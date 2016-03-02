@@ -18,7 +18,33 @@ var tables = [
 
 
 
+function getHeader(csv) {
+  return csv.split("\n")[0];
+}
 
+function getBody(csv) {
+  // break the textblock into an array of lines
+  var lines = csv.split('\n');
+  // remove one line, starting at the first position
+  lines.splice(0,1);
+  // join the array back into a single string
+  var noFirstLine = lines.join('\n');
+  return noFirstLine;
+}
+
+function removeStr(str, toRemove) {
+  var parts = str.split(toRemove);
+  parts.splice(0,1);
+  return parts.join(toRemove);
+}
+
+function pluralise(str) {
+  if(str[str.length -1 ] == "s") {
+    return str;
+  } else {
+    return str + "s";
+  }
+}
 
 function execute(cmd, args, callback) {
   var spawn = require('child_process').spawn;
@@ -37,21 +63,6 @@ function execute(cmd, args, callback) {
   });
 }
 
-
-function getHeader(csv) {
-  return csv.split("\n")[0];
-}
-
-function getBody(csv) {
-  // break the textblock into an array of lines
-  var lines = csv.split('\n');
-  // remove one line, starting at the first position
-  lines.splice(0,1);
-  // join the array back into a single string
-  var noFirstLine = lines.join('\n');
-  return noFirstLine;
-}
-
 function writeCsv(csv, collectionName, callback) {
   var fileName = collectionName + ".csv";
   fs.writeFile(fileName, csv, function(err) {
@@ -67,7 +78,7 @@ function importMongo(collectionName) {
   //mongoimport --collection adminActivitiesTeacher --type csv --headerline --db mondeavie admin_activities_teacher.csv
   var fileName = collectionName + ".csv";
   var cmd = 'mongoimport';
-  var args = [ '--collection', collectionName, '--type', 'csv', '--headerline', '--db', 'mondeavie', fileName ];
+  var args = [ '--collection', collectionName, '--type', 'csv', '--headerline', '--db', 'mondeavie', "./csv/" + fileName ];
   execute(cmd, args, function callback(result) {
     console.log(result);
     //return csv;
@@ -75,23 +86,23 @@ function importMongo(collectionName) {
 }
 
 async.each(tables, function (tableName, callback) {
-  //var tableName = tables[index];
   console.log('tableName', tableName);
 
-  var collectionName = Humps.camelize(tableName);
-  importMongo(collectionName);
+  //var collectionName = Humps.camelize(tableName);
+  var collectionName = pluralise( removeStr(tableName, "admin_activities_") );
+
   /*
+  
   var cmd = 'sqlite3';
   var args = [ 'db.sqlite3', '-header', '-csv', 'select * FROM ' + tableName ];
   execute(cmd, args, function callback(csv) {
     var csvCamelCase = Humps.camelize( getHeader(csv) ) + "\n";
-    //console.log('csvCamelCase', csvCamelCase);
     csvCamelCase += getBody(csv);
-    writeCsv(csvCamelCase, collectionName, importMongo(collectionName) );
-
-    //return csv;
+    writeCsv(csvCamelCase, collectionName );
   });
   */
+
+  importMongo(collectionName);
 
 });
 //console.log(Humps.camelize('hello_world')); // 'helloWorld'
