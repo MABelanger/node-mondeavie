@@ -65,6 +65,27 @@ var scheduleSchema = Schema({
 });
 var Schedule = mongoose.model('Schedule', scheduleSchema);
 
+/**
+ * daySchedule schemas
+ */
+var dayScheduleSchema = Schema({
+  id: Number,
+  isFull: Boolean,
+  hourStart: String,
+  hourEnd: String,
+  dayNameId: Number,
+  dayName: String,
+  scheduleId: Number,
+  schedule: {
+    type: Schema.Types.ObjectId,
+    ref: 'Schedule'
+  },
+  dayEnd: String,
+  dayStart: String
+});
+var DaySchedule = mongoose.model('DaySchedule', dayScheduleSchema);
+
+
 
 /**
  * Connect to the console database on localhost with
@@ -211,10 +232,20 @@ function findTree() {
             schedule.course = getObjectId(courses, schedule.courseId);
             //schedule.save();
           });
-        });
-      });
-    });
-  });
+
+          DaySchedule
+          .find( {} )
+          .exec(function(err, daySchedules) {
+            daySchedules.map(function(daySchedule) {
+              console.log('daySchedule.id : ' + daySchedule.id);
+              daySchedule.schedule = getObjectId(schedules, daySchedule.scheduleId);
+              //daySchedule.save();
+            });
+          });
+        }); // Schedule
+      }); // Course
+    }); // CourseName
+  }); // Teacher
 }
 
 function done(err) {
