@@ -51,9 +51,9 @@ var courseSchema = Schema({
 var Course = mongoose.model('Course', courseSchema);
 
 /**
- * CourseName schemas
+ * Schedule schemas
  */
-var courseNameSchema = Schema({
+var scheduleSchema = Schema({
   id: Number,
   name: String,
   description: String,
@@ -63,7 +63,7 @@ var courseNameSchema = Schema({
     ref: 'Course'
   }
 });
-var CourseName = mongoose.model('CourseName', courseNameSchema);
+var Schedule = mongoose.model('Schedule', scheduleSchema);
 
 
 /**
@@ -198,11 +198,19 @@ function findTree() {
       .exec(function(err, courses) {
         courses.map(function(course) {
           console.log('course.id : ' + course.id);
-          //console.log('teacher._id : ' + getObjectId(teachers, course.teacherId) );
-          //console.log('courseName._id : ' + getObjectId(courseNames, course.courseNameId) );
           course.teacher = getObjectId(teachers, course.teacherId);
           course.courseName = getObjectId(courseNames, course.courseNameId);
-          course.save();
+          //course.save();
+        });
+
+        Schedule
+        .find( {} )
+        .exec(function(err, schedules) {
+          schedules.map(function(schedule) {
+            console.log('schedule.id : ' + schedule.id);
+            schedule.course = getObjectId(courses, schedule.courseId);
+            //schedule.save();
+          });
         });
       });
     });
