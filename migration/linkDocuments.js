@@ -2,89 +2,23 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Types.ObjectId;
 
-/**
- * Teacher schema
- */
-var teacherSchema = Schema({
-  id: Number,
-  firstName: String,
-  lastName: String,
-  tel: String,
-  schoolName: String,
-  schoolUrl: String
-});
-var Teacher = mongoose.model('Teacher', teacherSchema);
+require('./schemas/teacher.js')();
+var Teacher = mongoose.model('Teacher');
 
-/**
- * CourseName schemas
- */
-var courseNameSchema = Schema({
-  id: Number,
-  name: String,
-  icon: String
-});
-var CourseName = mongoose.model('CourseName', courseNameSchema);
+require('./schemas/courseName.js')();
+var CourseName = mongoose.model('CourseName');
 
+require('./schemas/course.js')();
+var Course = mongoose.model('Course');
 
-/**
- * Course schema
- */
-var courseSchema = Schema({
-  id: Number,
-  teacherId: String,
-  courseNameId: String,
-  teacher: {
-    type: Schema.Types.ObjectId,
-    ref: 'Teacher'
-  },
-  courseName: {
-    type: Schema.Types.ObjectId,
-    ref: 'CourseName'
-  },
-  courseType: String,
-  note: String,
-  image: String,
-  description: String,
-  price: String,
-  isVisible: Boolean
-});
-var Course = mongoose.model('Course', courseSchema);
+require('./schemas/schedule.js')();
+var Schedule = mongoose.model('Schedule');
 
-/**
- * Schedule schemas
- */
-var scheduleSchema = Schema({
-  id: Number,
-  name: String,
-  description: String,
-  courseId: Number,
-  course: {
-    type: Schema.Types.ObjectId,
-    ref: 'Course'
-  }
-});
-var Schedule = mongoose.model('Schedule', scheduleSchema);
+require('./schemas/daySchedule.js')();
+var DaySchedule = mongoose.model('DaySchedule');
 
-/**
- * daySchedule schemas
- */
-var dayScheduleSchema = Schema({
-  id: Number,
-  isFull: Boolean,
-  hourStart: String,
-  hourEnd: String,
-  dayNameId: Number,
-  dayName: String,
-  scheduleId: Number,
-  schedule: {
-    type: Schema.Types.ObjectId,
-    ref: 'Schedule'
-  },
-  dayEnd: String,
-  dayStart: String
-});
-var DaySchedule = mongoose.model('DaySchedule', dayScheduleSchema);
-
+require('./schemas/testingDay.js')();
+var TestingDay = mongoose.model('TestingDay');
 
 
 /**
@@ -107,7 +41,8 @@ mongoose.connect('mongodb://localhost/mondeavie', function(err) {
   if (err) throw err;
 
   // we connected ok
-  findTree();
+  //findTree();
+  findRecursive();
 });
 
 /**
@@ -185,6 +120,21 @@ function find() {
   });
 }
 
+/**
+ * find Recursive
+ */
+
+function findRecursive() {
+  TestingDay
+  .findOne({})
+  .populate('daySchedule')
+  .populate('schedule')
+  .exec(function(err, testingDays) {
+    if (err) return done(err);
+    console.log(testingDays);
+  });
+}
+
 
 function getObjectId(objects, id) {
   var objectId = 0;
@@ -195,6 +145,20 @@ function getObjectId(objects, id) {
   });
   //return new ObjectId(objectId);
   return objectId;
+}
+
+function getDayName(id) {
+  var dayName = '';
+  switch (id) {
+    case 1 : dayName = 'lundi'; break;
+    case 2 : dayName = 'mardi'; break;
+    case 3 : dayName = 'mercredi'; break;
+    case 4 : dayName = 'jeudi'; break;
+    case 5 : dayName = 'vendredi'; break;
+    case 6 : dayName = 'samedi'; break;
+    case 7 : dayName = 'dimanche'; break;
+  };
+  return dayName;
 }
 
 function findTree() {
@@ -239,9 +203,20 @@ function findTree() {
             daySchedules.map(function(daySchedule) {
               console.log('daySchedule.id : ' + daySchedule.id);
               daySchedule.schedule = getObjectId(schedules, daySchedule.scheduleId);
+              daySchedule.dayName = getDayName(daySchedule.dayNameId);
               //daySchedule.save();
             });
-          });
+
+            TestingDay
+            .find( {} )
+            .exec(function(err, testingDays) {
+              testingDays.map(function(testingDay) {
+                console.log('testingDay.id : ' + testingDay.id);
+                testingDay.daySchedule = getObjectId(daySchedules, testingDay.dayScheduleId);
+                //testingDay.save();
+              });
+            }); // TestingDay
+          }); // DaySchedule
         }); // Schedule
       }); // Course
     }); // CourseName

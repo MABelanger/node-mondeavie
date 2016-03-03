@@ -5,13 +5,10 @@ var Schema = mongoose.Schema;
 // create an export function to encapsulate the model creation
 module.exports = function() {
   // define schema
-	var teacherSchema = Schema({
+	var courseNameSchema = Schema({
 	  id: Number,
-	  firstName: String,
-	  lastName: String,
-	  tel: String,
-	  schoolName: String,
-	  schoolUrl: String
+	  name: String,
+	  icon: String
 	});
-  mongoose.model('Teacher', teacherSchema);
+	mongoose.model('CourseName', courseNameSchema);
 };
