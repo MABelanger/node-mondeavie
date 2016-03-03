@@ -49,30 +49,42 @@ function isTeacher(teachers, id) {
   return false;
 }
 
+
+
+
 function cbCourse(err, course) {
   if(course) {
 
-    Teacher
-    .find({ _id: course.teacher })
+    Schedule
+    .find({ course: course._id })
     .lean()
-    .exec(function(err, teacher){
-      CourseName
-      .findOne({ _id: course.courseName })
+    .exec(function(err, schedules){
+
+      Teacher
+      .findOne({ _id: course.teacher })
       .lean()
-      .exec(function(err, courseName){
-        jsonObj.map(function(courseObj, index){
-          if(courseName.name == courseObj.name){
-            //console.log('courseName.name', courseName.name)
-            if( isTeacher(jsonObj[ index ].teachers, teacher._id) ) {
-              console.log('++++do not insert', teacher);
-            } else {
-              jsonObj[ index ].teachers.push(teacher);
-              console.log("_____" + JSON.stringify(jsonObj));
+      .exec(function(err, teacher){
+
+        CourseName
+        .findOne({ _id: course.courseName })
+        .lean()
+        .exec(function(err, courseName){
+
+          jsonObj.map(function(courseMap, index){
+            if(courseName.name == courseMap.name){
+              //console.log('courseName.name', courseName.name)
+              if( isTeacher(jsonObj[ index ].teachers, teacher._id) ) {
+                console.log('++++do not insert', teacher);
+              } else {
+                teacher.schedules = schedules;
+                jsonObj[ index ].teachers.push(teacher);
+                console.log("_____" + JSON.stringify(jsonObj[1]));
+              }
             }
-          }
-        }); // jsonObj.map
-      }); // CourseName
-    }); // Teacher
+          }); // jsonObj.map
+        }); // CourseName
+      }); // Teacher
+    }); // Schedule
   } // if(course)
 }
 
