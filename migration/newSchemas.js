@@ -40,13 +40,11 @@ var _courseNameIndex = 0;
 
 
 function isTeacher(teachers, id) {
-  //console.log('id', id)
+  var isTrue;
   teachers.map(function(teacher, index){
-    if(teacher._id == id) {
-      return true;
-    }
+    isTrue = isTrue || String(teacher._id) == String(id);
   });
-  return false;
+  return isTrue;
 }
 
 
@@ -88,14 +86,14 @@ function cbCourse(err, course) {
                   jsonObj.map(function(courseMap, index){
                     if(courseName.name == courseMap.name){
                       //console.log('courseName.name', courseName.name)
-                      if( isTeacher(jsonObj[ index ].teachers, teacher._id) ) {
-                        console.log('++++do not insert', teacher);
+                      if( isTeacher(jsonObj[ index ].teachers, teacher._id) == true ) {
+                        //console.log('++++do not insert\n\n\n', teacher);
                       } else {
                         teacher.course = course;
                         teacher.course.courseTypes = schedules;
                         jsonObj[ index ].teachers.push(teacher);
-                        console.log("\n\n\n");
-                        console.log("_____" + JSON.stringify(jsonObj));
+                        console.log("\n\n\n_____" + JSON.stringify(jsonObj));
+                        //console.log('teacher.firstName', teacher.firstName)
                       }
                     }
                   }); // jsonObj.map
