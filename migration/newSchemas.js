@@ -91,7 +91,8 @@ function cbCourse(err, course) {
                       if( isTeacher(jsonObj[ index ].teachers, teacher._id) ) {
                         console.log('++++do not insert', teacher);
                       } else {
-                        teacher.courseTypes = schedules;
+                        teacher.course = course;
+                        teacher.course.courseTypes = schedules;
                         jsonObj[ index ].teachers.push(teacher);
                         console.log("\n\n\n");
                         console.log("_____" + JSON.stringify(jsonObj));
