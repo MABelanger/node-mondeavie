@@ -59,31 +59,42 @@ function cbCourse(err, course) {
     .find({ course: course._id })
     .lean()
     .exec(function(err, schedules){
+      schedules.map(function(schedule, indexSchedule){
 
-      Teacher
-      .findOne({ _id: course.teacher })
-      .lean()
-      .exec(function(err, teacher){
-
-        CourseName
-        .findOne({ _id: course.courseName })
+        DaySchedule
+        .find({ schedule: schedule._id })
         .lean()
-        .exec(function(err, courseName){
+        .exec(function(err, daySchedules){
 
-          jsonObj.map(function(courseMap, index){
-            if(courseName.name == courseMap.name){
-              //console.log('courseName.name', courseName.name)
-              if( isTeacher(jsonObj[ index ].teachers, teacher._id) ) {
-                console.log('++++do not insert', teacher);
-              } else {
-                teacher.schedules = schedules;
-                jsonObj[ index ].teachers.push(teacher);
-                console.log("_____" + JSON.stringify(jsonObj[1]));
-              }
-            }
-          }); // jsonObj.map
-        }); // CourseName
-      }); // Teacher
+          schedules[ indexSchedule ].schedules = daySchedules;
+          //console.log('daySchedules', daySchedules)
+          Teacher
+          .findOne({ _id: course.teacher })
+          .lean()
+          .exec(function(err, teacher){
+
+            CourseName
+            .findOne({ _id: course.courseName })
+            .lean()
+            .exec(function(err, courseName){
+
+              jsonObj.map(function(courseMap, index){
+                if(courseName.name == courseMap.name){
+                  //console.log('courseName.name', courseName.name)
+                  if( isTeacher(jsonObj[ index ].teachers, teacher._id) ) {
+                    console.log('++++do not insert', teacher);
+                  } else {
+                    teacher.courseTypes = schedules;
+                    jsonObj[ index ].teachers.push(teacher);
+                    console.log("\n\n\n");
+                    console.log("_____" + JSON.stringify(jsonObj));
+                  }
+                }
+              }); // jsonObj.map
+            }); // CourseName
+          }); // Teacher
+        }); // DaySchedule
+      }); // schedules.map
     }); // Schedule
   } // if(course)
 }
@@ -108,9 +119,6 @@ function cbTeacher(err, teachers) {
     });
   });
 }
-
-
-
 
 function cbCourseName(err, courseNames) {
   if (err) return done(err);
