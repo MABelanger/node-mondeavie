@@ -3,120 +3,6 @@
     "name": "Yoga",
     "teachers": [
       {
-        "_id": "56d67dbe15288675475505c4",
-        "id": 3,
-        "firstName": "Sandra",
-        "lastName": "Duval",
-        "tel": "514-883-4442",
-        "schoolName": "Facebook",
-        "schoolUrl": "https://www.facebook.com/sandraduvalofficielle?fref=ts",
-        "courseTypes": [
-          {
-            "_id": "56d67dbe152886754755054e",
-            "id": 3,
-            "name": "Yoga doux",
-            "description": "<p>Une pratique amenant une relaxation importante par son rythme plus lent et ses postures ax&eacute;es sur la flexibilit&eacute; et la d&eacute;tente.</p>",
-            "courseId": 2,
-            "course": "56d67dbe15288675475504aa",
-            "schedules": [
-              {
-                "_id": "56d67dbe152886754755050b",
-                "id": 3,
-                "isFull": 0,
-                "hourStart": "20:00:00",
-                "hourEnd": "21:15:00",
-                "dayNameId": 2,
-                "scheduleId": 3,
-                "dayEnd": "2016-06-14",
-                "dayStart": "2016-01-12",
-                "schedule": "56d67dbe152886754755054e",
-                "dayName": "mardi"
-              }
-            ]
-          },
-          {
-            "_id": "56d67dbe152886754755054f",
-            "id": 4,
-            "name": "Yoga en force",
-            "description": "Un cours où les postures seront en alternance statique et en mouvement offrant un défi de force, d'endurance et d'équilibre plus grand.",
-            "courseId": 2,
-            "course": "56d67dbe15288675475504aa",
-            "schedules": [
-              {
-                "_id": "56d67dbe152886754755050d",
-                "id": 5,
-                "isFull": 0,
-                "hourStart": "18:30:00",
-                "hourEnd": "19:45:00",
-                "dayNameId": 2,
-                "scheduleId": 4,
-                "dayEnd": "2016-06-14",
-                "dayStart": "2016-01-12",
-                "schedule": "56d67dbe152886754755054f",
-                "dayName": "mardi"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "_id": "56d67dbe15288675475505c4",
-        "id": 3,
-        "firstName": "Sandra",
-        "lastName": "Duval",
-        "tel": "514-883-4442",
-        "schoolName": "Facebook",
-        "schoolUrl": "https://www.facebook.com/sandraduvalofficielle?fref=ts",
-        "courseTypes": [
-          {
-            "_id": "56d67dbe152886754755054e",
-            "id": 3,
-            "name": "Yoga doux",
-            "description": "<p>Une pratique amenant une relaxation importante par son rythme plus lent et ses postures ax&eacute;es sur la flexibilit&eacute; et la d&eacute;tente.</p>",
-            "courseId": 2,
-            "course": "56d67dbe15288675475504aa",
-            "schedules": [
-              {
-                "_id": "56d67dbe152886754755050b",
-                "id": 3,
-                "isFull": 0,
-                "hourStart": "20:00:00",
-                "hourEnd": "21:15:00",
-                "dayNameId": 2,
-                "scheduleId": 3,
-                "dayEnd": "2016-06-14",
-                "dayStart": "2016-01-12",
-                "schedule": "56d67dbe152886754755054e",
-                "dayName": "mardi"
-              }
-            ]
-          },
-          {
-            "_id": "56d67dbe152886754755054f",
-            "id": 4,
-            "name": "Yoga en force",
-            "description": "Un cours où les postures seront en alternance statique et en mouvement offrant un défi de force, d'endurance et d'équilibre plus grand.",
-            "courseId": 2,
-            "course": "56d67dbe15288675475504aa",
-            "schedules": [
-              {
-                "_id": "56d67dbe152886754755050d",
-                "id": 5,
-                "isFull": 0,
-                "hourStart": "18:30:00",
-                "hourEnd": "19:45:00",
-                "dayNameId": 2,
-                "scheduleId": 4,
-                "dayEnd": "2016-06-14",
-                "dayStart": "2016-01-12",
-                "schedule": "56d67dbe152886754755054f",
-                "dayName": "mardi"
-              }
-            ]
-          }
-        ]
-      },
-      {
         "_id": "56d67dbe15288675475505c5",
         "id": 4,
         "firstName": "Isabelle",
@@ -144,7 +30,17 @@
                 "dayEnd": "2016-06-13",
                 "dayStart": "2016-01-12",
                 "schedule": "56d67dbe1528867547550556",
-                "dayName": "mardi"
+                "dayName": "mardi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505da",
+                    "id": 12,
+                    "day": "2016-01-26",
+                    "isFull": 0,
+                    "dayScheduleId": 19,
+                    "daySchedule": "56d67dbe1528867547550512"
+                  }
+                ]
               }
             ]
           }
@@ -178,7 +74,17 @@
                 "dayEnd": "2016-05-27",
                 "dayStart": "2016-01-08",
                 "schedule": "56d67dbe1528867547550550",
-                "dayName": "vendredi"
+                "dayName": "vendredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505de",
+                    "id": 21,
+                    "day": "2016-03-04",
+                    "isFull": 0,
+                    "dayScheduleId": 18,
+                    "daySchedule": "56d67dbe1528867547550510"
+                  }
+                ]
               },
               {
                 "_id": "56d67dbe1528867547550511",
@@ -191,7 +97,17 @@
                 "dayEnd": "2016-05-26",
                 "dayStart": "2016-01-07",
                 "schedule": "56d67dbe1528867547550550",
-                "dayName": "jeudi"
+                "dayName": "jeudi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505dd",
+                    "id": 20,
+                    "day": "2016-03-03",
+                    "isFull": 0,
+                    "dayScheduleId": 9,
+                    "daySchedule": "56d67dbe1528867547550511"
+                  }
+                ]
               },
               {
                 "_id": "56d67dbe1528867547550524",
@@ -204,7 +120,17 @@
                 "dayEnd": "2016-05-30",
                 "dayStart": "2016-01-18",
                 "schedule": "56d67dbe1528867547550550",
-                "dayName": "lundi"
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e3",
+                    "id": 37,
+                    "day": "2016-02-29",
+                    "isFull": 0,
+                    "dayScheduleId": 46,
+                    "daySchedule": "56d67dbe1528867547550524"
+                  }
+                ]
               },
               {
                 "_id": "56d67dbe1528867547550527",
@@ -217,7 +143,17 @@
                 "dayEnd": "2016-04-27",
                 "dayStart": "2016-01-11",
                 "schedule": "56d67dbe1528867547550550",
-                "dayName": "mercredi"
+                "dayName": "mercredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505ec",
+                    "id": 46,
+                    "day": "2016-03-01",
+                    "isFull": 0,
+                    "dayScheduleId": 52,
+                    "daySchedule": "56d67dbe1528867547550527"
+                  }
+                ]
               },
               {
                 "_id": "56d67dbe1528867547550528",
@@ -230,7 +166,561 @@
                 "dayEnd": "2016-05-30",
                 "dayStart": "2016-01-25",
                 "schedule": "56d67dbe1528867547550550",
-                "dayName": "lundi"
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505ed",
+                    "id": 47,
+                    "day": "2016-02-29",
+                    "isFull": 0,
+                    "dayScheduleId": 53,
+                    "daySchedule": "56d67dbe1528867547550528"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_id": "56d67dbe15288675475505c6",
+        "id": 5,
+        "firstName": "Marianne",
+        "lastName": "Girard",
+        "tel": 4504745078,
+        "schoolName": "",
+        "schoolUrl": "",
+        "courseTypes": [
+          {
+            "_id": "56d67dbe1528867547550550",
+            "id": 6,
+            "name": "Yoga",
+            "description": "",
+            "courseId": 4,
+            "course": "56d67dbe15288675475504ac",
+            "schedules": [
+              {
+                "_id": "56d67dbe1528867547550510",
+                "id": 18,
+                "isFull": 0,
+                "hourStart": "12:00:00",
+                "hourEnd": "13:15:00",
+                "dayNameId": 5,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-27",
+                "dayStart": "2016-01-08",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "vendredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505de",
+                    "id": 21,
+                    "day": "2016-03-04",
+                    "isFull": 0,
+                    "dayScheduleId": 18,
+                    "daySchedule": "56d67dbe1528867547550510"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550511",
+                "id": 9,
+                "isFull": 0,
+                "hourStart": "15:30:00",
+                "hourEnd": "16:40:00",
+                "dayNameId": 4,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-26",
+                "dayStart": "2016-01-07",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "jeudi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505dd",
+                    "id": 20,
+                    "day": "2016-03-03",
+                    "isFull": 0,
+                    "dayScheduleId": 9,
+                    "daySchedule": "56d67dbe1528867547550511"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550524",
+                "id": 46,
+                "isFull": 0,
+                "hourStart": "18:00:00",
+                "hourEnd": "19:20:00",
+                "dayNameId": 1,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-30",
+                "dayStart": "2016-01-18",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e3",
+                    "id": 37,
+                    "day": "2016-02-29",
+                    "isFull": 0,
+                    "dayScheduleId": 46,
+                    "daySchedule": "56d67dbe1528867547550524"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550527",
+                "id": 52,
+                "isFull": 0,
+                "hourStart": "16:15:00",
+                "hourEnd": "17:30:00",
+                "dayNameId": 3,
+                "scheduleId": 6,
+                "dayEnd": "2016-04-27",
+                "dayStart": "2016-01-11",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "mercredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505ec",
+                    "id": 46,
+                    "day": "2016-03-01",
+                    "isFull": 0,
+                    "dayScheduleId": 52,
+                    "daySchedule": "56d67dbe1528867547550527"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550528",
+                "id": 53,
+                "isFull": 0,
+                "hourStart": "19:30:00",
+                "hourEnd": "20:45:00",
+                "dayNameId": 1,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-30",
+                "dayStart": "2016-01-25",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505ed",
+                    "id": 47,
+                    "day": "2016-02-29",
+                    "isFull": 0,
+                    "dayScheduleId": 53,
+                    "daySchedule": "56d67dbe1528867547550528"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_id": "56d67dbe15288675475505c6",
+        "id": 5,
+        "firstName": "Marianne",
+        "lastName": "Girard",
+        "tel": 4504745078,
+        "schoolName": "",
+        "schoolUrl": "",
+        "courseTypes": [
+          {
+            "_id": "56d67dbe1528867547550550",
+            "id": 6,
+            "name": "Yoga",
+            "description": "",
+            "courseId": 4,
+            "course": "56d67dbe15288675475504ac",
+            "schedules": [
+              {
+                "_id": "56d67dbe1528867547550510",
+                "id": 18,
+                "isFull": 0,
+                "hourStart": "12:00:00",
+                "hourEnd": "13:15:00",
+                "dayNameId": 5,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-27",
+                "dayStart": "2016-01-08",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "vendredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505de",
+                    "id": 21,
+                    "day": "2016-03-04",
+                    "isFull": 0,
+                    "dayScheduleId": 18,
+                    "daySchedule": "56d67dbe1528867547550510"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550511",
+                "id": 9,
+                "isFull": 0,
+                "hourStart": "15:30:00",
+                "hourEnd": "16:40:00",
+                "dayNameId": 4,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-26",
+                "dayStart": "2016-01-07",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "jeudi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505dd",
+                    "id": 20,
+                    "day": "2016-03-03",
+                    "isFull": 0,
+                    "dayScheduleId": 9,
+                    "daySchedule": "56d67dbe1528867547550511"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550524",
+                "id": 46,
+                "isFull": 0,
+                "hourStart": "18:00:00",
+                "hourEnd": "19:20:00",
+                "dayNameId": 1,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-30",
+                "dayStart": "2016-01-18",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e3",
+                    "id": 37,
+                    "day": "2016-02-29",
+                    "isFull": 0,
+                    "dayScheduleId": 46,
+                    "daySchedule": "56d67dbe1528867547550524"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550527",
+                "id": 52,
+                "isFull": 0,
+                "hourStart": "16:15:00",
+                "hourEnd": "17:30:00",
+                "dayNameId": 3,
+                "scheduleId": 6,
+                "dayEnd": "2016-04-27",
+                "dayStart": "2016-01-11",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "mercredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505ec",
+                    "id": 46,
+                    "day": "2016-03-01",
+                    "isFull": 0,
+                    "dayScheduleId": 52,
+                    "daySchedule": "56d67dbe1528867547550527"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550528",
+                "id": 53,
+                "isFull": 0,
+                "hourStart": "19:30:00",
+                "hourEnd": "20:45:00",
+                "dayNameId": 1,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-30",
+                "dayStart": "2016-01-25",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505ed",
+                    "id": 47,
+                    "day": "2016-02-29",
+                    "isFull": 0,
+                    "dayScheduleId": 53,
+                    "daySchedule": "56d67dbe1528867547550528"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_id": "56d67dbe15288675475505c6",
+        "id": 5,
+        "firstName": "Marianne",
+        "lastName": "Girard",
+        "tel": 4504745078,
+        "schoolName": "",
+        "schoolUrl": "",
+        "courseTypes": [
+          {
+            "_id": "56d67dbe1528867547550550",
+            "id": 6,
+            "name": "Yoga",
+            "description": "",
+            "courseId": 4,
+            "course": "56d67dbe15288675475504ac",
+            "schedules": [
+              {
+                "_id": "56d67dbe1528867547550510",
+                "id": 18,
+                "isFull": 0,
+                "hourStart": "12:00:00",
+                "hourEnd": "13:15:00",
+                "dayNameId": 5,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-27",
+                "dayStart": "2016-01-08",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "vendredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505de",
+                    "id": 21,
+                    "day": "2016-03-04",
+                    "isFull": 0,
+                    "dayScheduleId": 18,
+                    "daySchedule": "56d67dbe1528867547550510"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550511",
+                "id": 9,
+                "isFull": 0,
+                "hourStart": "15:30:00",
+                "hourEnd": "16:40:00",
+                "dayNameId": 4,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-26",
+                "dayStart": "2016-01-07",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "jeudi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505dd",
+                    "id": 20,
+                    "day": "2016-03-03",
+                    "isFull": 0,
+                    "dayScheduleId": 9,
+                    "daySchedule": "56d67dbe1528867547550511"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550524",
+                "id": 46,
+                "isFull": 0,
+                "hourStart": "18:00:00",
+                "hourEnd": "19:20:00",
+                "dayNameId": 1,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-30",
+                "dayStart": "2016-01-18",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e3",
+                    "id": 37,
+                    "day": "2016-02-29",
+                    "isFull": 0,
+                    "dayScheduleId": 46,
+                    "daySchedule": "56d67dbe1528867547550524"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550527",
+                "id": 52,
+                "isFull": 0,
+                "hourStart": "16:15:00",
+                "hourEnd": "17:30:00",
+                "dayNameId": 3,
+                "scheduleId": 6,
+                "dayEnd": "2016-04-27",
+                "dayStart": "2016-01-11",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "mercredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505ec",
+                    "id": 46,
+                    "day": "2016-03-01",
+                    "isFull": 0,
+                    "dayScheduleId": 52,
+                    "daySchedule": "56d67dbe1528867547550527"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550528",
+                "id": 53,
+                "isFull": 0,
+                "hourStart": "19:30:00",
+                "hourEnd": "20:45:00",
+                "dayNameId": 1,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-30",
+                "dayStart": "2016-01-25",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505ed",
+                    "id": 47,
+                    "day": "2016-02-29",
+                    "isFull": 0,
+                    "dayScheduleId": 53,
+                    "daySchedule": "56d67dbe1528867547550528"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_id": "56d67dbe15288675475505c6",
+        "id": 5,
+        "firstName": "Marianne",
+        "lastName": "Girard",
+        "tel": 4504745078,
+        "schoolName": "",
+        "schoolUrl": "",
+        "courseTypes": [
+          {
+            "_id": "56d67dbe1528867547550550",
+            "id": 6,
+            "name": "Yoga",
+            "description": "",
+            "courseId": 4,
+            "course": "56d67dbe15288675475504ac",
+            "schedules": [
+              {
+                "_id": "56d67dbe1528867547550510",
+                "id": 18,
+                "isFull": 0,
+                "hourStart": "12:00:00",
+                "hourEnd": "13:15:00",
+                "dayNameId": 5,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-27",
+                "dayStart": "2016-01-08",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "vendredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505de",
+                    "id": 21,
+                    "day": "2016-03-04",
+                    "isFull": 0,
+                    "dayScheduleId": 18,
+                    "daySchedule": "56d67dbe1528867547550510"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550511",
+                "id": 9,
+                "isFull": 0,
+                "hourStart": "15:30:00",
+                "hourEnd": "16:40:00",
+                "dayNameId": 4,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-26",
+                "dayStart": "2016-01-07",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "jeudi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505dd",
+                    "id": 20,
+                    "day": "2016-03-03",
+                    "isFull": 0,
+                    "dayScheduleId": 9,
+                    "daySchedule": "56d67dbe1528867547550511"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550524",
+                "id": 46,
+                "isFull": 0,
+                "hourStart": "18:00:00",
+                "hourEnd": "19:20:00",
+                "dayNameId": 1,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-30",
+                "dayStart": "2016-01-18",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e3",
+                    "id": 37,
+                    "day": "2016-02-29",
+                    "isFull": 0,
+                    "dayScheduleId": 46,
+                    "daySchedule": "56d67dbe1528867547550524"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550527",
+                "id": 52,
+                "isFull": 0,
+                "hourStart": "16:15:00",
+                "hourEnd": "17:30:00",
+                "dayNameId": 3,
+                "scheduleId": 6,
+                "dayEnd": "2016-04-27",
+                "dayStart": "2016-01-11",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "mercredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505ec",
+                    "id": 46,
+                    "day": "2016-03-01",
+                    "isFull": 0,
+                    "dayScheduleId": 52,
+                    "daySchedule": "56d67dbe1528867547550527"
+                  }
+                ]
+              },
+              {
+                "_id": "56d67dbe1528867547550528",
+                "id": 53,
+                "isFull": 0,
+                "hourStart": "19:30:00",
+                "hourEnd": "20:45:00",
+                "dayNameId": 1,
+                "scheduleId": 6,
+                "dayEnd": "2016-05-30",
+                "dayStart": "2016-01-25",
+                "schedule": "56d67dbe1528867547550550",
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505ed",
+                    "id": 47,
+                    "day": "2016-02-29",
+                    "isFull": 0,
+                    "dayScheduleId": 53,
+                    "daySchedule": "56d67dbe1528867547550528"
+                  }
+                ]
               }
             ]
           }
@@ -251,8 +741,7 @@
             "name": "Yoga prénatal",
             "description": "<p class=\"MsoNormal\" style=\"line-height: 20.7999992370605px;\">Le yoga pr&eacute; natal se veut une excellente introduction dans le monde du yoga. Les s&eacute;ances comprennent des asanas, (postures) simples, des pranayamas (techniques de respiration) et des bandhas (contractions musculaires). Les s&eacute;ances se termineront toujours par une relaxation.</p><p class=\"MsoNormal\" style=\"line-height: 20.7999992370605px;\">Le yoga pr&eacute; natal est une excellente occasion de vivre sa grossesse dans la confiance et la &laquo;&nbsp;pleine conscience&nbsp;&raquo;. Les s&eacute;ances aident &agrave; assouplir le corps,&nbsp; elles aident &agrave; contr&ocirc;ler la&nbsp; respiration, &agrave; prendre conscience de chaque &eacute;tape de la grossesse et procurent un effet de bien-&ecirc;tre g&eacute;n&eacute;ral chez la maman.</p><p class=\"MsoNormal\" style=\"line-height: 20.7999992370605px;\">Un cours qui peut vous aider durant la grossesse, la maternit&eacute;&hellip; ou toute la vie!</p><p class=\"MsoNormal\" style=\"line-height: 20.7999992370605px;\">Bienvenue &agrave; toutes.</p>",
             "courseId": 9,
-            "course": "56d67dbe15288675475504b0",
-            "schedules": []
+            "course": "56d67dbe15288675475504b0"
           },
           {
             "_id": "56d67dbe152886754755055b",
@@ -273,50 +762,17 @@
                 "dayEnd": "2015-05-14",
                 "dayStart": "2015-03-19",
                 "schedule": "56d67dbe152886754755055b",
-                "dayName": "jeudi"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "_id": "56d67dbe15288675475505c9",
-        "id": 9,
-        "firstName": "Luisa",
-        "lastName": "Mastellone",
-        "tel": 5149778490,
-        "schoolName": "Yogalu",
-        "schoolUrl": "https://www.facebook.com/pages/Yoga-Luisa-Mastellone/382114085285271?sk=info&tab=page_info",
-        "courseTypes": [
-          {
-            "_id": "56d67dbe1528867547550554",
-            "id": 13,
-            "name": "Yoga prénatal",
-            "description": "<p class=\"MsoNormal\" style=\"line-height: 20.7999992370605px;\">Le yoga pr&eacute; natal se veut une excellente introduction dans le monde du yoga. Les s&eacute;ances comprennent des asanas, (postures) simples, des pranayamas (techniques de respiration) et des bandhas (contractions musculaires). Les s&eacute;ances se termineront toujours par une relaxation.</p><p class=\"MsoNormal\" style=\"line-height: 20.7999992370605px;\">Le yoga pr&eacute; natal est une excellente occasion de vivre sa grossesse dans la confiance et la &laquo;&nbsp;pleine conscience&nbsp;&raquo;. Les s&eacute;ances aident &agrave; assouplir le corps,&nbsp; elles aident &agrave; contr&ocirc;ler la&nbsp; respiration, &agrave; prendre conscience de chaque &eacute;tape de la grossesse et procurent un effet de bien-&ecirc;tre g&eacute;n&eacute;ral chez la maman.</p><p class=\"MsoNormal\" style=\"line-height: 20.7999992370605px;\">Un cours qui peut vous aider durant la grossesse, la maternit&eacute;&hellip; ou toute la vie!</p><p class=\"MsoNormal\" style=\"line-height: 20.7999992370605px;\">Bienvenue &agrave; toutes.</p>",
-            "courseId": 9,
-            "course": "56d67dbe15288675475504b0",
-            "schedules": []
-          },
-          {
-            "_id": "56d67dbe152886754755055b",
-            "id": 22,
-            "name": "Viniyoga",
-            "description": "<p class=\"MsoNormal\"><em><span style=\"mso-ansi-language:FR-CA;font-style:normal;\nmso-bidi-font-style:italic\">Le viniyoga c&#39;est le yoga de l&#39;instant pr&eacute;sent, le yoga de la pleine conscience. C&#39;est un yoga progressif qui mise au d&eacute;part sur la conscience du souffle, l&#39;&eacute;tape la plus importante de la m&eacute;ditation. Pas &eacute;tonnant que les gens qui commencent &agrave; faire du yoga affirment qu&#39;ils recommencent &agrave; respirer... On y explore donc l&#39;expansion thoracique, la dilatation de l&#39;abdomen... tout se fait dans la pleine conscience.<br /><br />Les postures s&#39;encha&icirc;nent de fa&ccedil;on dynamique, en y int&eacute;grant aussi des moments de postures statiques pour pratiquer l&#39;endurance et l&rsquo;&eacute;quilibre. Elles sont toujours en harmonie avec le souffle, car tout au long des s&eacute;ances, c&#39;est lui qui nous guide.<br /><br />Le but ultime du viniyoga est de faire cesser l&#39;agitation du mental afin de revenir &agrave; la Source, le Soi. Ainsi, lorsque le mental est clair, il est beaucoup plus facile de prendre une d&eacute;cision, car ni les peurs, ni l&#39;&eacute;go, ni les d&eacute;sirs, ni les &eacute;motions peuvent interf&eacute;rer.&nbsp;<br /><br />Par les postures, les techniques de respiration et l&#39;observation de nos r&eacute;actions, le viniyoga nous fait forc&eacute;ment grandir, car l&#39;&eacute;tude que l&#39;on fait de soi nous am&egrave;ne &agrave; modifier certains comportements et &agrave; adopter des attitudes saines pour soi et pour les autres.<br /><br />Les postures nous apportent de la souplesse (autant au niveau physique que mental), un &eacute;tirement des muscles du corps, plus d&#39;endurance, un grand effet de calme, un &eacute;panouissement personnel, un meilleur rythme cardiaque, ainsi qu&rsquo;une meilleure gestion du stress et de l&#39;anxi&eacute;t&eacute;.<br /><br />Pour moi une s&eacute;ance de viniyoga c&#39;est la totale, car &ccedil;a me permet de faire le vide et le plein &agrave; la fois...<o:p></o:p></span></em></p><p class=\"MsoNormal\"><em><span style=\"mso-ansi-language:FR-CA;font-style:normal;\nmso-bidi-font-style:italic\">Bienvenue &agrave; tous ceux qui ont leur bien-&ecirc;tre &agrave; coeur <o:p></o:p></span></em></p><p class=\"MsoNormal\"><em><span lang=\"EN-US\" style=\"font-style:normal;mso-bidi-font-style:\nitalic\">Namast&eacute;&nbsp;<o:p></o:p></span></em></p>",
-            "courseId": 9,
-            "course": "56d67dbe15288675475504b0",
-            "schedules": [
-              {
-                "_id": "56d67dbe1528867547550516",
-                "id": 26,
-                "isFull": 0,
-                "hourStart": "13:15:00",
-                "hourEnd": "14:30:00",
-                "dayNameId": 4,
-                "scheduleId": 22,
-                "dayEnd": "2015-05-14",
-                "dayStart": "2015-03-19",
-                "schedule": "56d67dbe152886754755055b",
-                "dayName": "jeudi"
+                "dayName": "jeudi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505db",
+                    "id": 8,
+                    "day": "2015-03-12",
+                    "isFull": 0,
+                    "dayScheduleId": 26,
+                    "daySchedule": "56d67dbe1528867547550516"
+                  }
+                ]
               }
             ]
           }
@@ -350,7 +806,171 @@
                 "dayEnd": "2016-06-05",
                 "dayStart": "2016-01-17",
                 "schedule": "56d67dbe1528867547550558",
-                "dayName": "dimanche"
+                "dayName": "dimanche",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505dc",
+                    "id": 18,
+                    "day": "2016-02-21",
+                    "isFull": 0,
+                    "dayScheduleId": 22,
+                    "daySchedule": "56d67dbe1528867547550514"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_id": "56d67dbe15288675475505c4",
+        "id": 3,
+        "firstName": "Sandra",
+        "lastName": "Duval",
+        "tel": "514-883-4442",
+        "schoolName": "Facebook",
+        "schoolUrl": "https://www.facebook.com/sandraduvalofficielle?fref=ts",
+        "courseTypes": [
+          {
+            "_id": "56d67dbe152886754755054e",
+            "id": 3,
+            "name": "Yoga doux",
+            "description": "<p>Une pratique amenant une relaxation importante par son rythme plus lent et ses postures ax&eacute;es sur la flexibilit&eacute; et la d&eacute;tente.</p>",
+            "courseId": 2,
+            "course": "56d67dbe15288675475504aa",
+            "schedules": [
+              {
+                "_id": "56d67dbe152886754755050b",
+                "id": 3,
+                "isFull": 0,
+                "hourStart": "20:00:00",
+                "hourEnd": "21:15:00",
+                "dayNameId": 2,
+                "scheduleId": 3,
+                "dayEnd": "2016-06-14",
+                "dayStart": "2016-01-12",
+                "schedule": "56d67dbe152886754755054e",
+                "dayName": "mardi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e7",
+                    "id": 41,
+                    "day": "2016-01-19",
+                    "isFull": 0,
+                    "dayScheduleId": 3,
+                    "daySchedule": "56d67dbe152886754755050b"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_id": "56d67dbe152886754755054f",
+            "id": 4,
+            "name": "Yoga en force",
+            "description": "Un cours où les postures seront en alternance statique et en mouvement offrant un défi de force, d'endurance et d'équilibre plus grand.",
+            "courseId": 2,
+            "course": "56d67dbe15288675475504aa",
+            "schedules": [
+              {
+                "_id": "56d67dbe152886754755050d",
+                "id": 5,
+                "isFull": 0,
+                "hourStart": "18:30:00",
+                "hourEnd": "19:45:00",
+                "dayNameId": 2,
+                "scheduleId": 4,
+                "dayEnd": "2016-06-14",
+                "dayStart": "2016-01-12",
+                "schedule": "56d67dbe152886754755054f",
+                "dayName": "mardi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e8",
+                    "id": 42,
+                    "day": "2016-01-19",
+                    "isFull": 0,
+                    "dayScheduleId": 5,
+                    "daySchedule": "56d67dbe152886754755050d"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_id": "56d67dbe15288675475505c4",
+        "id": 3,
+        "firstName": "Sandra",
+        "lastName": "Duval",
+        "tel": "514-883-4442",
+        "schoolName": "Facebook",
+        "schoolUrl": "https://www.facebook.com/sandraduvalofficielle?fref=ts",
+        "courseTypes": [
+          {
+            "_id": "56d67dbe152886754755054e",
+            "id": 3,
+            "name": "Yoga doux",
+            "description": "<p>Une pratique amenant une relaxation importante par son rythme plus lent et ses postures ax&eacute;es sur la flexibilit&eacute; et la d&eacute;tente.</p>",
+            "courseId": 2,
+            "course": "56d67dbe15288675475504aa",
+            "schedules": [
+              {
+                "_id": "56d67dbe152886754755050b",
+                "id": 3,
+                "isFull": 0,
+                "hourStart": "20:00:00",
+                "hourEnd": "21:15:00",
+                "dayNameId": 2,
+                "scheduleId": 3,
+                "dayEnd": "2016-06-14",
+                "dayStart": "2016-01-12",
+                "schedule": "56d67dbe152886754755054e",
+                "dayName": "mardi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e7",
+                    "id": 41,
+                    "day": "2016-01-19",
+                    "isFull": 0,
+                    "dayScheduleId": 3,
+                    "daySchedule": "56d67dbe152886754755050b"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_id": "56d67dbe152886754755054f",
+            "id": 4,
+            "name": "Yoga en force",
+            "description": "Un cours où les postures seront en alternance statique et en mouvement offrant un défi de force, d'endurance et d'équilibre plus grand.",
+            "courseId": 2,
+            "course": "56d67dbe15288675475504aa",
+            "schedules": [
+              {
+                "_id": "56d67dbe152886754755050d",
+                "id": 5,
+                "isFull": 0,
+                "hourStart": "18:30:00",
+                "hourEnd": "19:45:00",
+                "dayNameId": 2,
+                "scheduleId": 4,
+                "dayEnd": "2016-06-14",
+                "dayStart": "2016-01-12",
+                "schedule": "56d67dbe152886754755054f",
+                "dayName": "mardi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e8",
+                    "id": 42,
+                    "day": "2016-01-19",
+                    "isFull": 0,
+                    "dayScheduleId": 5,
+                    "daySchedule": "56d67dbe152886754755050d"
+                  }
+                ]
               }
             ]
           }
@@ -384,7 +1004,17 @@
                 "dayEnd": "2016-04-27",
                 "dayStart": "2016-01-13",
                 "schedule": "56d67dbe152886754755055c",
-                "dayName": "mercredi"
+                "dayName": "mercredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e4",
+                    "id": 38,
+                    "day": "2016-01-13",
+                    "isFull": 0,
+                    "dayScheduleId": 27,
+                    "daySchedule": "56d67dbe1528867547550517"
+                  }
+                ]
               }
             ]
           },
@@ -407,7 +1037,17 @@
                 "dayEnd": "2016-04-27",
                 "dayStart": "2016-01-13",
                 "schedule": "56d67dbe152886754755055d",
-                "dayName": "mercredi"
+                "dayName": "mercredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e5",
+                    "id": 39,
+                    "day": "2016-01-13",
+                    "isFull": 0,
+                    "dayScheduleId": 47,
+                    "daySchedule": "56d67dbe1528867547550525"
+                  }
+                ]
               }
             ]
           }
@@ -441,7 +1081,17 @@
                 "dayEnd": "2016-04-27",
                 "dayStart": "2016-01-13",
                 "schedule": "56d67dbe152886754755055c",
-                "dayName": "mercredi"
+                "dayName": "mercredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e4",
+                    "id": 38,
+                    "day": "2016-01-13",
+                    "isFull": 0,
+                    "dayScheduleId": 27,
+                    "daySchedule": "56d67dbe1528867547550517"
+                  }
+                ]
               }
             ]
           },
@@ -464,7 +1114,17 @@
                 "dayEnd": "2016-04-27",
                 "dayStart": "2016-01-13",
                 "schedule": "56d67dbe152886754755055d",
-                "dayName": "mercredi"
+                "dayName": "mercredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e5",
+                    "id": 39,
+                    "day": "2016-01-13",
+                    "isFull": 0,
+                    "dayScheduleId": 47,
+                    "daySchedule": "56d67dbe1528867547550525"
+                  }
+                ]
               }
             ]
           }
@@ -498,7 +1158,17 @@
                 "dayEnd": "2016-02-08",
                 "dayStart": "2016-01-18",
                 "schedule": "56d67dbe1528867547550565",
-                "dayName": "lundi"
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e6",
+                    "id": 40,
+                    "day": "2016-01-18",
+                    "isFull": 0,
+                    "dayScheduleId": 38,
+                    "daySchedule": "56d67dbe152886754755051f"
+                  }
+                ]
               }
             ]
           }
@@ -532,7 +1202,17 @@
                 "dayEnd": "2016-06-13",
                 "dayStart": "2016-01-11",
                 "schedule": "56d67dbe1528867547550564",
-                "dayName": "lundi"
+                "dayName": "lundi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e1",
+                    "id": 30,
+                    "day": "2016-01-11",
+                    "isFull": 0,
+                    "dayScheduleId": 39,
+                    "daySchedule": "56d67dbe1528867547550520"
+                  }
+                ]
               }
             ]
           }
@@ -566,7 +1246,17 @@
                 "dayEnd": "2016-02-11",
                 "dayStart": "2016-01-07",
                 "schedule": "56d67dbe1528867547550566",
-                "dayName": "jeudi"
+                "dayName": "jeudi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e2",
+                    "id": 34,
+                    "day": "2016-01-14",
+                    "isFull": 0,
+                    "dayScheduleId": 40,
+                    "daySchedule": "56d67dbe1528867547550521"
+                  }
+                ]
               }
             ]
           }
@@ -605,7 +1295,17 @@
                 "dayEnd": "2016-03-30",
                 "dayStart": "2016-01-13",
                 "schedule": "56d67dbe1528867547550552",
-                "dayName": "mercredi"
+                "dayName": "mercredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e0",
+                    "id": 26,
+                    "day": "2016-01-13",
+                    "isFull": 0,
+                    "dayScheduleId": 12,
+                    "daySchedule": "56d67dbe152886754755050e"
+                  }
+                ]
               }
             ]
           }
@@ -639,7 +1339,17 @@
                 "dayEnd": "2016-04-14",
                 "dayStart": "2016-01-21",
                 "schedule": "56d67dbe1528867547550569",
-                "dayName": "jeudi"
+                "dayName": "jeudi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505ea",
+                    "id": 44,
+                    "day": "2016-01-14",
+                    "isFull": 0,
+                    "dayScheduleId": 48,
+                    "daySchedule": "56d67dbe1528867547550526"
+                  }
+                ]
               }
             ]
           }
@@ -650,26 +1360,6 @@
   {
     "name": "Méditation",
     "teachers": [
-      {
-        "_id": "56d67dbe15288675475505c8",
-        "id": 8,
-        "firstName": "Christine",
-        "lastName": "Polenz",
-        "tel": "",
-        "schoolName": "Centre de méditation",
-        "schoolUrl": "http://www.meditationamontreal.org/",
-        "courseTypes": [
-          {
-            "_id": "56d67dbe1528867547550553",
-            "id": 12,
-            "name": "Méditation",
-            "description": "<p>Un entra&icirc;nement en 11 &eacute;tapes<br />11 facteurs mentaux vertueux</p><p>19 oct &bull; Des actions saines pour un esprit sain<br />26 oct &bull; La libert&eacute; du d&eacute;tachement<br />2 nov &bull; Un esprit calme et positif<br />9 nov &bull; Les bienfaits de la sagesse<br />16 nov &bull; La flexibilit&eacute; de l&rsquo;esprit<br />23 nov &bull; Prot&eacute;g&eacute; de la n&eacute;gativit&eacute;<br />30 nov &bull; La compassion</p>",
-            "courseId": 8,
-            "course": "56d67dbe15288675475504af",
-            "schedules": []
-          }
-        ]
-      },
       {
         "_id": "56d67dbe15288675475505cc",
         "id": 12,
@@ -698,7 +1388,17 @@
                 "dayEnd": "2016-06-05",
                 "dayStart": "2016-01-17",
                 "schedule": "56d67dbe1528867547550559",
-                "dayName": "dimanche"
+                "dayName": "dimanche",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505df",
+                    "id": 22,
+                    "day": "2016-02-14",
+                    "isFull": 0,
+                    "dayScheduleId": 24,
+                    "daySchedule": "56d67dbe1528867547550515"
+                  }
+                ]
               }
             ]
           }
@@ -732,7 +1432,8 @@
                 "dayEnd": "2015-03-26",
                 "dayStart": "2015-02-12",
                 "schedule": "56d67dbe152886754755055a",
-                "dayName": "jeudi"
+                "dayName": "jeudi",
+                "testingDays": []
               }
             ]
           }
@@ -766,7 +1467,8 @@
                 "dayEnd": "2015-12-10",
                 "dayStart": "2015-10-29",
                 "schedule": "56d67dbe152886754755055f",
-                "dayName": "jeudi"
+                "dayName": "jeudi",
+                "testingDays": []
               }
             ]
           },
@@ -789,7 +1491,8 @@
                 "dayEnd": "2015-12-10",
                 "dayStart": "2015-10-01",
                 "schedule": "56d67dbe1528867547550563",
-                "dayName": "jeudi"
+                "dayName": "jeudi",
+                "testingDays": []
               }
             ]
           }
@@ -823,7 +1526,8 @@
                 "dayEnd": "2015-12-10",
                 "dayStart": "2015-10-29",
                 "schedule": "56d67dbe152886754755055f",
-                "dayName": "jeudi"
+                "dayName": "jeudi",
+                "testingDays": []
               }
             ]
           },
@@ -846,7 +1550,8 @@
                 "dayEnd": "2015-12-10",
                 "dayStart": "2015-10-01",
                 "schedule": "56d67dbe1528867547550563",
-                "dayName": "jeudi"
+                "dayName": "jeudi",
+                "testingDays": []
               }
             ]
           }
@@ -880,7 +1585,8 @@
                 "dayEnd": "2016-04-29",
                 "dayStart": "2016-02-26",
                 "schedule": "56d67dbe1528867547550560",
-                "dayName": "vendredi"
+                "dayName": "vendredi",
+                "testingDays": []
               }
             ]
           }
@@ -914,7 +1620,8 @@
                 "dayEnd": "2015-12-19",
                 "dayStart": "2015-12-19",
                 "schedule": "56d67dbe1528867547550568",
-                "dayName": "samedi"
+                "dayName": "samedi",
+                "testingDays": []
               }
             ]
           }
@@ -953,7 +1660,8 @@
                 "dayEnd": "2016-04-01",
                 "dayStart": "2016-03-04",
                 "schedule": "56d67dbe1528867547550557",
-                "dayName": "vendredi"
+                "dayName": "vendredi",
+                "testingDays": []
               }
             ]
           }
@@ -992,7 +1700,8 @@
                 "dayEnd": "2015-06-17",
                 "dayStart": "2015-06-03",
                 "schedule": "56d67dbe1528867547550562",
-                "dayName": "mercredi"
+                "dayName": "mercredi",
+                "testingDays": []
               }
             ]
           }
@@ -1026,7 +1735,8 @@
                 "dayEnd": "2015-06-29",
                 "dayStart": "2015-05-25",
                 "schedule": "56d67dbe1528867547550561",
-                "dayName": "lundi"
+                "dayName": "lundi",
+                "testingDays": []
               }
             ]
           }
@@ -1065,7 +1775,17 @@
                 "dayEnd": "2016-05-31",
                 "dayStart": "2016-01-12",
                 "schedule": "56d67dbe1528867547550567",
-                "dayName": "mardi"
+                "dayName": "mardi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505eb",
+                    "id": 45,
+                    "day": "2016-01-12",
+                    "isFull": 0,
+                    "dayScheduleId": 43,
+                    "daySchedule": "56d67dbe1528867547550522"
+                  }
+                ]
               }
             ]
           }
@@ -1104,7 +1824,17 @@
                 "dayEnd": "2016-04-06",
                 "dayStart": "2016-01-13",
                 "schedule": "56d67dbe1528867547550551",
-                "dayName": "mercredi"
+                "dayName": "mercredi",
+                "testingDays": [
+                  {
+                    "_id": "56d67dbe15288675475505e9",
+                    "id": 43,
+                    "day": "2016-01-13",
+                    "isFull": 0,
+                    "dayScheduleId": 10,
+                    "daySchedule": "56d67dbe152886754755050c"
+                  }
+                ]
               }
             ]
           }
@@ -1138,7 +1868,8 @@
                 "dayEnd": "2015-06-18",
                 "dayStart": "2015-05-07",
                 "schedule": "56d67dbe1528867547550555",
-                "dayName": "jeudi"
+                "dayName": "jeudi",
+                "testingDays": []
               }
             ]
           }
@@ -1172,7 +1903,8 @@
                 "dayEnd": "2016-05-31",
                 "dayStart": "2016-01-12",
                 "schedule": "56d67dbe152886754755055e",
-                "dayName": "mardi"
+                "dayName": "mardi",
+                "testingDays": []
               }
             ]
           }
