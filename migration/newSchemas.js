@@ -27,36 +27,94 @@ mongoose.connect('mongodb://localhost/mondeavie', function(err) {
 
   // we connected ok
   //findTree();
-  findRecursive(function(jsonObj){
-    console.log(JSON.stringify(jsonObj[0]));
-  });
+  findRecursive();
 });
 
-/**
- * find Recursive
- */
 
-function findRecursive(cb) {
-  var jsonObj = [];
-  CourseName
-  .find({})
-  .exec(function(err, courseNames) {
-    if (err) return done(err);
-    courseNames.map(function(courseName, index) {
-      jsonObj.push({
-        name : courseName.name
-      });
+var jsonObj = [];
+var _courseNames =[];
+var _courseName;
+var _teachers = [];
+var _teacher;
+var _courseNameIndex = 0;
 
-      Course
-      .find({ courseName : courseName._id })
+
+function isTeacher(teachers, id) {
+  //console.log('id', id)
+  teachers.map(function(teacher, index){
+    if(teacher._id == id) {
+      return true;
+    }
+  });
+  return false;
+}
+
+function cbCourse(err, course) {
+  if(course) {
+
+    Teacher
+    .find({ _id: course.teacher })
+    .lean()
+    .exec(function(err, teacher){
+      CourseName
+      .findOne({ _id: course.courseName })
       .lean()
-      .exec(function(err, courses) {
-        jsonObj[ index ].courses = courses;
-        if(courseNames.length -1 == index) {
-          cb(jsonObj);
-        }
-      });
+      .exec(function(err, courseName){
+        jsonObj.map(function(courseObj, index){
+          if(courseName.name == courseObj.name){
+            //console.log('courseName.name', courseName.name)
+            if( isTeacher(jsonObj[ index ].teachers, teacher._id) ) {
+              console.log('++++do not insert', teacher);
+            } else {
+              jsonObj[ index ].teachers.push(teacher);
+              console.log("_____" + JSON.stringify(jsonObj));
+            }
+          }
+        }); // jsonObj.map
+      }); // CourseName
+    }); // Teacher
+  } // if(course)
+}
+
+
+function cbTeacher(err, teachers) {
+  _courseNames.map(function(courseName) {
+    _courseName = courseName;
+
+    jsonObj.push({
+      name : _courseName.name,
+    });
+
+    // for each course reset teachers
+    jsonObj[ jsonObj.length -1 ].teachers = [];
+
+    teachers.map(function(teacher) {
+      Course
+      .findOne({ courseName : _courseName._id, teacher: teacher._id })
+      .lean()
+      .exec(cbCourse);
     });
   });
-  
 }
+
+
+
+
+function cbCourseName(err, courseNames) {
+  if (err) return done(err);
+  _courseNames = courseNames;
+  Teacher
+  .find({  })
+  .lean()
+  .exec(cbTeacher);
+
+}
+
+
+function findRecursive(cb) {
+  CourseName
+  .find({})
+  .exec(cbCourseName);
+}
+
+
