@@ -1,0 +1,49 @@
+{
+  "_id": "",
+  "name": "Yoga",
+  "svg": "",
+  "teachers": [
+    {
+      "firstName": "Isabelle",
+      "lastName": "Nadeau",
+      "tel": "514-919-6318",
+      "schoolName": "",
+      "schoolUrl": "",
+      "course": {
+        "courseType": "Yoga doux",
+        "note": "",
+        "image": "/media/course_pic/Isabelle_Nadeau_300x300.jpg",
+        "description": "",
+        "price": "",
+        "isVisible": true,
+        "courseTypes": [
+          {
+            "name": "Yoga sur chaise",
+            "description": "",
+            "_id": "",
+            "schedules": [
+              {
+                "isFull": false,
+                "hourStart": "13:00:00",
+                "hourEnd": "14:15:00",
+                "dayEnd": "2016-06-13",
+                "dayStart": "2016-01-12",
+                "dayName": "mardi",
+                "_id": "",
+                "testingDays": [
+                  {
+                    "day": "2016-01-26",
+                    "isFull": false,
+                    "_id": ""
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "_id": ""
+    }
+  ],
+  "__v": 0
+}

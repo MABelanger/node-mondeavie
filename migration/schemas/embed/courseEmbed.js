@@ -45,15 +45,13 @@ var TeachersSchema = new Schema({
 
 // create an export function to encapsulate the model creation
 module.exports = function() {
-  var coursesSchema = Schema({
+  var courseEmbed = Schema({
     name : String,
     svg: String,
     teachers : [ TeachersSchema ]
   }); // courseSchema
-  mongoose.model('Courses', coursesSchema);
+  mongoose.model('CourseEmbed', courseEmbed);
 };
-
-
 
 /*
   {
@@ -96,5 +94,6 @@ module.exports = function() {
             }
           ]
         }
-      },
+      }]
+    }
 */
