@@ -3,11 +3,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var testingDaysSchema = new Schema({
+  "slug" : String,
   "day": String,
   "isFull": Boolean
 });
 
 var SchedulesSchema = new Schema({
+  "slug" : String,
   "isFull": Boolean,
   "hourStart": String,
   "hourEnd": String,
@@ -18,12 +20,14 @@ var SchedulesSchema = new Schema({
 });
 
 var courseTypesSchema = new Schema({
+  "slug" : String,
   "name": String,
   "description": String,
   "schedules": [ SchedulesSchema ]
 });
 
 var CourseSchema = new Schema({
+  "slug" : String,
   "courseType": String,
   "note": String,
   "image": String,
@@ -34,6 +38,7 @@ var CourseSchema = new Schema({
 });
 
 var TeachersSchema = new Schema({
+  "slug" : String,
   "firstName": String,
   "lastName": String,
   "tel": String,
@@ -46,9 +51,10 @@ var TeachersSchema = new Schema({
 // create an export function to encapsulate the model creation
 module.exports = function() {
   var CourseSchemaEmbed = Schema({
-    name : String,
-    svg: String,
-    teachers : [ TeachersSchema ]
+    "slug" : String,
+    "name" : String,
+    "svg": String,
+    "teachers" : [ TeachersSchema ]
   }); // courseSchema
   mongoose.model('Course', CourseSchemaEmbed);
 };
