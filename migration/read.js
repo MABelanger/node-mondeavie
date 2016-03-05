@@ -10,15 +10,16 @@ function errHandle(err){
   console.log('err', err);
 }
 
-mongoose.connect('mongodb://localhost/mondeavie-embed', function(err) {
+mongoose.connect('mongodb://localhost/mondeavie-embed-urlid', function(err) {
   // if we failed to connect, abort
   if (err) throw err;
 
+  // find course by slug
   Course
-  .find({'teachers.firstName' : 1}, {"teachers.$" : 1})
-  .exec(function(err, teachers) {
+  .find({'slug' : 'yoga'})
+  .exec(function(err, courses) {
     if (err) return errHandle(err);
-    console.log( JSON.stringify(teachers) );
+    console.log( JSON.stringify(courses[0].name) );
   });
 
 /*

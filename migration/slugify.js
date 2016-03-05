@@ -18,19 +18,29 @@ function cbUpdateSlug (err, numAffected) {
   console.log(numAffected);
 }
 
+function getTeacherCoursesSlug(teacher){
+  if(teacher.course) {
+    var _slug = slug(teacher.course.courseType).toLowerCase();
+    teacher.course.slug = _slug;
+  }
+  return teacher;
+}
+
+
 function teacherSlug(course){
   var teachers = course.teachers;
   teachers.map(function(teacher, index){
     //course._id = course.name.toLowerCase();
     var _slug = slug(teacher.firstName + ' ' + teacher.lastName).toLowerCase();
     teachers[ index ].slug = _slug;
+    teachers[ index ] = getTeacherCoursesSlug(teachers[ index ]);
   });
 
   var conditions = { '_id' : course._id }
     , update = { 'teachers' : teachers }
     , options = { multi: true };
 
-  //Course.update(conditions, update, options, cbUpdateSlug);
+  Course.update(conditions, update, options, cbUpdateSlug);
 }
 
 function courseSlug(courses){
@@ -41,7 +51,7 @@ function courseSlug(courses){
       , update = { 'slug' : _slug }
       , options = { multi: true };
 
-    //Course.update(conditions, update, options, cbUpdateSlug);
+    Course.update(conditions, update, options, cbUpdateSlug);
 
     teacherSlug(course);
   });
