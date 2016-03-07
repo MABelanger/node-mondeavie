@@ -2,22 +2,22 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Types.ObjectId;
 
-require('./schemas/teacher.js')();
+require('../schemas/teacher.js')();
 var Teacher = mongoose.model('Teacher');
 
-require('./schemas/courseName.js')();
+require('../schemas/courseName.js')();
 var CourseName = mongoose.model('CourseName');
 
-require('./schemas/course.js')();
+require('../schemas/course.js')();
 var Course = mongoose.model('Course');
 
-require('./schemas/schedule.js')();
+require('../schemas/schedule.js')();
 var Schedule = mongoose.model('Schedule');
 
-require('./schemas/daySchedule.js')();
+require('../schemas/daySchedule.js')();
 var DaySchedule = mongoose.model('DaySchedule');
 
-require('./schemas/testingDay.js')();
+require('../schemas/testingDay.js')();
 var TestingDay = mongoose.model('TestingDay');
 
 
@@ -26,7 +26,6 @@ mongoose.connect('mongodb://localhost/mondeavie', function(err) {
   if (err) throw err;
 
   // we connected ok
-  //findTree();
   findRecursive();
 });
 
@@ -46,8 +45,6 @@ function isTeacher(teachers, id) {
   });
   return isTrue;
 }
-
-
 
 
 function cbCourse(err, course) {
@@ -72,7 +69,7 @@ function cbCourse(err, course) {
 
               daySchedules[ indexDaySchedule ].testingDays = testingDays;
               schedules[ indexSchedule ].schedules = daySchedules;
-              //console.log('daySchedules', daySchedules)
+
               Teacher
               .findOne({ _id: course.teacher })
               .lean()
@@ -85,15 +82,14 @@ function cbCourse(err, course) {
 
                   jsonObj.map(function(courseMap, index){
                     if(courseName.name == courseMap.name){
-                      //console.log('courseName.name', courseName.name)
                       if( isTeacher(jsonObj[ index ].teachers, teacher._id) == true ) {
                         //console.log('++++do not insert\n\n\n', teacher);
                       } else {
                         teacher.course = course;
                         teacher.course.courseTypes = schedules;
                         jsonObj[ index ].teachers.push(teacher);
+                        // take only the last one
                         console.log("\n\n\n_____" + JSON.stringify(jsonObj));
-                        //console.log('teacher.firstName', teacher.firstName)
                       }
                     }
                   }); // jsonObj.map

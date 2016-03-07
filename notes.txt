@@ -143,6 +143,7 @@ db.runCommand({
 // return only the teacher
 .findOne({'teachers.firstName' : 'Isabelle'}, {"teachers.$" : 1})
 
+ mongoexport --db mondeavie-embed-urlid --collection courses --jsonArray -o mongodb.json
 
 
 
