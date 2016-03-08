@@ -2,6 +2,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var slugUtils = require('../../utils/slugUtils');
+
 var testingDaysSchema = new Schema({
   "slug" : String,
   "day": String,
@@ -47,17 +49,41 @@ var TeachersSchema = new Schema({
   "course": CourseSchema
 });
 
+var CourseSchemaEmbed = Schema({
+  "slug" : String,
+  "name" : String,
+  "svg": String,
+  "teachers" : [ TeachersSchema ]
+}); // courseSchema
+
+
+/**
+ functions of the model Course
+ **/
 
 // create an export function to encapsulate the model creation
-module.exports = function() {
-  var CourseSchemaEmbed = Schema({
-    "slug" : String,
-    "name" : String,
-    "svg": String,
-    "teachers" : [ TeachersSchema ]
-  }); // courseSchema
-  mongoose.model('Course', CourseSchemaEmbed);
-};
+var Course = mongoose.model('Course', CourseSchemaEmbed);
+
+// Get Courses
+Course.getCourses = function(callback) {
+  Course.find({}, callback);
+}
+
+// Get Only one course by the name of the course ( slug )
+Course.getCourseBySlug = function(slug, callback) {
+  Course.findOne({ slug: slug }, callback);
+}
+
+// Add Course
+Course.addCourse = function(course, callback) {
+  // set the slug value
+  courseSlug = slugUtils.course(course);
+  Course.create(courseSlug, callback);
+}
+
+
+module.exports = Course;
+
 
 /*
   {

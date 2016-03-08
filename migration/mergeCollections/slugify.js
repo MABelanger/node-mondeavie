@@ -5,7 +5,7 @@ var print = console.log.bind(console, '>')
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Types.ObjectId;
 
-require('../schemas/embed/courseEmbed.js')();
+require('../../schemas/embed/course.js')();
 var Course = mongoose.model('Course');
 
 
@@ -30,7 +30,6 @@ function getTeacherCoursesSlug(teacher){
 function teacherSlug(course){
   var teachers = course.teachers;
   teachers.map(function(teacher, index){
-    //course._id = course.name.toLowerCase();
     var _slug = slug(teacher.firstName + ' ' + teacher.lastName).toLowerCase();
     teachers[ index ].slug = _slug;
     teachers[ index ] = getTeacherCoursesSlug(teachers[ index ]);

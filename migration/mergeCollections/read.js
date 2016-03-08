@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Types.ObjectId;
 
-require('../schemas/embed/courseEmbed.js')();
+require('../../schemas/embed/course.js')();
 var Course = mongoose.model('Course');
 
 
