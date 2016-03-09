@@ -15,8 +15,10 @@
     "express": "^4.13.4",
     "express-mongoose-generator": "^2.0.0",
     "humps": "^1.0.0",
+    "lodash": "^4.6.1",
     "mongodb-rest": "^0.10.14",
     "mongoose": "^4.4.5",
+    "nodemon": "^1.9.1",
     "slug": "^0.9.1",
     "sqlite3": "^3.1.1"
   }

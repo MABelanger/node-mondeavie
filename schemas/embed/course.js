@@ -74,6 +74,19 @@ Course.getCourseBySlug = function(slug, callback) {
   Course.findOne({ slug: slug }, callback);
 }
 
+// Get Only one course by the name of the course ( slug )
+Course.updateBySlug = function(slug, course, options, callback) {
+  var query = { slug: slug };
+  courseSlug = slugUtils.course(course);
+  var update = {
+    name: courseSlug.name,
+    slug: courseSlug.slug
+  }
+  Course.findOneAndUpdate(query, update, options, callback);
+}
+
+
+
 // Add Course
 Course.addCourse = function(course, callback) {
   // set the slug value
@@ -84,7 +97,7 @@ Course.addCourse = function(course, callback) {
 
 module.exports = Course;
 
-
+// /app/courses/:courseId/teachers/:teacherId/course/courseTypes/:courseTypesId/schedules/:schedulesId/testingDays/:testingDaysId
 /*
   {
     "name": "Yoga",
