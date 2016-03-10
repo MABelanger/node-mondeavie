@@ -60,10 +60,10 @@ var CourseSchemaEmbed = Schema({
 
 CourseSchemaEmbed.pre('save', function(next) {
   // set the slugs value of course document and subDocuments
+  console.log('pre save');
   utils.slugify(this);
   next();
 });
-
 
 
 /**
@@ -72,6 +72,9 @@ CourseSchemaEmbed.pre('save', function(next) {
 
 // create an export function to encapsulate the model creation
 var Course = mongoose.model('Course', CourseSchemaEmbed);
+
+// create container functions
+
 
 
 /* 
@@ -90,16 +93,27 @@ Course.read = function(_id, callback) {
 }
 
 // Update Course
-Course.update = function(_id, course, callback) {
-  // set the slugs value of course document and subDocuments
-  courseSlug = utils.slugify(course);
-  Course.findByIdAndUpdate(_id, courseSlug, callback);
+Course.update = function(_id, json, callback) {
+
+  // we don't call update by id because the hook pre-update is not supported
+  // so call save method instead.
+  // Course.findByIdAndUpdate(_id, json, callback);
+
+
+  Course.findById( _id, function(err, course){
+    // copy all attributes from json to the course
+    for (var attrname in json) {
+      course[attrname] = json[attrname];
+    }
+    course.save(callback);
+  });
 }
 
 // List Courses
 Course.list = function(callback) {
   Course.find({}, callback);
 }
+
 
 
 // Get Only one course by the name of the course ( slug )
