@@ -1,4 +1,23 @@
 
+db.courses.remove({_id:{$in:[
+  ObjectId("56de1beb1e30deca97aa7a29"),
+  ObjectId("56de24aecd137478991958de"),
+  ObjectId("56de24f07b363b8d995401f6"),
+  ObjectId("56de255a585eb9a599994b73"),
+  ObjectId("56de2564585eb9a599994b74"),
+  ObjectId("56de26eec4c350cb9910b531"),
+  ObjectId("56df6f349e9a0e869f9ba190"),
+  ObjectId("56e0ca9ceb6b037fb0e7d2bc"),
+  ObjectId("56e0caf1eb6b037fb0e7d2c0"),
+  ObjectId("56e0cbaeeb6b037fb0e7d2c4"),
+  ObjectId("56e0d1fb10c80849b19ffc5a"),
+  ObjectId("56e0d35fa593b96bb1ff0863"),
+  ObjectId("56e0d3ae58066d7cb17e05a8"),
+  ObjectId("56e0ddcc86f7441ab261c93b"),
+  ObjectId("56e0dde986f7441ab261c93c")
+  ]
+}})
+
 courses -> 
 	professors -> 
 		courseTypes -> 

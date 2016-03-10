@@ -108,6 +108,11 @@ Course.update = function(_id, json, callback) {
   });
 }
 
+// Delete Course
+Course.delete = function(_id, callback) {
+  Course.findByIdAndRemove(_id, callback);
+};
+
 // List Courses
 Course.list = function(callback) {
   Course.find({}, callback);

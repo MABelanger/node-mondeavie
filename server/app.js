@@ -57,6 +57,17 @@ app.put('/api/courses/:_id', function(req, res){
   });
 });
 
+// Delete Course
+app.delete('/api/courses/:_id', function(req, res){
+  Course.delete(req.params._id, function(err){
+    if( err ) throw err;
+    res.json({
+      'status': 'deleted',
+      '_id' : req.params._id
+    });
+  });
+});
+
 
 // List Courses
 app.get('/api/courses', function(req, res){
