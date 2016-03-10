@@ -7,8 +7,16 @@ var utils = require('../../utils/utils');
 
 var testingDaysSchema = new Schema({
   "slug" : String,
-  "day": String,
+  "day": Date,
   "isFull": Boolean
+},
+{ 
+  toObject: {virtuals: true}, 
+  toJSON: {virtuals: true}
+});
+
+testingDaysSchema.virtual('yyyymmdd').get(function () {
+  return utils.getYYYYMMDD(this.day);
 });
 
 var SchedulesSchema = new Schema({
@@ -16,8 +24,8 @@ var SchedulesSchema = new Schema({
   "isFull": Boolean,
   "hourStart": String,
   "hourEnd": String,
-  "dayEnd": String,
-  "dayStart": String,
+  "dayEnd": Date,
+  "dayStart": Date,
   "dayName": String,
   "testingDays": [ testingDaysSchema ]
 });
