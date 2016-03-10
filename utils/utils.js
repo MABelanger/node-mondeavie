@@ -25,14 +25,12 @@ function teacherSlug(teachers){
 
 var Utils = {
   slugify : function(course){
-    var courseSlug = _clone(course);
-    var _slug = slug(courseSlug.name).toLowerCase();
 
     // course slug is course.name
-    courseSlug.slug = _slug;
+    course.slug = slug(course.name).toLowerCase();
     // slug all teachers
-    teacherSlug(courseSlug.teachers);
-    return courseSlug;
+    teacherSlug(course.teachers);
+    return course;
   }
 }
 

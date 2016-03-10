@@ -58,6 +58,13 @@ var CourseSchemaEmbed = Schema({
 }); // courseSchema
 
 
+CourseSchemaEmbed.pre('save', function(next) {
+  // set the slugs value of course document and subDocuments
+  utils.slugify(this);
+  next();
+});
+
+
 
 /**
  functions of the model Course
@@ -72,10 +79,9 @@ var Course = mongoose.model('Course', CourseSchemaEmbed);
  */
 
 // Create Course
-Course.create = function(course, callback) {
-  // set the slugs value of course document and subDocuments
-  courseSlug = utils.slugify(course);
-  Course.create(courseSlug, callback);
+Course.create = function(json, callback) {
+  course = new Course(json);
+  course.save(callback);
 }
 
 // Read Course
