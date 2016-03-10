@@ -99,11 +99,10 @@ Course.update = function(_id, json, callback) {
   // so call save method instead.
   // Course.findByIdAndUpdate(_id, json, callback);
 
-
   Course.findById( _id, function(err, course){
     // copy all attributes from json to the course
-    for (var attrname in json) {
-      course[attrname] = json[attrname];
+    for (var attName in json) {
+      course[attName] = json[attName];
     }
     course.save(callback);
   });
@@ -125,47 +124,4 @@ Course.getCourseBySlug = function(slug, callback) {
 module.exports = Course;
 
 // /app/courses/:courseId/teachers/:teacherId/course/courseTypes/:courseTypesId/schedules/:schedulesId/testingDays/:testingDaysId
-/*
-  {
-    "name": "Yoga",
-    "svg" : "",
-    "teachers": [
-      {
-        "firstName": "Isabelle",
-        "lastName": "Nadeau",
-        "tel": "514-919-6318",
-        "schoolName": "",
-        "schoolUrl": "",
-        "course": {
-          "courseType": "Yoga doux",
-          "note": "",
-          "image": "/media/course_pic/Isabelle_Nadeau_300x300.jpg",
-          "description": "",
-          "price": "",
-          "isVisible": true,
-          "courseTypes": [
-            {
-              "name": "Yoga sur chaise",
-              "description": "",
-              "schedules": [
-                {
-                  "isFull": false,
-                  "hourStart": "13:00:00",
-                  "hourEnd": "14:15:00",
-                  "dayEnd": "2016-06-13",
-                  "dayStart": "2016-01-12",
-                  "dayName": "mardi",
-                  "testingDays": [
-                    {
-                      "day": "2016-01-26",
-                      "isFull": false
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      }]
-    }
-*/
+
