@@ -1,8 +1,9 @@
 // import the necessary modules
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var ObjectId = mongoose.Types.ObjectId;
 
-var slugUtils = require('../../utils/slugUtils');
+var utils = require('../../utils/utils');
 
 var testingDaysSchema = new Schema({
   "slug" : String,
@@ -57,6 +58,7 @@ var CourseSchemaEmbed = Schema({
 }); // courseSchema
 
 
+
 /**
  functions of the model Course
  **/
@@ -64,34 +66,39 @@ var CourseSchemaEmbed = Schema({
 // create an export function to encapsulate the model creation
 var Course = mongoose.model('Course', CourseSchemaEmbed);
 
-// Get Courses
-Course.getCourses = function(callback) {
+
+/* 
+ * CRUD operations for the courses
+ */
+
+// Create Course
+Course.create = function(course, callback) {
+  // set the slugs value of course document and subDocuments
+  courseSlug = utils.slugify(course);
+  Course.create(courseSlug, callback);
+}
+
+// Read Course
+Course.read = function(_id, callback) {
+  Course.findById( _id, callback);
+}
+
+// Update Course
+Course.update = function(_id, course, callback) {
+  // set the slugs value of course document and subDocuments
+  courseSlug = utils.slugify(course);
+  Course.findByIdAndUpdate(_id, courseSlug, callback);
+}
+
+// List Courses
+Course.list = function(callback) {
   Course.find({}, callback);
 }
+
 
 // Get Only one course by the name of the course ( slug )
 Course.getCourseBySlug = function(slug, callback) {
   Course.findOne({ slug: slug }, callback);
-}
-
-// Get Only one course by the name of the course ( slug )
-Course.updateBySlug = function(slug, course, options, callback) {
-  var query = { slug: slug };
-  courseSlug = slugUtils.course(course);
-  var update = {
-    name: courseSlug.name,
-    slug: courseSlug.slug
-  }
-  Course.findOneAndUpdate(query, update, options, callback);
-}
-
-
-
-// Add Course
-Course.addCourse = function(course, callback) {
-  // set the slug value
-  courseSlug = slugUtils.course(course);
-  Course.create(courseSlug, callback);
 }
 
 

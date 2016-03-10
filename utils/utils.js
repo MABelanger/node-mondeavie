@@ -23,8 +23,8 @@ function teacherSlug(teachers){
 }
 
 
-var SlugUtils = {
-  course : function(course){
+var Utils = {
+  slugify : function(course){
     var courseSlug = _clone(course);
     var _slug = slug(courseSlug.name).toLowerCase();
 
@@ -36,4 +36,4 @@ var SlugUtils = {
   }
 }
 
-module.exports = SlugUtils;
+module.exports = Utils;

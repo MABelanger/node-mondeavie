@@ -20,30 +20,61 @@ app.get('/', function(req, res){
 });
 
 
-// Get All courses
+
+/* 
+ * /app/courses/:courseId/teachers/:teacherId/course/courseTypes/:courseTypesId/schedules/:schedulesId/testingDays/:testingDaysId
+ */
+
+
+/* 
+ * CRUD operations for the course
+ */
+
+// Create course
+app.post('/api/courses', function(req, res){
+  var course = req.body;
+  Course.create(course, function(err, createdCourse){
+    if( err ) throw err;
+    res.json( createdCourse );
+  });
+});
+
+// Read Course
+app.get('/api/courses/:_id', function(req, res){
+  Course.read(req.params._id, function(err, course){
+    if( err ) throw err;
+    res.json(course);
+  });
+});
+
+// Update Course
+app.put('/api/courses/:_id', function(req, res){
+  var id =  req.params._id;
+  var course = req.body;
+  Course.update(id, course, function(err, updatedCourse){
+    if( err ) throw err;
+    res.json( updatedCourse );
+  });
+});
+
+
+// List Courses
 app.get('/api/courses', function(req, res){
-  Course.getCourses(function(err, courses){
+  Course.list(function(err, courses){
     if( err ) throw err;
     res.json(courses);
   });
 });
 
-// create new course
-app.post('/api/courses', function(req, res){
-  var _course = req.body;
-  Course.addCourse(_course, function(err, course){
-    if( err ) throw err;
-    res.json(course);
-  });
-});
 
 
-app.get('/api/courses/:_slug', function(req, res){
-  Course.getCourseBySlug(req.params._slug, function(err, course){
-    if( err ) throw err;
-    res.json(course);
-  });
-});
+
+
+
+
+
+
+
 
 app.put('/api/courses/:_slug', function(req, res){
   var slug =  req.params._slug;
@@ -54,26 +85,9 @@ app.put('/api/courses/:_slug', function(req, res){
   });
 });
 
-/*
-function updateSet(id, resource, resourceId, req, res) {
-var set = {};
-for (var field in partialUpdate) {
-  set['subDocs.$.' + field] = partialUpdate[field];
-}
-Parent.update({_id: parentDoc._id, "subDocs._id": document._id}, 
-    {$set: set}, 
-    function(err, numAffected) {});
-}
-*/
 
-app.put('/api/courses/:id/:resource/:resourceId', function(req, res) {
-    // this method is only for Array of resources.
-    var id = eq.params.id;
-    var resource = req.params.resource;
-    var resourceId = req.params.resourceId;
 
-    updateSet(id, resource, resourceId, req, res);
-});
+
 
 app.get('/test', function(req, res) {
   Course.findOne({'_id' : '56df6f349e9a0e869f9ba190' }, function(err, course){
