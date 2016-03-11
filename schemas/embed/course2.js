@@ -7,7 +7,7 @@ var utils = require('../../utils/utils');
 
 var testingDaysSchema = new Schema({
   "slug" : String,
-  "day": String  ,
+  "day": Date,
   "isFull": Boolean
 });
 
@@ -25,10 +25,8 @@ testingDaysSchema.virtual('yyyymmdd').get(function () {
 var SchedulesSchema = new Schema({
   "slug" : String,
   "isFull": Boolean,
-  "hourStart": String,
-  "hourEnd": String,
-  "dayEnd": String  ,
-  "dayStart": String  ,
+  "dayEnd": Date,
+  "dayStart": Date,
   "dayName": String,
   "testingDays": [ testingDaysSchema ]
 });
@@ -68,7 +66,7 @@ var CourseSchemaEmbed = Schema({
   "teachers" : [ TeachersSchema ]
 }); // courseSchema
 
-CourseSchemaEmbed.set('versionKey', '3');
+//CourseSchemaEmbed.set('versionKey', '3');
 
 
 CourseSchemaEmbed.pre('save', function(next) {
@@ -84,7 +82,7 @@ CourseSchemaEmbed.pre('save', function(next) {
  **/
 
 // create an export function to encapsulate the model creation
-var Course = mongoose.model('Course', CourseSchemaEmbed);
+var Course = mongoose.model('Course2', CourseSchemaEmbed);
 
 // create container functions
 
