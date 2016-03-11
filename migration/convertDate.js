@@ -7,20 +7,13 @@ require('../schemas/embed/course2.js')();
 var Course = mongoose.model('Course');
 var Course2 = mongoose.model('Course2');
 
-// /app/courses/:courseId/teachers/:teacherId/course/courseTypes/
-// :courseTypesId/schedules/:schedulesId/testingDays/:testingDaysId
-
 
 function getNewIsoDate(day, hour){
   // format 1999-11-04T14:51:06.157Z
   return new Date(day + 'T' + hour + '.000Z');
 }
 
-/*
-    var day = courseType.schedules[indexSchedule].dayStart;
-    var hour = courseType.schedules[indexSchedule].hourStart;
-    courseType.schedules[indexSchedule].dayStart = getNewIsoDate(day, hour);
-*/
+
 function setScheduleDay(schedule){
   var day = schedule.dayStart;
   var hour = schedule.hourStart;
@@ -30,6 +23,9 @@ function setScheduleDay(schedule){
   hour = schedule.hourEnd;
   schedule.dayEnd = getNewIsoDate(day, hour);
 }
+
+
+
 mongoose.connect('mongodb://localhost/mondeavie-embed-urlid', function(err) {
   // if we failed to connect, abort
   if (err) throw err;

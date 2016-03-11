@@ -22,6 +22,7 @@ function teacherSlug(teachers){
   }
 }
 
+
 function getYYYYMMDD(date){
   var yyyy = date.getFullYear().toString();
   var mm = (date.getMonth()+1).toString(); // getMonth() is zero-based

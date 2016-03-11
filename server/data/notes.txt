@@ -1,5 +1,0 @@
-curl -H "Accept:application/json" http://localhost:3000/api/courses/yoga
-curl -i -X DELETE URL...
-curl -i -X POST -H "Content-Type:application/json" http://localhost:3000/api/courses/ -d '{"name" : "toto"}'
-
-Download postman
