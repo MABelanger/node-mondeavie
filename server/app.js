@@ -28,6 +28,10 @@ app.get('/', function(req, res){
   res.send('use /api');
 });
 
+function isValidId(id){
+  return mongoose.Types.ObjectId.isValid(id);
+}
+
 /* 
  * CRUD operations for the course
  */
@@ -61,13 +65,19 @@ app.put('/api/courses/:_id', function(req, res){
 
 // Delete Course
 app.delete('/api/courses/:_id', function(req, res){
-  Course.delete(req.params._id, function(err){
-    if( err ) throw err;
-    res.json({
-      'status': 'deleted',
-      '_id' : req.params._id
+  if(isValidId(req.params._id)) {
+    Course.delete(req.params._id, function(err){
+      if( err ) throw err;
+      res.json({
+        'status': 'deleted',
+        '_id' : req.params._id
+      });
     });
-  });
+  }else{
+    res.json({
+      'status': 'ERROR: id invalid',
+    });
+  }
 });
 
 // List Courses

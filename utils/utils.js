@@ -33,7 +33,9 @@ function getYYYYMMDD(date){
 var Utils = {
   slugify : function(course){
     // course slug is course.name
-    course.slug = slug(course.name).toLowerCase();
+    if(course.name){
+      course.slug = slug(course.name).toLowerCase();
+    }
     // slug all teachers
     teacherSlug(course.teachers);
     return course;
