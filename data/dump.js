@@ -1,3 +1,16 @@
+
+{
+  toObject: {virtuals: true}, 
+  toJSON: {virtuals: true}
+});
+
+testingDaysSchema.virtual('yyyymmdd').get(function () {
+  return utils.getYYYYMMDD(this.day);
+});
+
+CourseSchemaEmbed.set('versionKey', '3');
+
+
 app.get('/test', function(req, res) {
   Course.findOne({'_id' : '56df6f349e9a0e869f9ba190' }, function(err, course){
     console.log('course', course)

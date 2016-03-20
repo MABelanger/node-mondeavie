@@ -2,6 +2,7 @@ var bodyParser = require('body-parser');
 
 // Load routes
 var routeCourse = require('./course');
+var routeTeacher = require('./teacher');
 
 module.exports = function (app) {
 
@@ -28,5 +29,14 @@ module.exports = function (app) {
   app.put('/api/courses/:_id', routeCourse().update); // Update
   app.delete('/api/courses/:_id', routeCourse().delete); // Delete
   app.get('/api/courses', routeCourse().list); // List
+
+  /* 
+   * CRUD operations for the teacher
+   */
+  app.post('/api/courses/:course_id/teachers', routeTeacher().create); // Create
+  app.get('/api/courses/:course_id/teachers/:_id', routeTeacher().read); // Read
+  app.put('/api/courses/:course_id/teachers/:_id', routeTeacher().update); // Update
+  app.delete('/api/courses/:course_id/teachers/:_id', routeTeacher().delete); // Delete
+  app.get('/api/courses/:course_id/teachers', routeTeacher().list); // List
 
 };
