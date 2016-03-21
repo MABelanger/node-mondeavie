@@ -11,69 +11,106 @@ function isValidId(id){
   return mongoose.Types.ObjectId.isValid(id);
 }
 
+
+function findCourse(course_id){
+  var promise = new Promise(function(resolve, reject) {
+    Course.findById( course_id, (err, course) => {
+      if (! err ) {
+        resolve(course);
+      }
+      else {
+        reject(err);
+      }
+    });
+  });
+  return promise;
+}
+
 module.exports = function () {
 
   var functions = {};
 
   functions.create = function(req, res){
-    course = new Course(req.body);
-    course.save( function(err, createdCourse){
-      if( err ) throw err;
-      res.json( createdCourse );
-    });
+
+    let course_id = req.params.course_id;
+
+    findCourse(course_id)
+      .then( (course) => {
+        course.teachers.push(req.body);
+        course.save(function(err, course){
+          // return only the teacher added
+          let teacher = course.teachers[ course.teachers.length -1 ];
+          res.json(teacher);
+        });
+      }, (err) => {
+        res.json(err);
+      });
+
   };
 
   functions.read = function(req, res){
-    Course.findById(req.params._id, function(err, course){
-      if( err ) throw err;
-      res.json(course);
-    });
+    let course_id = req.params.course_id;
+    let teacher_id = req.params._id;
+
+    findCourse(course_id)
+      .then( (course) => {
+        let teacher = course.teachers.id(teacher_id);
+        res.json(teacher);
+      }, (err) => {
+        res.json(err);
+      });
+
   }
 
   functions.update = function(req, res){
-    var _id =  req.params._id;
-    var json = req.body;
 
-    // we don't call update by id because the hook pre-update is not supported
-    // so call save method instead.
-    // Course.findByIdAndUpdate(_id, json, callback);
+    let course_id = req.params.course_id;
+    let teacher_id = req.params._id;
+    let json = req.body;
 
-    Course.findById( _id, function(err, course){
-      // copy all attributes from json to the course
-      for (var attName in json) {
-        course[attName] = json[attName];
-      }
-      course.save(function(err, updatedCourse){
-        if( err ) throw err;
-        res.json( updatedCourse );
-      });
-    });
-  }
-
-  functions.delete = function(req, res){
-    let _id = req.params._id;
-    if(isValidId(_id)) {
-      Course.findByIdAndRemove(_id, function(err){
-        if( err ) throw err;
-        res.json({
-          'status': 'deleted',
-          '_id' : _id
+    findCourse(course_id)
+      .then( (course) => {
+        let teacher = course.teachers.id(teacher_id);
+        for (let attName in json) {
+          teacher[attName] = json[attName];
+        }
+        course.save(function(err, course){
+          // return only the teacher updated
+          let teacher = course.teachers.id(teacher_id);
+          res.json(teacher);
         });
+      }, (err) => {
+        res.json(err);
       });
-    }else{
-      res.json({
-        'status': 'ERROR: id invalid',
-      });
-    }
   }
+
+  // functions.delete = function(req, res){
+  //   let _id = req.params._id;
+  //   if(isValidId(_id)) {
+  //     Course.findByIdAndRemove(_id, function(err){
+  //       if( err ) throw err;
+  //       res.json({
+  //         'status': 'deleted',
+  //         '_id' : _id
+  //       });
+  //     });
+  //   }else{
+  //     res.json({
+  //       'status': 'ERROR: id invalid',
+  //     });
+  //   }
+  // }
 
   functions.list = function(req, res){
     let course_id = req.params.course_id;
-    let _id = req.params._id;
-    Course.findById( course_id, function(err, course){
-      if( err ) throw err;
-      res.json(course.teachers);
-    });
+
+    findCourse(course_id)
+      .then( (course) => {
+        let teachers = course.teachers;
+        res.json(teachers);
+      }, (err) => {
+        res.json(err);
+      });
   }
 
   return functions;

@@ -16,7 +16,7 @@ module.exports = function () {
   var functions = {};
 
   functions.create = function(req, res){
-    course = new Course(req.body);
+    let course = new Course(req.body);
     course.save( function(err, createdCourse){
       if( err ) throw err;
       res.json( createdCourse );
