@@ -84,22 +84,23 @@ module.exports = function () {
       });
   }
 
-  // functions.delete = function(req, res){
-  //   let _id = req.params._id;
-  //   if(isValidId(_id)) {
-  //     Course.findByIdAndRemove(_id, function(err){
-  //       if( err ) throw err;
-  //       res.json({
-  //         'status': 'deleted',
-  //         '_id' : _id
-  //       });
-  //     });
-  //   }else{
-  //     res.json({
-  //       'status': 'ERROR: id invalid',
-  //     });
-  //   }
-  // }
+  functions.delete = function(req, res){
+    let course_id = req.params.course_id;
+    let teacher_id = req.params._id;
+
+    findCourse(course_id)
+      .then( (course) => {
+        course.teachers.pull(teacher_id)
+        course.save(function(err, course){
+          res.json({
+            'status': 'deleted',
+            '_id' : teacher_id
+          });
+        });
+      }, (err) => {
+        res.json(err);
+      });
+  }
 
   functions.list = function(req, res){
     let course_id = req.params.course_id;
