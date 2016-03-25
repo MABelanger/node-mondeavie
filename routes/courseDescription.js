@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var Course = require('../schemas/embed/course');
 
-// /app/courses/:courseId/teachers/:teacherId/course/courseTypes/
+// /app/courses/:courseId/teachers/:teacherId/courseDescription/courseTypes/
 // :courseTypesId/schedules/:schedulesId/testingDays/:testingDaysId
 
 
@@ -11,14 +11,17 @@ function isValidId(id){
   return mongoose.Types.ObjectId.isValid(id);
 }
 
-
 function findCourseTeacher(course_id, teacher_id){
   var promise = new Promise(function(resolve, reject) {
     Course.findById( course_id, (err, course) => {
       if (! err ) {
         let teacher = course.teachers.id(teacher_id);
         if (teacher){
-          resolve(course, teacher);
+          let res = {
+            course: course,
+            teacher: teacher
+          }
+          resolve(res);
         }
         else {
           reject("no id teacher found !");
@@ -42,7 +45,10 @@ module.exports = function () {
     let courseDescription = req.body;
 
     findCourseTeacher(course_id, teacher_id)
-      .then( (course, teacher) => {
+      .then( (data) => {
+        let course = data.course
+        let teacher = data.teacher;
+
         // need to update the course description by the document course
         // we can't do a .save() on a teacher
         course.teachers.id(teacher_id).course = courseDescription;
@@ -62,8 +68,12 @@ module.exports = function () {
     let teacher_id = req.params.teacher_id;
 
     findCourseTeacher(course_id, teacher_id)
-      .then( (course, teacher) => {
+      .then( (data) => {
+        let course = data.course
+        let teacher = data.teacher;
+
         let courseDescription = teacher.course; // TODO, rename course by courseDescription in mongodb
+
         res.json(courseDescription);
       }, (err) => {
         res.json(err);
@@ -77,7 +87,10 @@ module.exports = function () {
     let json = req.body;
 
     findCourseTeacher(course_id, teacher_id)
-      .then( (course, teacher) => {
+      .then( (data) => {
+        let course = data.course
+        let teacher = data.teacher;
+
         let courseDescription = course.teachers.id(teacher_id).course;
         for (let attName in json) {
           courseDescription[attName] = json[attName];
@@ -97,7 +110,10 @@ module.exports = function () {
     let teacher_id = req.params.teacher_id;
 
     findCourseTeacher(course_id, teacher_id)
-      .then( (course, teacher) => {
+      .then( (data) => {
+        let course = data.course
+        let teacher = data.teacher;
+
         delete course.teachers.id(teacher_id).course;
         course.save(function(err, course){
           res.json({
