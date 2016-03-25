@@ -86,6 +86,7 @@ module.exports = function () {
     let teacher_id = req.params.teacher_id;
     let json = req.body;
 
+    console.log('json', json)
     findCourseTeacher(course_id, teacher_id)
       .then( (data) => {
         let course = data.course
@@ -97,6 +98,7 @@ module.exports = function () {
         }
         course.save(function(err, course){
           // return only the course description added
+          console.log('course', course)
           let courseDescription = course.teachers.id(teacher_id).course;
           res.json(courseDescription);
         });
