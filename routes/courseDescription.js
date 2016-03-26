@@ -86,19 +86,21 @@ module.exports = function () {
     let teacher_id = req.params.teacher_id;
     let json = req.body;
 
-    console.log('json', json)
     findCourseTeacher(course_id, teacher_id)
       .then( (data) => {
-        let course = data.course
+        let course = data.course;
         let teacher = data.teacher;
 
         let courseDescription = course.teachers.id(teacher_id).course;
-        for (let attName in json) {
-          courseDescription[attName] = json[attName];
+        if (courseDescription){ // check if is not null
+          for (let attName in json) {
+            courseDescription[attName] = json[attName];
+          }
+        }else {
+          course.teachers.id(teacher_id).course = json;
         }
         course.save(function(err, course){
           // return only the course description added
-          console.log('course', course)
           let courseDescription = course.teachers.id(teacher_id).course;
           res.json(courseDescription);
         });
@@ -116,7 +118,7 @@ module.exports = function () {
         let course = data.course
         let teacher = data.teacher;
 
-        delete course.teachers.id(teacher_id).course;
+        course.teachers.id(teacher_id).course = undefined;
         course.save(function(err, course){
           res.json({
             'status': 'deleted'

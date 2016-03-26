@@ -2,6 +2,7 @@
 
 var express = require('express');
 var mongoose = require('mongoose');
+var sharp = require('sharp');
 
 // Constants
 var URL = 'mongodb://localhost/mondeavie-embed-urlid';
@@ -21,3 +22,5 @@ mongoose.connect(URL, function(err){
 app.listen(3000);
 
 console.log('Running on port 3000');
+
+
