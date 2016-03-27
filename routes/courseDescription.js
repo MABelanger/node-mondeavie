@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose');
 var Course = require('../schemas/embed/course');
+var utils = require('../utils/utils');
 
 // /app/courses/:courseId/teachers/:teacherId/courseDescription/courseTypes/
 // :courseTypesId/schedules/:schedulesId/testingDays/:testingDaysId
@@ -94,7 +95,18 @@ module.exports = function () {
         let courseDescription = course.teachers.id(teacher_id).course;
         if (courseDescription){ // check if is not null
           for (let attName in json) {
-            courseDescription[attName] = json[attName];
+
+            if(attName == "image"){
+              let imgBase64 = json.image;
+              console.log('imgBase64', imgBase64);
+              let fileName = 'bibi.jpg';
+              utils.saveImage(imgBase64, fileName, function(imgPath){
+                console.log('utils.saveImage: imgPath', imgPath);
+                courseDescription.image = imgPath;
+              });
+            }else {
+              courseDescription[attName] = json[attName];
+            }
           }
         }else {
           course.teachers.id(teacher_id).course = json;
