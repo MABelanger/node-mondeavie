@@ -118,8 +118,14 @@ module.exports = function () {
         // save it on the file and save the path to the db.
         if (json.image.dataUri) {
           let dataUri = json.image.dataUri;
-          let fileName = json.image.fileName;
+
+          // we don't need the filename of the client
+          // the fileName is renamed with teacherSlug_courseSlug.jpg
+          //let fileName = json.image.fileName;
+          let fileName = teacher.slug +'_' + course.slug + '.jpg';
+
           let url = 'media/img/course_description/' + fileName;
+          console.log('url', url)
 
           utils.saveImage(dataUri, url, function(url){
             // set the path to the image
