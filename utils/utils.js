@@ -7,8 +7,8 @@ function _clone(obj){
   return JSON.parse( JSON.stringify(obj) );
 }
 
-function getTeacherCoursesSlug(teacher){
-  if(teacher.course) {
+function getTeacherCoursesSlug(teacher) {
+  if (teacher.course) {
     var _slug = slug(teacher.course.courseType).toLowerCase();
     teacher.course.slug = _slug;
   }
@@ -26,16 +26,16 @@ function teacherSlug(teachers){
 }
 
 
-function getYYYYMMDD(date){
+function getYYYYMMDD(date) {
   var yyyy = date.getFullYear().toString();
   var mm = (date.getMonth()+1).toString(); // getMonth() is zero-based
   var dd  = date.getDate().toString();
   return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]); // padding
 }
 
-function slugify(course){
+function slugify(course) {
   // course slug is course.name
-  if(course.name){
+  if (course.name) {
     course.slug = slug(course.name).toLowerCase();
   }
   // slug all teachers
@@ -58,15 +58,15 @@ function decodeBase64Image(dataString) {
   return response;
 }
 
-function saveImage(dataString, fileName, callback){
+function saveImage(dataString, imgPath, callback) {
   var bitmap = decodeBase64Image(dataString).data;
   sharp(bitmap)
     .resize(200, 100)
     .max()
     .toFormat('jpeg')
-    .toFile('toto.jpg', function(err) {
+    .toFile(imgPath, function(err) {
       console.log(err)
-      callback('toto.jpg');
+      callback(imgPath);
       // output.jpg is a 300 pixels wide and 200 pixels high image
       // containing a scaled and cropped version of input.jpg
     });

@@ -30,7 +30,9 @@ var CourseSchema = new Schema({
   "slug" : String,
   "courseType": String,
   "note": String,
-  "image": String,
+  "image": {
+    url: String
+  },
   "description": String,
   "price": String,
   "isVisible": Boolean,
