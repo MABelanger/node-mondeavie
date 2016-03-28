@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var Course = require('../schemas/embed/course');
 var utils = require('../utils/utils');
 
+var BASE_IMG_URL = 'media/img/course_description/'; // TODO: add constant module
+
 // /app/courses/:courseId/teachers/:teacherId/courseDescription/courseTypes/
 // :courseTypesId/schedules/:schedulesId/testingDays/:testingDaysId
 
@@ -17,6 +19,7 @@ function _findCourseTeacher(course_id, teacher_id){
     Course.findById( course_id, (err, course) => {
       if (! err ) {
         let teacher = course.teachers.id(teacher_id);
+
         if (teacher){
           let res = {
             course: course,
@@ -55,13 +58,14 @@ module.exports = function () {
   var functions = {};
 
   functions.create = function(req, res){
-
+    console.log('create')
     let course_id = req.params.course_id;
     let teacher_id = req.params.teacher_id;
     let courseDescription = req.body;
 
     _findCourseTeacher(course_id, teacher_id)
       .then( (data) => {
+
         let course = data.course
         let teacher = data.teacher;
 
@@ -97,26 +101,26 @@ module.exports = function () {
     let teacher_id = req.params.teacher_id;
     let json = req.body;
 
+    console.log('update')
     _findCourseTeacher(course_id, teacher_id)
       .then( (data) => {
+        console.log('json.image.dataUri')
         let course = data.course;
         let teacher = data.teacher;
 
-        let courseDescription = course.teachers.id(teacher_id).course;
-
         // if courseDescription do not exist, create an empty object 
         // to add properties to it.
-        if (courseDescription){ // check if is not null
-          courseDescription = {};
+        if (! course.teachers.id(teacher_id).course){ // check if is not null
+          course.teachers.id(teacher_id).course = {};
         }
 
         for (let attName in json) {
-          courseDescription[attName] = json[attName];
+          course.teachers.id(teacher_id).course[attName] = json[attName];
         }
 
         // check if is a new upload image. If so,
         // save it on the file and save the path to the db.
-        if (json.image.dataUri) {
+        if (json.image && json.image.dataUri) {
           let dataUri = json.image.dataUri;
 
           // we don't need the filename of the client
@@ -124,12 +128,10 @@ module.exports = function () {
           //let fileName = json.image.fileName;
           let fileName = teacher.slug +'_' + course.slug + '.jpg';
 
-          let url = 'media/img/course_description/' + fileName;
-          console.log('url', url)
+          let url = BASE_IMG_URL + fileName;
 
           utils.saveImage(dataUri, url, function(url){
             // set the path to the image
-            console.log('url', url);
             let image = {
               url: url
             }
@@ -139,7 +141,6 @@ module.exports = function () {
         } else {
           _courseSave({course:course, res:res, teacher_id:teacher_id});
         }
-  
       }, (err) => {
         res.json(err);
       });

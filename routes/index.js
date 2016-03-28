@@ -1,6 +1,7 @@
 "use strict";
 
 var bodyParser = require('body-parser');
+var express = require('express');
 
 
 // Load routes
@@ -26,7 +27,20 @@ module.exports = function (app) {
     res.send('use /api');
   });
 
-  /* 
+  /**
+   * Serve the static files
+   */
+  let staticDirs = ['media', 'media/img/course_description'];
+
+
+  app.use('/media', express.static('media'));
+  /*
+  for (let staticDir in staticDirs){
+    app.use( '/' + staticDir, express.static( staticDir ));
+  }
+  */
+
+  /**
    * CRUD operations for the course
    */
   app.post('/api/courses', routeCourse().create); // Create

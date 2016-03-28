@@ -8,7 +8,7 @@ function _clone(obj){
 }
 
 function getTeacherCoursesSlug(teacher) {
-  if (teacher.course) {
+  if (teacher.course && teacher.course.courseType) {
     var _slug = slug(teacher.course.courseType).toLowerCase();
     teacher.course.slug = _slug;
   }
@@ -18,9 +18,11 @@ function getTeacherCoursesSlug(teacher) {
 function teacherSlug(teachers){
   if (teachers){
     teachers.map(function(teacher, index){
-      var _slug = slug(teacher.firstName + ' ' + teacher.lastName).toLowerCase();
-      teachers[ index ].slug = _slug;
-      teachers[ index ] = getTeacherCoursesSlug(teachers[ index ]);
+      if( teacher.firstName && teacher.lastName ){
+        var _slug = slug(teacher.firstName + ' ' + teacher.lastName).toLowerCase();
+        teachers[ index ].slug = _slug;
+        teachers[ index ] = getTeacherCoursesSlug(teachers[ index ]);
+      }
     });
   }
 }
