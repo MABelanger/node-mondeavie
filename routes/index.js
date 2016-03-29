@@ -8,6 +8,8 @@ var express = require('express');
 var routeCourse = require('./course');
 var routeTeacher = require('./teacher');
 var routeCourseDescription = require('./courseDescription');
+var routeCourseType = require('./courseType');
+
 
 module.exports = function (app) {
 
@@ -66,5 +68,15 @@ module.exports = function (app) {
   app.put('/api/courses/:course_id/teachers/:teacher_id/course_description', routeCourseDescription().update); // Update
   app.delete('/api/courses/:course_id/teachers/:teacher_id/course_description', routeCourseDescription().delete); // Delete
   //app.get('/api/courses/:course_id/teachers', routeTeacher().list); // List
+
+
+  /* 
+   * CRUD operations for course type
+   */
+  app.post('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types', routeCourseType().create); // Create
+  app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id', routeCourseType().read); // Read
+  app.put('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id', routeCourseType().update); // Update
+  app.delete('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id', routeCourseType().delete); // Delete
+  app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types', routeCourseType().list); // List
 
 };
