@@ -121,8 +121,7 @@ describe('Routing', function() {
   /**
    * Delete
    */
-  it('should Update a Course Description correctly with the right'
-     + 'slug and keep existing data', function(done){
+  it('Should Delete the Course Description', function(done){
 
     request(url)
       .del('/api/courses/56f1f7cae96dfe920145e0ec/teachers/56f8ce4a9474f74640335424/course_description')
@@ -133,9 +132,7 @@ describe('Routing', function() {
           throw err;
         }
         // Should.js fluent syntax applied
-        // res.body.should.have.property('_id');
-
-        // res.body.creationDate.should.not.equal(null);
+        res.body.status.should.equal('deleted');
         done();
       });// ./end
   });// ./it
@@ -143,7 +140,7 @@ describe('Routing', function() {
   /**
    * Read
    */
-  it('should get no data', function(done){
+  it('should get no data after delete the Course Description', function(done){
     request(url)
       .get('/api/courses/56f1f7cae96dfe920145e0ec/teachers/56f8ce4a9474f74640335424/course_description')
       .end(function (err,res) {
@@ -151,7 +148,5 @@ describe('Routing', function() {
         done();
       });// ./end
   });// ./it
-
-
 
 }); // ./describe
