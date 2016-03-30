@@ -8,6 +8,19 @@ function isValidId(id){
   return mongoose.Types.ObjectId.isValid(id);
 }
 
+function findCourse(course_id){
+  var promise = new Promise(function(resolve, reject) {
+    Course.findById( course_id, (err, course) => {
+      if (! err ) {
+        resolve(course);
+      }
+      else {
+        reject(err);
+      }
+    });
+  });
+  return promise;
+}
 
 function findCourseTeacher(course_id, teacher_id){
   var promise = new Promise(function(resolve, reject) {
@@ -49,6 +62,7 @@ function courseSave(ref){
 }
 
 var Utils = {
+  findCourse: findCourse,
   findCourseTeacher : findCourseTeacher,
   courseSave: courseSave
 }

@@ -9,6 +9,7 @@ var routeCourse = require('./course');
 var routeTeacher = require('./teacher');
 var routeCourseDescription = require('./courseDescription');
 var routeCourseType = require('./courseType');
+var routeSchedule = require('./schedule');
 
 
 module.exports = function (app) {
@@ -32,15 +33,8 @@ module.exports = function (app) {
   /**
    * Serve the static files
    */
-  let staticDirs = ['media', 'media/img/course_description'];
-
-
   app.use('/media', express.static('media'));
-  /*
-  for (let staticDir in staticDirs){
-    app.use( '/' + staticDir, express.static( staticDir ));
-  }
-  */
+
 
   /**
    * CRUD operations for the course
@@ -67,7 +61,6 @@ module.exports = function (app) {
   app.get('/api/courses/:course_id/teachers/:teacher_id/course_description', routeCourseDescription().read); // Read
   app.put('/api/courses/:course_id/teachers/:teacher_id/course_description', routeCourseDescription().update); // Update
   app.delete('/api/courses/:course_id/teachers/:teacher_id/course_description', routeCourseDescription().delete); // Delete
-  //app.get('/api/courses/:course_id/teachers', routeTeacher().list); // List
 
 
   /* 
@@ -78,5 +71,14 @@ module.exports = function (app) {
   app.put('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id', routeCourseType().update); // Update
   app.delete('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id', routeCourseType().delete); // Delete
   app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types', routeCourseType().list); // List
+
+ /* 
+  * CRUD operations for schedule
+  */
+  app.post('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules', routeSchedule().create); // Create
+  app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id', routeSchedule().read); // Read
+  app.put('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id', routeSchedule().update); // Update
+  app.delete('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id', routeSchedule().delete); // Delete
+  app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules', routeSchedule().list); // List
 
 };

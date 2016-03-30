@@ -3,28 +3,13 @@
 var mongoose = require('mongoose');
 var Course = require('../schemas/embed/course');
 
+var dbUtils =                   require('../utils/db');
+
+var findCourse = dbUtils.findCourse;
+
 // /app/courses/:courseId/teachers/:teacherId/course/courseTypes/
 // :courseTypesId/schedules/:schedulesId/testingDays/:testingDaysId
 
-
-function isValidId(id){
-  return mongoose.Types.ObjectId.isValid(id);
-}
-
-
-function findCourse(course_id){
-  var promise = new Promise(function(resolve, reject) {
-    Course.findById( course_id, (err, course) => {
-      if (! err ) {
-        resolve(course);
-      }
-      else {
-        reject(err);
-      }
-    });
-  });
-  return promise;
-}
 
 module.exports = function () {
 
