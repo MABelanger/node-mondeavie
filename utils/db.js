@@ -42,6 +42,7 @@ function courseSave(ref){
   let teacher_id = ref.teacher_id;
   course.save(function(err, course){
     // return only the course description added
+    
     let courseDescription = ref.course.teachers.id(teacher_id).course;
     ref.res.json(courseDescription);
   });

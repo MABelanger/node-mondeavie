@@ -111,7 +111,11 @@ module.exports = function () {
       .then( (data) => {
         let teacher = data.teacher;
 
-        res.json(teacher.course.courseTypes);
+        if(teacher.course){
+          res.json(teacher.course.courseTypes);
+        }else {
+          res.json();
+        }
       }, (err) => {
         res.json(err);
       });
