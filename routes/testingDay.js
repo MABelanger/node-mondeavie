@@ -113,7 +113,7 @@ module.exports = function () {
         course.teachers.id( teacher_id )
           .course.courseTypes.id( courseType_id )
           .schedules.id( schedule_id )
-          .testingDays.pull( schedule_id );
+          .testingDays.pull( testingDay_id );
 
         course.save(function(err, course){
          res.json({
