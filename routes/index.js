@@ -10,6 +10,8 @@ var routeTeacher = require('./teacher');
 var routeCourseDescription = require('./courseDescription');
 var routeCourseType = require('./courseType');
 var routeSchedule = require('./schedule');
+var routeTestingDay = require('./testingDay');
+
 
 
 module.exports = function (app) {
@@ -80,5 +82,14 @@ module.exports = function (app) {
   app.put('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id', routeSchedule().update); // Update
   app.delete('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id', routeSchedule().delete); // Delete
   app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules', routeSchedule().list); // List
+
+ /* 
+  * CRUD operations for testing day
+  */
+  app.post('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/testing_days', routeTestingDay().create); // Create
+  app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/testing_days/:testing_day_id', routeTestingDay().read); // Read
+  app.put('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/testing_days/:testing_day_id', routeTestingDay().update); // Update
+  app.delete('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/testing_days/:testing_day_id', routeTestingDay().delete); // Delete
+  app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/testing_days', routeTestingDay().list); // List
 
 };
