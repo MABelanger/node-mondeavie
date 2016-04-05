@@ -5,23 +5,10 @@ var Course                 = require('../schemas/embed/course');
 var dbUtils                = require('../utils/db');
 
 
-function _saveCourse(course, res){
-  course.save( function(err, savedCourse){
-    if( err ) {
-      res.status(400);
-      res.json( err );
-    } else {
-      res.json( savedCourse );
-    }
-  });
+function _getObj(course, obj_id){
+  return course;
 }
 
-function _updateAttributes(obj, json){
-  // update all attributes specified in the json
-  for (var attName in json) {
-    obj[attName] = json[attName];
-  }
-}
 
 module.exports = function () {
 
@@ -29,7 +16,7 @@ module.exports = function () {
 
   functions.create = function(req, res){
     let course = new Course(req.body);
-    _saveCourse(course, res);
+    dbUtils.saveCourse(course, res, course._id, _getObj);
   };
 
   functions.read = function(req, res){
@@ -49,8 +36,8 @@ module.exports = function () {
    * so call save method instead.
    */
     Course.findById( _id, function(err, course){
-      _updateAttributes(course, json);
-      _saveCourse(course, res);
+        dbUtils.updateAttributes(course, json);
+        dbUtils.saveCourse(course, res, course._id, _getObj);
     });
   }
 
