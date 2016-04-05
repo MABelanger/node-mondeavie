@@ -1,14 +1,26 @@
 "use strict";
 
-var mongoose = require('mongoose');
-var Course = require('../schemas/embed/course');
-
-// /app/courses/:courseId/teachers/:teacherId/course/courseTypes/
-// :courseTypesId/schedules/:schedulesId/testingDays/:testingDaysId
+var mongoose               = require('mongoose');
+var Course                 = require('../schemas/embed/course');
+var dbUtils                = require('../utils/db');
 
 
-function isValidId(id){
-  return mongoose.Types.ObjectId.isValid(id);
+function _saveCourse(course, res){
+  course.save( function(err, savedCourse){
+    if( err ) {
+      res.status(400);
+      res.json( err );
+    } else {
+      res.json( savedCourse );
+    }
+  });
+}
+
+function _updateAttributes(obj, json){
+  // update all attributes specified in the json
+  for (var attName in json) {
+    obj[attName] = json[attName];
+  }
 }
 
 module.exports = function () {
@@ -17,14 +29,7 @@ module.exports = function () {
 
   functions.create = function(req, res){
     let course = new Course(req.body);
-    course.save( function(err, createdCourse){
-      if( err ) {
-        console.log(err);
-        res.status(400);
-        res.json( err );
-      }
-      res.json( createdCourse );
-    });
+    _saveCourse(course, res);
   };
 
   functions.read = function(req, res){
@@ -38,35 +43,30 @@ module.exports = function () {
     var _id =  req.params._id;
     var json = req.body;
 
-    // we don't call update by id because the hook pre-update is not supported
-    // so call save method instead.
-    // Course.findByIdAndUpdate(_id, json, callback);
-
+  /*
+   * we don't call findByIdAndUpdate in update fct because 
+   * the hook pre-update is not supported
+   * so call save method instead.
+   */
     Course.findById( _id, function(err, course){
-      // copy all attributes from json to the course
-      for (var attName in json) {
-        course[attName] = json[attName];
-      }
-      course.save(function(err, updatedCourse){
-        if( err ) throw err;
-        res.json( updatedCourse );
-      });
+      _updateAttributes(course, json);
+      _saveCourse(course, res);
     });
   }
 
   functions.delete = function(req, res){
     let _id = req.params._id;
-    if(isValidId(_id)) {
+    if( !dbUtils.isValidId(_id) ) {
+      res.json({
+        'status': 'ERROR: id invalid',
+      });
+    } else {
       Course.findByIdAndRemove(_id, function(err){
         if( err ) throw err;
         res.json({
           'status': 'deleted',
           '_id' : _id
         });
-      });
-    }else{
-      res.json({
-        'status': 'ERROR: id invalid',
       });
     }
   }

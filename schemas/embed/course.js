@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var utils = require('../../utils/utils');
 
 function validatePresenceOf (value) {
+  console.log('value', value);
   if(typeof value === 'string' || typeof value === 'number') {
       value = value.toString().trim();
   }
@@ -46,26 +47,65 @@ var CourseSchema = new Schema({
   "courseTypes": [ courseTypesSchema ]
 });
 
+
 var TeachersSchema = new Schema({
   "slug" : String,
-  "firstName": String,
+  "firstName" : {
+    type: String, 
+    validate: [validatePresenceOf, "Le prénom est invalide"],
+    required: [true, "Le prénom est requis"]
+  },
+  "lastName" : {
+    type: String, 
+    validate: [validatePresenceOf, "Le nom est invalide"],
+    required: [true, "Le nom est requis"]
+  },
+  "tel" : {
+    type: String, 
+    //validate: [validatePresenceOf, "Le téléphone est invalide"],
+    //required: [true, "Le téléphone est requis"]
+  },
+  "schoolName" : {
+    type: String, 
+    //validate: [validatePresenceOf, "Le nom d école est invalide"],
+    //required: [true, "Le nom d école est requis"]
+  },
+  "schoolUrl" : {
+    type: String, 
+    //validate: [validatePresenceOf, "L adresse url de l école est invalide"],
+    //required: [true, "L adresse url de l école est requis"]
+  },
+  "course": CourseSchema
+});
+
+/*
+var TeachersSchema = new Schema({
+  "slug" : String,
+  "firstName" : {
+    type: String, 
+    validate: [validatePresenceOf, "Le prénom est invalide"],
+    required: [true, "Le prénom est requis"]
+  },
   "lastName": String,
   "tel": String,
   "schoolName": String,
   "schoolUrl": String,
   "course": CourseSchema
 });
+*/
 
 var CourseSchemaEmbed = Schema({
   "slug" : String,
   "name" : {
     type: String, 
     validate: [validatePresenceOf, "Le nom est invalide"],
-    required: [true, 'Le nom est requis'] },
+    required: [true, 'Le nom est requis']
+  },
   "svg": {
     type: String, 
-    validate: [validatePresenceOf, "Le svg est invalide"],
-    required: [true, 'Le svg est requis'] },
+    //validate: [validatePresenceOf, "Le svg est invalide"],
+    //required: [true, 'Le svg est requis']
+  },
   "teachers" : [ TeachersSchema ]
 }); // courseSchema
 
@@ -80,7 +120,3 @@ CourseSchemaEmbed.pre('save', function(next) {
 
 // create an export function to encapsulate the model creation
 module.exports = mongoose.model('Course', CourseSchemaEmbed);
-
-
-
-

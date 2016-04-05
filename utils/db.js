@@ -64,7 +64,8 @@ function courseSave(ref){
 var Utils = {
   findCourse: findCourse,
   findCourseTeacher : findCourseTeacher,
-  courseSave: courseSave
+  courseSave: courseSave,
+  isValidId: isValidId
 }
 
 module.exports = Utils;

@@ -24,10 +24,16 @@ module.exports = function () {
         course.teachers.push(req.body);
         course.save(function(err, course){
           // return only the teacher added
-          let teacher = course.teachers[ course.teachers.length -1 ];
-          res.json(teacher);
+          if( err ) {
+            res.status(400);
+            res.json( err );
+          } else {
+            let teacher = course.teachers[ course.teachers.length -1 ];
+            res.json(teacher);
+          }
         });
       }, (err) => {
+        // course not found
         res.json(err);
       });
 
