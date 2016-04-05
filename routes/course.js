@@ -18,7 +18,11 @@ module.exports = function () {
   functions.create = function(req, res){
     let course = new Course(req.body);
     course.save( function(err, createdCourse){
-      if( err ) throw err;
+      if( err ) {
+        console.log(err);
+        res.status(400);
+        res.json( err );
+      }
       res.json( createdCourse );
     });
   };

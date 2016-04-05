@@ -4,6 +4,13 @@ var Schema = mongoose.Schema;
 
 var utils = require('../../utils/utils');
 
+function validatePresenceOf (value) {
+  if(typeof value === 'string' || typeof value === 'number') {
+      value = value.toString().trim();
+  }
+  return !!(value && value.length);
+}
+
 var testingDaysSchema = new Schema({
   "slug" : String,
   "day": Date,
@@ -51,8 +58,14 @@ var TeachersSchema = new Schema({
 
 var CourseSchemaEmbed = Schema({
   "slug" : String,
-  "name" : String,
-  "svg": String,
+  "name" : {
+    type: String, 
+    validate: [validatePresenceOf, "Le nom est invalide"],
+    required: [true, 'Le nom est requis'] },
+  "svg": {
+    type: String, 
+    validate: [validatePresenceOf, "Le svg est invalide"],
+    required: [true, 'Le svg est requis'] },
   "teachers" : [ TeachersSchema ]
 }); // courseSchema
 
