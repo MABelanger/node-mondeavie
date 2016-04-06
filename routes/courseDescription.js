@@ -8,47 +8,39 @@ var BASE_IMG_URL = 'media/img/course_description/'; // TODO: add constant module
 var findCourseTeacher = dbUtils.findCourseTeacher;
 var courseSave = dbUtils.courseSave;
 
-// /app/courses/:courseId/teachers/:teacherId/courseDescription/courseTypes/
-// :courseTypesId/schedules/:schedulesId/testingDays/:testingDaysId
+// we don't need the filename of the client
+// the fileName is renamed with teacherSlug_courseSlug.jpg
+//let fileName = json.image.fileName;
+function _updateImage(json, fileName, course, teacherId, res){
+  let dataUri = json.image.dataUri;
+
+  let url = BASE_IMG_URL + fileName;
+
+  utils.saveImage(dataUri, url, function(url){
+    // set the path to the image
+    let image = {
+      url: url
+    }
+    course.teachers.id(teacherId).course.image = image;
+    courseSave({course:course, res:res, teacher_id:teacherId});
+  });
+};
 
 
 module.exports = function () {
 
   var functions = {};
 
-  functions.create = function(req, res){
-    console.log('create')
-    let course_id = req.params.course_id;
-    let teacher_id = req.params.teacher_id;
-    let courseDescription = req.body;
+  // No create
 
-    findCourseTeacher(course_id, teacher_id)
-      .then( (data) => {
-
-        let course = data.course
-        let teacher = data.teacher;
-
-        // need to update the course description by the document course
-        // we can't do a .save() on a teacher
-        course.teachers.id(teacher_id).course = courseDescription;
-        courseSave({course:course, res:res, teacher_id:teacher_id});
-      }, (err) => {
-        res.json(err);
-      });
-
-  };
-
+  // Read
   functions.read = function(req, res){
     let course_id = req.params.course_id;
     let teacher_id = req.params.teacher_id;
 
-    findCourseTeacher(course_id, teacher_id)
-      .then( (data) => {
-        let course = data.course
-        let teacher = data.teacher;
-
-        let courseDescription = teacher.course; // TODO, rename course by courseDescription in mongodb
-
+    dbUtils.findCourse(course_id)
+      .then( (course) => {
+        let courseDescription = course.teachers.id(teacher_id).course;
         res.json(courseDescription);
       }, (err) => {
         res.json(err);
@@ -79,23 +71,8 @@ module.exports = function () {
         // check if is a new upload image. If so,
         // save it on the file and save the path to the db.
         if (json.image && json.image.dataUri) {
-          let dataUri = json.image.dataUri;
-
-          // we don't need the filename of the client
-          // the fileName is renamed with teacherSlug_courseSlug.jpg
-          //let fileName = json.image.fileName;
           let fileName = teacher.slug +'_' + course.slug + '.jpg';
-
-          let url = BASE_IMG_URL + fileName;
-
-          utils.saveImage(dataUri, url, function(url){
-            // set the path to the image
-            let image = {
-              url: url
-            }
-            course.teachers.id(teacher_id).course.image = image;
-            courseSave({course:course, res:res, teacher_id:teacher_id});
-          });
+          _updateImage(json, fileName, course, teacher_id, res);
         } else {
           courseSave({course:course, res:res, teacher_id:teacher_id});
         }

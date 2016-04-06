@@ -59,7 +59,7 @@ module.exports = function (app) {
   /* 
    * CRUD operations for course description
    */
-  app.post('/api/courses/:course_id/teachers/:teacher_id/course_description', routeCourseDescription().create); // Create
+  //app.post('/api/courses/:course_id/teachers/:teacher_id/course_description', routeCourseDescription().create); // Create
   app.get('/api/courses/:course_id/teachers/:teacher_id/course_description', routeCourseDescription().read); // Read
   app.put('/api/courses/:course_id/teachers/:teacher_id/course_description', routeCourseDescription().update); // Update
   app.delete('/api/courses/:course_id/teachers/:teacher_id/course_description', routeCourseDescription().delete); // Delete
