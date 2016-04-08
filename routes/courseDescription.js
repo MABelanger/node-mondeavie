@@ -8,12 +8,18 @@ var BASE_IMG_URL = 'media/img/course_description/'; // TODO: add constant module
 var findCourseTeacher = dbUtils.findCourseTeacher;
 var courseSave = dbUtils.courseSave;
 
+
+function _getObj(course, obj_id){
+  return course.teachers.id( obj_id ).course;
+}
+
+
 // we don't need the filename of the client
 // the fileName is renamed with teacherSlug_courseSlug.jpg
 //let fileName = json.image.fileName;
-function _updateImage(json, fileName, course, teacherId, res){
+function _updateImage(json, course, teacher, res){
   let dataUri = json.image.dataUri;
-
+  let fileName = teacher.slug +'_' + course.slug + '.jpg';
   let url = BASE_IMG_URL + fileName;
 
   utils.saveImage(dataUri, url, function(url){
@@ -21,8 +27,8 @@ function _updateImage(json, fileName, course, teacherId, res){
     let image = {
       url: url
     }
-    course.teachers.id(teacherId).course.image = image;
-    courseSave({course:course, res:res, teacher_id:teacherId});
+    course.teachers.id(teacher._id).course.image = image;
+    dbUtils.saveCourse(course, res, teacher._id, _getObj);
   });
 };
 
@@ -53,30 +59,22 @@ module.exports = function () {
     let json = req.body;
 
     console.log('update')
-    findCourseTeacher(course_id, teacher_id)
-      .then( (data) => {
-        let course = data.course;
-        let teacher = data.teacher;
 
-        // if courseDescription do not exist, create an empty object 
-        // to add properties to it.
-        if (! course.teachers.id(teacher_id).course){ // check if is not null
-          course.teachers.id(teacher_id).course = {};
-        }
-
-        for (let attName in json) {
-          course.teachers.id(teacher_id).course[attName] = json[attName];
-        }
+    dbUtils.findCourse(course_id)
+      .then( (course) => {
+        let teacher = course.teachers.id(teacher_id);
+        teacher.course = dbUtils.updateAttributes(teacher.course, json);
 
         // check if is a new upload image. If so,
         // save it on the file and save the path to the db.
         if (json.image && json.image.dataUri) {
-          let fileName = teacher.slug +'_' + course.slug + '.jpg';
-          _updateImage(json, fileName, course, teacher_id, res);
+          _updateImage(json, course, teacher, res);
+
         } else {
-          courseSave({course:course, res:res, teacher_id:teacher_id});
+          dbUtils.saveCourse(course, res, teacher._id, _getObj);
         }
       }, (err) => {
+
         res.json(err);
       });
   }
@@ -85,11 +83,9 @@ module.exports = function () {
     let course_id = req.params.course_id;
     let teacher_id = req.params.teacher_id;
 
-    findCourseTeacher(course_id, teacher_id)
+    dbUtils.findCourse(course_id)
       .then( (data) => {
-        let course = data.course
-        let teacher = data.teacher;
-
+        // put the object to undefined so the field is not present into the db.
         course.teachers.id(teacher_id).course = undefined;
         course.save(function(err, course){
           res.json({
