@@ -5,7 +5,6 @@ var utils =                    require('../utils/utils');
 
 var BASE_IMG_URL = 'media/img/course_description/'; // TODO: add constant module
 
-var findCourseTeacher = dbUtils.findCourseTeacher;
 var courseSave = dbUtils.courseSave;
 
 

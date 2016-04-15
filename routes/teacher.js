@@ -16,18 +16,6 @@ module.exports = function () {
 
   var functions = {};
 
-/*
-        course.save(function(err, course){
-          // return only the teacher added
-          if( err ) {
-            res.status(400);
-            res.json( err );
-          } else {
-            let teacher = course.teachers[ course.teachers.length -1 ];
-            res.json(teacher);
-          }
-        });
-*/
   functions.create = function(req, res){
 
     let course_id = req.params.course_id;

@@ -36,8 +36,8 @@ module.exports = function () {
    * so call save method instead.
    */
     Course.findById( _id, function(err, course){
-        dbUtils.updateAttributes(course, json);
-        dbUtils.saveCourse(course, res, course._id, _getObj);
+      dbUtils.updateAttributes(course, json);
+      dbUtils.saveCourse(course, res, course._id, _getObj);
     });
   }
 
