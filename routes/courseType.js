@@ -19,15 +19,15 @@ module.exports = function () {
     let teacher_id = req.params.teacher_id;
     let courseType = req.body;
 
-    findCourseTeacher(course_id, teacher_id)
-      .then( (data) => {
-
-        let course = data.course;
-
+    dbUtils.findCourse(course_id)
+      .then( (course) => {
         // add the course Type to the array, save it and return the course Type saved.
-        course.teachers.id(teacher_id).course.courseTypes.push( courseType );
+        course.teachers.id(teacher_id)
+              .course.courseTypes.push( courseType );
         course.save(function(err, course){
-          let courseType = course.teachers.id(teacher_id).course.courseTypes[ course.teachers.id(teacher_id).course.courseTypes.length -1 ];
+          let courseType = course.teachers.id(teacher_id)
+                          .course.courseTypes[ course.teachers.id(teacher_id)
+                          .course.courseTypes.length -1 ];
           res.json(courseType);
         });
       }, (err) => {
@@ -42,12 +42,10 @@ module.exports = function () {
     let teacher_id = req.params.teacher_id;
     let courseType_id = req.params.course_type_id;
 
-    findCourseTeacher(course_id, teacher_id)
-      .then( (data) => {
-        let course = data.course
-        let teacher = data.teacher;
-
-        let courseType = teacher.course.courseTypes.id(courseType_id);
+    dbUtils.findCourse(course_id)
+      .then( (course) => {
+        let courseType = course.teachers.id(teacher_id)
+                        .course.courseTypes.id(courseType_id);
 
         res.json(courseType);
       }, (err) => {
@@ -62,14 +60,14 @@ module.exports = function () {
     let courseType_id = req.params.course_type_id;
     let json = req.body;
 
-    findCourseTeacher(course_id, teacher_id)
-      .then( (data) => {
-        let course = data.course;
-        let teacher = data.teacher;
+    dbUtils.findCourse(course_id)
+      .then( (course) => {
 
-        for (let attName in json) {
-          course.teachers.id(teacher_id).course.courseTypes.id(courseType_id)[attName] = json[attName];
-        }
+        let courseType = course.teachers.id(teacher_id)
+                        .course.courseTypes.id(courseType_id);
+
+
+        courseType = dbUtils.updateAttributes(courseType, json);
 
         course.save(function(err, course){
           let courseType = course.teachers.id(teacher_id).course.courseTypes.id(courseType_id);
@@ -87,9 +85,8 @@ module.exports = function () {
     let teacher_id = req.params.teacher_id;
     let courseType_id = req.params.course_type_id;
 
-    findCourseTeacher(course_id, teacher_id)
-      .then( (data) => {
-        let course = data.course
+    dbUtils.findCourse(course_id)
+      .then( (course) => {
 
         course.teachers.id(teacher_id).course.courseTypes.pull(courseType_id)
         course.save(function(err, course){
@@ -107,9 +104,9 @@ module.exports = function () {
     let course_id = req.params.course_id;
     let teacher_id = req.params.teacher_id;
 
-    findCourseTeacher(course_id, teacher_id)
-      .then( (data) => {
-        let teacher = data.teacher;
+    dbUtils.findCourse(course_id)
+      .then( (course) => {
+        let teacher = course.teachers.id(teacher_id);
 
         if(teacher.course){
           res.json(teacher.course.courseTypes);
