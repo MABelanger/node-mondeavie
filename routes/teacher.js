@@ -35,7 +35,7 @@ module.exports = function () {
 
   functions.read = function(req, res){
     let course_id = req.params.course_id;
-    let teacher_id = req.params._id;
+    let teacher_id = req.params.teacher_id;
 
     dbUtils.findCourse(course_id)
       .then( (course) => {
@@ -50,7 +50,7 @@ module.exports = function () {
   functions.update = function(req, res){
 
     let course_id = req.params.course_id;
-    let teacher_id = req.params._id;
+    let teacher_id = req.params.teacher_id;
     let json = req.body;
 
     dbUtils.findCourse(course_id)
@@ -65,7 +65,7 @@ module.exports = function () {
 
   functions.delete = function(req, res){
     let course_id = req.params.course_id;
-    let teacher_id = req.params._id;
+    let teacher_id = req.params.teacher_id;
 
     dbUtils.findCourse(course_id)
       .then( (course) => {

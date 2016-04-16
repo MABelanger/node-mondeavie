@@ -51,9 +51,9 @@ module.exports = function (app) {
    * CRUD operations for the teacher
    */
   app.post('/api/courses/:course_id/teachers', routeTeacher().create); // Create
-  app.get('/api/courses/:course_id/teachers/:_id', routeTeacher().read); // Read
-  app.put('/api/courses/:course_id/teachers/:_id', routeTeacher().update); // Update
-  app.delete('/api/courses/:course_id/teachers/:_id', routeTeacher().delete); // Delete
+  app.get('/api/courses/:course_id/teachers/:teacher_id', routeTeacher().read); // Read
+  app.put('/api/courses/:course_id/teachers/:teacher_id', routeTeacher().update); // Update
+  app.delete('/api/courses/:course_id/teachers/:teacher_id', routeTeacher().delete); // Delete
   app.get('/api/courses/:course_id/teachers', routeTeacher().list); // List
 
   /* 

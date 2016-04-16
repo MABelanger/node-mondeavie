@@ -105,11 +105,7 @@ module.exports = function () {
           .course.courseTypes.id( courseType_id )
           .schedules.pull(schedule_id);
 
-        course.save(function(err, course){
-         res.json({
-            'status': 'deleted'
-          });
-        });
+        dbUtils.updateDeletedObj(course, res);
 
       }, (err) => {
         res.json(err);
