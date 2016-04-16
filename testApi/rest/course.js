@@ -19,6 +19,25 @@ module.exports = function () {
 
   var functions = {};
 
+  functions.createError = function(url, resource, done, cb){
+
+    var bodyPost = {
+
+    };
+
+    request(url)
+      .post(resource)
+      .send(bodyPost)
+      .set('Connection', 'keep-alive')
+      .expect('Content-Type', /json/)
+      .expect(400) //Status code
+      .end(function(err,res) {
+        res.body.errors['name'].message
+          .should.equal( 'Le nom est requis' );
+        done();
+      });// ./end
+  };
+
   functions.create = function(url, resource, done, cb){
 
     var bodyPost = {

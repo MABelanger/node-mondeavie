@@ -16,6 +16,10 @@ var teacher_id = null;
 
 describe('Create, Read, Update Course', function() {
 
+  it('Should Create with error the Course', function(done){
+    restCourse.createError(URL, resource_course, done);
+  });// ./it
+
   before(function(done) {
     restCourse.create(URL, resource_course, done, function(_course_id){
       course_id = _course_id;
@@ -35,6 +39,10 @@ describe('Create, Read, Update Course', function() {
 
 
 describe('Create, Read, Update Teacher', function() {
+
+  it('Should Create with error the Teacher', function(done){
+    restTeacher.createError(URL, resource_teacher, done);
+  });// ./it
 
   before(function(done) {
     restTeacher.create(URL, resource_teacher, done, function(_teacher_id){
