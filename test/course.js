@@ -1,5 +1,7 @@
 "use strict";
 
+// node ../node_modules/mocha/bin/mocha course.js 
+
 var should = require('should');
 var chai = require('chai').should;
 var request = require('supertest');  
@@ -93,26 +95,27 @@ function _gone(url, resource, done){
 describe('Routing', function() {
 
   var URL = 'http://localhost:3000';
+  var BASE_RESOURCE = '/api/courses/';
 
   before(function(done) {
-    _create(URL, '/api/courses/', done);
+    _create(URL, BASE_RESOURCE, done);
   });
 
   it('should read the Course', function(done){
-    _read(URL, '/api/courses/' + course_id, done);
+    _read(URL, BASE_RESOURCE + course_id, done);
   });// ./it
 
   it('should Update a Course correctly with the right slug and keep existing data', 
     function(done){
-      _update(URL, '/api/courses/' + course_id, done);
+      _update(URL, BASE_RESOURCE + course_id, done);
   });// ./it
 
   it('Should Delete the Course', function(done){
-    _delete(URL, '/api/courses/' + course_id, done);
+    _delete(URL, BASE_RESOURCE + course_id, done);
   });// ./it
 
   it('should the course be gone (no data) after delete', function(done){
-    _gone(URL, '/api/courses/' + course_id, done)
+    _gone(URL, BASE_RESOURCE + course_id, done)
   });// ./it
 
 }); // ./describe
