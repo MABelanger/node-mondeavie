@@ -72,6 +72,6 @@ var Utils = {
   saveCourse: saveCourse,
   updateDeletedObj: updateDeletedObj,
   updateAttributes: updateAttributes
-}
+};
 
 module.exports = Utils;

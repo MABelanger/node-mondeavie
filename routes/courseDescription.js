@@ -55,8 +55,6 @@ module.exports = function () {
     let teacher_id = req.params.teacher_id;
     let json = req.body;
 
-    console.log('update')
-
     dbUtils.findCourse(course_id)
       .then( (course) => {
         let teacher = course.teachers.id(teacher_id);

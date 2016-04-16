@@ -7,7 +7,6 @@ var Schema = mongoose.Schema;
 var utils = require('../../utils/utils');
 
 function validatePresenceOf (value) {
-  console.log('value', value);
   if(typeof value === 'string' || typeof value === 'number') {
       value = value.toString().trim();
   }
@@ -115,7 +114,6 @@ var CourseSchemaEmbed = Schema({
 // Hook on save method that create the slugs
 CourseSchemaEmbed.pre('save', function(next) {
   // set the slugs value of course document and subDocuments
-  console.log('pre save');
   utils.slugify(this);
   next();
 });

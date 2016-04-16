@@ -7,7 +7,6 @@ module.exports = function () {
   var functions = {};
 
   functions.create = function(req, res){
-    console.log('create')
     let course_id = req.params.course_id;
     let teacher_id = req.params.teacher_id;
     let courseType_id = req.params.course_type_id;
@@ -34,7 +33,6 @@ module.exports = function () {
   };
 
   functions.read = function(req, res){
-    console.log('read');
     let course_id = req.params.course_id;
     let teacher_id = req.params.teacher_id;
     let courseType_id = req.params.course_type_id;
@@ -54,7 +52,6 @@ module.exports = function () {
   }
 
   functions.update = function(req, res){
-    console.log('update')
     let course_id = req.params.course_id;
     let teacher_id = req.params.teacher_id;
     let courseType_id = req.params.course_type_id;
@@ -85,7 +82,6 @@ module.exports = function () {
   }
 
   functions.delete = function(req, res) {
-    console.log('delete');
     let course_id = req.params.course_id;
     let teacher_id = req.params.teacher_id;
     let courseType_id = req.params.course_type_id;
@@ -107,7 +103,6 @@ module.exports = function () {
   }
 
   functions.list = function(req, res){
-    console.log('list');
     let course_id = req.params.course_id;
     let teacher_id = req.params.teacher_id;
     let courseType_id = req.params.course_type_id;

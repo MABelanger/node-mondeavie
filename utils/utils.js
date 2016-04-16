@@ -72,6 +72,6 @@ var Utils = {
   slugify : slugify,
   getYYYYMMDD: getYYYYMMDD,
   saveImage: saveImage
-}
+};
 
 module.exports = Utils;
