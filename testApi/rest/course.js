@@ -14,8 +14,8 @@ module.exports = function () {
   var SLUG = 'test-5';
 
   // Update
-  var NAME_UPDATE = 'TEST 6';
-  var SLUG_UPDATE = 'test-6';
+  var NAME_UPDATE = 'TEST 7';
+  var SLUG_UPDATE = 'test-7';
 
   var functions = {};
 
