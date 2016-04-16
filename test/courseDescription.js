@@ -1,5 +1,6 @@
 "use strict";
 
+// node ../node_modules/mocha/bin/mocha courseDescription.js 
 var should = require('should');
 var chai = require('chai').should;
 var assert = require('assert');
