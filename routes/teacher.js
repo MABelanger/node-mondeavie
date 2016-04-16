@@ -5,9 +5,10 @@ var Course = require('../schemas/embed/course');
 
 var dbUtils =                   require('../utils/db');
 
-function _getObj(course, obj_id){
-  if( obj_id ) {
-    return course.teachers.id( obj_id );
+function _getObj(course, idList){
+  let teacher_id = idList[0];
+  if( teacher_id ) {
+    return course.teachers.id( teacher_id );
   }
   return course.teachers[ course.teachers.length -1 ];
 }
@@ -24,7 +25,7 @@ module.exports = function () {
       .then( (course) => {
         let teacher = req.body;
         course.teachers.push(teacher);
-        dbUtils.saveCourse(course, res, teacher._id, _getObj);
+        dbUtils.saveCourse(course, res, [teacher._id], _getObj);
       }, (err) => {
         // course not found
         res.json(err);
@@ -56,7 +57,7 @@ module.exports = function () {
       .then( (course) => {
         let teacher = course.teachers.id(teacher_id);
         dbUtils.updateAttributes(teacher, json);
-        dbUtils.saveCourse(course, res, teacher._id, _getObj);
+        dbUtils.saveCourse(course, res, [teacher._id], _getObj);
       }, (err) => {
         res.json(err);
       });
@@ -69,12 +70,7 @@ module.exports = function () {
     dbUtils.findCourse(course_id)
       .then( (course) => {
         course.teachers.pull(teacher_id)
-        course.save(function(err, course){
-          res.json({
-            'status': 'deleted',
-            '_id' : teacher_id
-          });
-        });
+        dbUtils.updateDeletedObj(course, res);
       }, (err) => {
         res.json(err);
       });

@@ -8,8 +8,9 @@ var BASE_IMG_URL = 'media/img/course_description/'; // TODO: add constant module
 var courseSave = dbUtils.courseSave;
 
 
-function _getObj(course, obj_id){
-  return course.teachers.id( obj_id ).course;
+function _getObj(course, idList){
+  let teacher_id = idList[0];
+  return course.teachers.id( teacher_id ).course;
 }
 
 
@@ -27,7 +28,7 @@ function _updateImage(json, course, teacher, res){
       url: url
     }
     course.teachers.id(teacher._id).course.image = image;
-    dbUtils.saveCourse(course, res, teacher._id, _getObj);
+    dbUtils.saveCourse(course, res, [teacher._id], _getObj);
   });
 };
 
@@ -70,7 +71,7 @@ module.exports = function () {
           _updateImage(json, course, teacher, res);
 
         } else {
-          dbUtils.saveCourse(course, res, teacher._id, _getObj);
+          dbUtils.saveCourse(course, res, [teacher._id], _getObj);
         }
       }, (err) => {
 
@@ -86,11 +87,7 @@ module.exports = function () {
       .then( (data) => {
         // put the object to undefined so the field is not present into the db.
         course.teachers.id(teacher_id).course = undefined;
-        course.save(function(err, course){
-          res.json({
-            'status': 'deleted'
-          });
-        });
+        dbUtils.updateDeletedObj(course, res);
       }, (err) => {
         res.json(err);
       });

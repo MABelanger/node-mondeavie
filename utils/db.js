@@ -8,17 +8,34 @@ function isValidId(id){
   return mongoose.Types.ObjectId.isValid(id);
 }
 
-function saveCourse(course, res, obj_id, getObjCb){
+
+function _saveCourse(course, res, isDelete, idList, getObjCb){
 
   course.save( function(err, course){
     if( err ) {
       res.status(400);
-      res.json( err );
+      res.json(err);
     } else {
-      let obj = getObjCb(course, obj_id);
-      res.json( obj );
+      // if is no delete, call the cb fct with the right args
+      if( isDelete ) {
+        res.json({'status': 'deleted'});
+      // 
+      } else {
+        res.json(getObjCb(course, idList));
+      }
     }
   });
+}
+
+
+function saveCourse(course, res, idList, getObjCb){
+  let isDelete = false;
+  _saveCourse(course, res, isDelete, idList, getObjCb);
+}
+
+function updateDeletedObj(course, res){
+  let isDelete = true;
+  _saveCourse(course, res, isDelete);
 }
 
 function updateAttributes(obj, json){
@@ -53,6 +70,7 @@ var Utils = {
   isValidId: isValidId,
   findCourse: findCourse,
   saveCourse: saveCourse,
+  updateDeletedObj: updateDeletedObj,
   updateAttributes: updateAttributes
 }
 

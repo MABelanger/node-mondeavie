@@ -6,8 +6,22 @@ var utils =                    require('../utils/utils');
 var findCourseTeacher = dbUtils.findCourseTeacher;
 var courseSave = dbUtils.courseSave;
 
-// /app/courses/:courseId/teachers/:teacherId/courseDescription/courseTypes/
-// :courseTypesId/schedules/:schedulesId/testingDays/:testingDaysId
+
+function _getObj(course, idList){
+  let teacher_id = idList[0];
+  let courseType_id = idList[1];
+
+  let courseTypes = course.teachers.id(teacher_id)
+                  .course.courseTypes;
+
+  if( courseType_id ) {
+    let courseType = courseTypes.id(courseType_id);
+    return courseType;
+  }
+
+  // if no id specified, return the last created one.
+  return courseTypes[ courseTypes.length -1 ];
+}
 
 module.exports = function () {
 
@@ -17,6 +31,7 @@ module.exports = function () {
     console.log('create')
     let course_id = req.params.course_id;
     let teacher_id = req.params.teacher_id;
+    let courseType_id = null;
     let courseType = req.body;
 
     dbUtils.findCourse(course_id)
@@ -24,12 +39,8 @@ module.exports = function () {
         // add the course Type to the array, save it and return the course Type saved.
         course.teachers.id(teacher_id)
               .course.courseTypes.push( courseType );
-        course.save(function(err, course){
-          let courseType = course.teachers.id(teacher_id)
-                          .course.courseTypes[ course.teachers.id(teacher_id)
-                          .course.courseTypes.length -1 ];
-          res.json(courseType);
-        });
+
+        dbUtils.saveCourse(course, res, [teacher_id, courseType_id], _getObj);
       }, (err) => {
         res.json(err);
       });
@@ -66,13 +77,9 @@ module.exports = function () {
         let courseType = course.teachers.id(teacher_id)
                         .course.courseTypes.id(courseType_id);
 
-
         courseType = dbUtils.updateAttributes(courseType, json);
 
-        course.save(function(err, course){
-          let courseType = course.teachers.id(teacher_id).course.courseTypes.id(courseType_id);
-          res.json(courseType);
-        });
+        dbUtils.saveCourse(course, res, [teacher_id, courseType_id], _getObj);
 
       }, (err) => {
         res.json(err);
@@ -88,12 +95,9 @@ module.exports = function () {
     dbUtils.findCourse(course_id)
       .then( (course) => {
 
-        course.teachers.id(teacher_id).course.courseTypes.pull(courseType_id)
-        course.save(function(err, course){
-          res.json({
-            'status': 'deleted'
-          });
-        });
+        course.teachers.id(teacher_id).course.courseTypes.pull(courseType_id);
+        dbUtils.updateDeletedObj(course, res);
+
       }, (err) => {
         res.json(err);
       });

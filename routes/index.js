@@ -42,9 +42,9 @@ module.exports = function (app) {
    * CRUD operations for the course
    */
   app.post('/api/courses', routeCourse().create); // Create
-  app.get('/api/courses/:_id', routeCourse().read); // Read
-  app.put('/api/courses/:_id', routeCourse().update); // Update
-  app.delete('/api/courses/:_id', routeCourse().delete); // Delete
+  app.get('/api/courses/:course_id', routeCourse().read); // Read
+  app.put('/api/courses/:course_id', routeCourse().update); // Update
+  app.delete('/api/courses/:course_id', routeCourse().delete); // Delete
   app.get('/api/courses', routeCourse().list); // List
 
   /* 
