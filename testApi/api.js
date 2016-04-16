@@ -3,34 +3,69 @@
 var should                 = require('should');
 
 var restCourse             = require('./rest/course')();
+var restTeacher            = require('./rest/teacher')();
+
+
+var URL = 'http://localhost:3000';
+var RESOURCE_COURSE = '/api/courses/';
 
 describe('CRUD Course', function() {
 
-  var URL = 'http://localhost:3000';
-  var BASE_RESOURCE = '/api/courses/';
   let course_id = null;
 
   before(function(done) {
-    restCourse.create(URL, BASE_RESOURCE, done, function(_course_id){
+    restCourse.create(URL, RESOURCE_COURSE, done, function(_course_id){
       course_id = _course_id;
     });
   });
 
-  it('should read the Course', function(done){
-    restCourse.read(URL, BASE_RESOURCE + course_id, done);
+  it('Should Read the Course', function(done){
+    restCourse.read(URL, RESOURCE_COURSE + course_id, done);
   });// ./it
 
-  it('should Update a Course correctly with the right slug and keep existing data', 
-    function(done){
-      restCourse.update(URL, BASE_RESOURCE + course_id, done);
+  it('Should Update a Course correctly with the right slug and keep existing data', function(done){
+    restCourse.update(URL, RESOURCE_COURSE + course_id, done);
   });// ./it
 
   it('Should Delete the Course', function(done){
-    restCourse.delete(URL, BASE_RESOURCE + course_id, done);
+    restCourse.delete(URL, RESOURCE_COURSE + course_id, done);
   });// ./it
 
-  it('should the course be gone (no data) after delete', function(done){
-    restCourse.gone(URL, BASE_RESOURCE + course_id, done)
+  it('Should Read (no data) after delete', function(done){
+    restCourse.gone(URL, RESOURCE_COURSE + course_id, done)
+  });// ./it
+
+}); // ./describe
+
+
+describe('CRUD Teacher', function() {
+
+  var resource_teacher = null;
+  let teacher_id = null;
+
+  before(function(done) {
+    restCourse.create(URL, RESOURCE_COURSE, function(){}, function(_course_id){
+      resource_teacher = '/api/courses/' + _course_id + '/teachers/';
+      restTeacher.create(URL, resource_teacher, done, function(_teacher_id){
+        teacher_id = _teacher_id;
+      });
+    });
+  });
+
+  it('Should Read the Teacher', function(done){
+    restTeacher.read(URL, resource_teacher + teacher_id, done);
+  });// ./it
+
+  it('Should Update a Teacher correctly with the right slug and keep existing data', function(done){
+    restTeacher.update(URL, resource_teacher + teacher_id, done);
+  });// ./it
+
+  it('Should Delete the Teacher', function(done){
+    restTeacher.delete(URL, resource_teacher + teacher_id, done);
+  });// ./it
+
+  it('Should Read (no data) after delete', function(done){
+    restTeacher.gone(URL, resource_teacher + teacher_id, done)
   });// ./it
 
 }); // ./describe

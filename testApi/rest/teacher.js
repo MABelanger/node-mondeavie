@@ -10,20 +10,22 @@ var request = require('supertest');
 module.exports = function () {
 
   // Create
-  var NAME = 'TEST 5';
-  var SLUG = 'test-5';
+  var FIRST_NAME = 'First';
+  var LAST_NAME = 'Last';
+  var SLUG = 'first-last';
 
   // Update
-  var NAME_UPDATE = 'TEST 6';
-  var SLUG_UPDATE = 'test-6';
+  var FIRST_NAME_UPDATE = 'FirstUpdate';
 
   var functions = {};
 
   functions.create = function(url, resource, done, cb){
 
     var bodyPost = {
-      "name": NAME,
+      "firstName": FIRST_NAME,
+      "lastName": LAST_NAME
     };
+
 
     request(url)
       .post(resource)
@@ -36,10 +38,11 @@ module.exports = function () {
           throw err;
         }
         res.body.should.have.property('_id');
-        res.body.name.should.equal( NAME );
+        res.body.firstName.should.equal( FIRST_NAME );
+        res.body.lastName.should.equal( LAST_NAME );
         res.body.slug.should.equal( SLUG );
-        let course_id = res.body._id;
-        cb(course_id);
+        let teacher_id = res.body._id;
+        cb(teacher_id);
         done();
       });// ./end
   };
@@ -48,14 +51,14 @@ module.exports = function () {
     request(url)
       .get(resource)
       .end(function (err,res) {
-        res.body.name.should.equal( NAME );
+        res.body.firstName.should.equal( FIRST_NAME );
         done();
       });// ./end
   }
 
   functions.update = function(url, resource, done){
     var bodyPut = {
-      "name": NAME_UPDATE
+      "firstName": FIRST_NAME_UPDATE
     };
 
     request(url)
@@ -67,8 +70,7 @@ module.exports = function () {
         if (err) {
           throw err;
         }
-        res.body.name.should.equal( NAME_UPDATE );
-        res.body.slug.should.equal( SLUG_UPDATE );
+        res.body.firstName.should.equal( FIRST_NAME_UPDATE );
         done();
       });// ./end
   }
