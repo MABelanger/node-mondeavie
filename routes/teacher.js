@@ -1,8 +1,5 @@
 "use strict";
 
-var mongoose = require('mongoose');
-var Course = require('../schemas/embed/course');
-
 var dbUtils =                   require('../utils/db');
 
 function _getObj(course, idList){

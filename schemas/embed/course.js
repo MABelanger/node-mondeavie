@@ -1,3 +1,5 @@
+"use strict";
+
 // import the necessary modules
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;

@@ -5,9 +5,6 @@ var utils =                    require('../utils/utils');
 
 var BASE_IMG_URL = 'media/img/course_description/'; // TODO: add constant module
 
-var courseSave = dbUtils.courseSave;
-
-
 function _getObj(course, idList){
   let teacher_id = idList[0];
   return course.teachers.id( teacher_id ).course;

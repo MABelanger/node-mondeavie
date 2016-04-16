@@ -1,11 +1,6 @@
 "use strict";
 
 var dbUtils=                   require('../utils/db');
-var utils =                    require('../utils/utils');
-
-var findCourseTeacher = dbUtils.findCourseTeacher;
-var courseSave = dbUtils.courseSave;
-
 
 function _getObj(course, idList){
   let teacher_id = idList[0];

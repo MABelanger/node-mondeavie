@@ -1,12 +1,6 @@
 "use strict";
 
 var dbUtils=                   require('../utils/db');
-var utils =                    require('../utils/utils');
-
-
-var findCourse = dbUtils.findCourse;
-var courseSave = dbUtils.courseSave;
-
 
 module.exports = function () {
 
@@ -21,7 +15,7 @@ module.exports = function () {
     let obj = req.body;
 
 
-    findCourse(course_id)
+    dbUtils.findCourse(course_id)
       .then( (course) => {
         course.teachers.id( teacher_id )
                 .course.courseTypes.id( courseType_id )
@@ -50,7 +44,7 @@ module.exports = function () {
     let schedule_id = req.params.schedule_id;
     let testingDay_id = req.params.testing_day_id;
 
-    findCourse(course_id)
+    dbUtils.findCourse(course_id)
       .then( (course) => {
 
         let testingDay = course.teachers.id( teacher_id )
@@ -74,7 +68,7 @@ module.exports = function () {
     let json = req.body;
 
 
-    findCourse(course_id)
+    dbUtils.findCourse(course_id)
       .then( (course) => {
 
         for (let attName in json) {
@@ -107,7 +101,7 @@ module.exports = function () {
     let testingDay_id = req.params.testing_day_id;
 
 
-    findCourse(course_id)
+    dbUtils.findCourse(course_id)
       .then( (course) => {
 
         course.teachers.id( teacher_id )
@@ -129,7 +123,7 @@ module.exports = function () {
     let courseType_id = req.params.course_type_id;
     let schedule_id = req.params.schedule_id;
 
-    findCourse(course_id)
+    dbUtils.findCourse(course_id)
       .then( (course) => {
 
         let schedules = course.teachers.id( teacher_id )

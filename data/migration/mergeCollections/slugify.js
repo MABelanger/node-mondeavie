@@ -1,3 +1,5 @@
+"use strict";
+
 var mongoose = require('mongoose');
 var slug = require('slug');
 var print = console.log.bind(console, '>')
