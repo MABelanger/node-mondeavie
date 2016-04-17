@@ -37,7 +37,11 @@ var courseTypesSchema = new Schema({
 
 var CourseSchema = new Schema({
   "slug" : String,
-  "courseType": String,
+  "courseType" : {
+    type: String, 
+    validate: [validatePresenceOf, "Le titre est invalide"],
+    required: [true, "Le titre est requis"]
+  },
   "note": String,
   "image": {
     url: String
