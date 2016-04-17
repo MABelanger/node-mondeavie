@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 var utils = require('../../utils/utils');
 
 function validatePresenceOf (value) {
-  if(typeof value === 'string' || typeof value === 'number') {
+  if(typeof value === 'string' || typeof value === 'number' || value instanceof Date) {
       value = value.toString().trim();
   }
   return !!(value && value.length);
@@ -15,22 +15,38 @@ function validatePresenceOf (value) {
 
 var testingDaysSchema = new Schema({
   "slug" : String,
-  "day": Date,
+  "day" : {
+    type: Date, 
+    //validate: [validatePresenceOf, "Le date est invalide"],
+    //required: [true, "Le date est requis"]
+  },
   "isFull": Boolean
 });
 
 var SchedulesSchema = new Schema({
   "slug" : String,
   "isFull": Boolean,
-  "dayEnd": Date,
-  "dayStart": Date,
+  "dayEnd" : {
+    type: Date, 
+    validate: [validatePresenceOf, "Le date de fin est invalide"],
+    required: [true, "Le date de fin est requis"]
+  },
+  "dayStart" : {
+    type: Date, 
+    validate: [validatePresenceOf, "Le date de départ est invalide"],
+    required: [true, "Le date de départ est requis"]
+  },
   "dayName": String,
   "testingDays": [ testingDaysSchema ]
 });
 
 var courseTypesSchema = new Schema({
   "slug" : String,
-  "name": String,
+  "name" : {
+    type: String, 
+    validate: [validatePresenceOf, "Le titre est invalide"],
+    required: [true, "Le titre est requis"]
+  },
   "description": String,
   "schedules": [ SchedulesSchema ]
 });
@@ -39,8 +55,8 @@ var CourseSchema = new Schema({
   "slug" : String,
   "courseType" : {
     type: String, 
-    validate: [validatePresenceOf, "Le titre est invalide"],
-    required: [true, "Le titre est requis"]
+    validate: [validatePresenceOf, "Le type est invalide"],
+    required: [true, "Le type est requis"]
   },
   "note": String,
   "image": {
@@ -76,28 +92,12 @@ var TeachersSchema = new Schema({
     //required: [true, "Le nom d école est requis"]
   },
   "schoolUrl" : {
-    type: String, 
+    type: String,
     //validate: [validatePresenceOf, "L adresse url de l école est invalide"],
     //required: [true, "L adresse url de l école est requis"]
   },
   "course": CourseSchema
 });
-
-/*
-var TeachersSchema = new Schema({
-  "slug" : String,
-  "firstName" : {
-    type: String, 
-    validate: [validatePresenceOf, "Le prénom est invalide"],
-    required: [true, "Le prénom est requis"]
-  },
-  "lastName": String,
-  "tel": String,
-  "schoolName": String,
-  "schoolUrl": String,
-  "course": CourseSchema
-});
-*/
 
 var CourseSchemaEmbed = Schema({
   "slug" : String,

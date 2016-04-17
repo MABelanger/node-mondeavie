@@ -44,7 +44,6 @@ function saveImage(dataString, imgPath, callback) {
     .max()
     .toFormat('jpeg')
     .toFile(imgPath, function(err) {
-      console.log(err)
       callback(imgPath);
       // output.jpg is a 300 pixels wide and 200 pixels high image
       // containing a scaled and cropped version of input.jpg

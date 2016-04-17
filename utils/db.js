@@ -13,7 +13,6 @@ function _saveCourse(course, res, isDelete, idList, getObjCb){
 
   course.save( function(err, course){
     if( err ) {
-      console.log('err', err);
       res.status(400);
       res.json(err);
     } else {

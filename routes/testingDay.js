@@ -2,6 +2,26 @@
 
 var dbUtils=                   require('../utils/db');
 
+function _getObj(course, idList){
+  let teacher_id = idList[0];
+  let courseType_id = idList[1];
+  let schedule_id = idList[2];
+  let testingDay_id = idList[3];
+
+  let testingDays = course.teachers.id( teacher_id )
+                  .course.courseTypes.id( courseType_id )
+                  .schedules.id( schedule_id )
+                  .testingDays
+
+  if( testingDay_id ) {
+    let testingDay = testingDays.id(testingDay_id);
+    return testingDay;
+  }
+
+  // if no id specified, return the last created one.
+  return testingDays[ testingDays.length -1 ];
+}
+
 module.exports = function () {
 
   var functions = {};
@@ -11,6 +31,7 @@ module.exports = function () {
     let teacher_id = req.params.teacher_id;
     let courseType_id = req.params.course_type_id;
     let schedule_id = req.params.schedule_id;
+    let testingDay_id = null;
     let obj = req.body;
 
 
@@ -21,15 +42,7 @@ module.exports = function () {
                 .schedules.id( schedule_id )
                 .testingDays.push( obj );
 
-        course.save(function(err, course){
-          // return only the schedule added
-          let testingDays = course.teachers.id( teacher_id )
-                          .course.courseTypes.id( courseType_id )
-                          .schedules.id( schedule_id )
-                          .testingDays;
-          let testingDay = testingDays[ testingDays.length -1 ];
-          res.json(testingDay);
-        });
+        dbUtils.saveCourse(course, res, [teacher_id, courseType_id, schedule_id, testingDay_id], _getObj);
       }, (err) => {
         res.json(err);
       });
@@ -67,22 +80,13 @@ module.exports = function () {
 
     dbUtils.findCourse(course_id)
       .then( (course) => {
-
-        for (let attName in json) {
-          course.teachers.id( teacher_id )
+        let testingDay = course.teachers.id( teacher_id )
             .course.courseTypes.id( courseType_id )
             .schedules.id(schedule_id)
-            .testingDays.id( testingDay_id )
-            [attName] = json[attName];
-        }
-        course.save(function(err, course){
-          // return only the testingDay added
-          let testingDay = course.teachers.id( teacher_id )
-                          .course.courseTypes.id( courseType_id )
-                          .schedules.id(schedule_id)
-                          .testingDays.id( testingDay_id )
-          res.json(testingDay);
-        });
+            .testingDays.id( testingDay_id );
+
+        testingDay = dbUtils.updateAttributes(testingDay, json);
+        dbUtils.saveCourse(course, res, [teacher_id, courseType_id, schedule_id, testingDay_id], _getObj);
 
       }, (err) => {
         res.json(err);
