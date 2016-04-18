@@ -13,6 +13,17 @@ function validatePresenceOf (value) {
   return !!(value && value.length);
 }
 
+
+// 2016-04-17T00:01:00.000Z
+function validateDate(value) {
+  var isoValue = value.toISOString();
+  var utcDateRegex = /(\d{4})-(\d{2})-(\d{2})T((\d{2}):(\d{2}):(\d{2}))\.(\d{3})Z/;
+  var isValid = utcDateRegex.test(isoValue);
+  return isValid;
+}
+
+
+
 var testingDaysSchema = new Schema({
   "slug" : String,
   "day" : {
@@ -28,12 +39,12 @@ var SchedulesSchema = new Schema({
   "isFull": Boolean,
   "dayEnd" : {
     type: Date, 
-    validate: [validatePresenceOf, "Le date de fin est invalide"],
+    validate: [validateDate, "Le date de fin est invalide"],
     required: [true, "Le date de fin est requis"]
   },
   "dayStart" : {
     type: Date, 
-    validate: [validatePresenceOf, "Le date de départ est invalide"],
+    validate: [validateDate, "Le date de départ est invalide"],
     required: [true, "Le date de départ est requis"]
   },
   "dayName": String,
@@ -120,6 +131,12 @@ CourseSchemaEmbed.pre('save', function(next) {
   // set the slugs value of course document and subDocuments
   utils.slugify(this);
   next();
+});
+
+CourseSchemaEmbed.pre('validate', function(next){
+    console.log("pre validate called");
+    //console.log('this', this);
+    next();
 });
 
 // create an export function to encapsulate the model creation
