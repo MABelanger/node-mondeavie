@@ -134,7 +134,7 @@ CourseSchemaEmbed.pre('save', function(next) {
 });
 
 CourseSchemaEmbed.pre('validate', function(next){
-    console.log("pre validate called");
+    //console.log("pre validate called");
     //console.log('this', this);
     next();
 });

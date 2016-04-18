@@ -69,7 +69,6 @@ module.exports = function () {
     let schedule_id = req.params.schedule_id;
     let json = req.body;
 
-    console.log('json', json)
     dbUtils.findCourse(course_id)
       .then( (course) => {
         let schedule = course.teachers.id( teacher_id )
