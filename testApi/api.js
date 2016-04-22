@@ -6,6 +6,7 @@ var restCourse             = require('./rest/course')();
 var restTeacher            = require('./rest/teacher')();
 var restCourseDescription  = require('./rest/courseDescription')();
 var restCourseType         = require('./rest/courseType')();
+var restSchedule           = require('./rest/schedule')();
 
 
 var URL = 'http://localhost:3000';
@@ -13,10 +14,12 @@ var resource_course = '/api/courses/';
 var resource_teacher = null;
 var resource_courseDescription = null;
 var resource_courseType = null;
+var resource_schedule = null;
 
 var course_id = null;
 var teacher_id = null;
 var courseType_id = null;
+var schedule_id = null;
 
 // Course
 describe('Create, Read, Update Course', function() {
@@ -97,18 +100,21 @@ describe('Create, Read, Update CourseDescription', function() {
 
 }); // ./describe
 
-// CoursetType
+// CourseType
 describe('Create, Read, Update CourseType', function() {
 
   it('Should Create with error the CourseType', function(done){
-    //restCourseType.createError(URL, resource_courseType, done);
-    done();
+    restCourseType.createError(URL, resource_courseType, done);
   });// ./it
 
   before(function(done) {
     //resource_courseType = '/api/courses/57145deba174745e29042cd0/teachers/56da1207dc80b7ca7805ea7b/course_description/course_types/';
     restCourseType.create(URL, resource_courseType, done, function(_courseType_id){
       courseType_id = _courseType_id;
+      resource_schedule = '/api/courses/' + course_id 
+                            + '/teachers/' + teacher_id
+                            + '/course_description/course_types/' + courseType_id
+                            + '/schedules/';
     });
   });
 
@@ -122,11 +128,45 @@ describe('Create, Read, Update CourseType', function() {
 
 }); // ./describe
 
+
+// Schedule
+describe('Create, Read, Update Schedule', function() {
+
+  it('Should Create with error the Schedule', function(done){
+    restSchedule.createError(URL, resource_schedule, done);
+  });// ./it
+
+  before(function(done) {
+    //resource_schedule = '/api/courses/57145deba174745e29042cd0/teachers/56da1207dc80b7ca7805ea7b/course_description/course_types/';
+    restSchedule.create(URL, resource_schedule, done, function(_schedule_id){
+      schedule_id = _schedule_id;
+    });
+  });
+
+  it('Should Read the Schedule', function(done){
+    restSchedule.read(URL, resource_schedule + schedule_id, done);
+  });// ./it
+
+  it('Should Update a Schedule', function(done){
+    restSchedule.update(URL, resource_schedule + schedule_id, done);
+  });// ./it
+
+}); // ./describe
+
 describe('Delete All', function() {
 
   before(function(done) {
     done();
   });
+
+  // Schedule
+  it('Should Delete the Schedule', function(done){
+    restSchedule.delete(URL, resource_schedule + schedule_id, done);
+  });// ./it
+
+  it('Should Read (no data) after delete Schedule', function(done){
+    restCourseType.gone(URL, resource_schedule + schedule_id, done)
+  });// ./it
 
 
   // CourseType

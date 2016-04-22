@@ -10,11 +10,11 @@ var request = require('supertest');
 module.exports = function () {
 
   // Create
-  var NAME = 'a name'
-  var SLUG = 'a-name';
+  var DAY_START = "2016-04-20T14:01:00.000Z";
+  var DAY_END   = "2016-04-22T00:01:00.000Z";
 
   // Update
-  var NAME_UPDATE = 'FirstUpdate';
+  var DAY_START_UPDATE = '2016-04-21T14:01:00.000Z';
 
   var functions = {};
 
@@ -37,7 +37,8 @@ module.exports = function () {
 
   functions.create = function(url, resource, done, cb){
     var bodyPost = {
-      "name": NAME
+      "dayStart": DAY_START,
+      "dayEnd": DAY_END
     };
 
 
@@ -53,10 +54,11 @@ module.exports = function () {
         }
 
         res.body.should.have.property('_id');
-        res.body.name.should.equal( NAME );
+        res.body.dayStart.should.equal( DAY_START );
+        res.body.dayEnd.should.equal( DAY_END );
 
-        let courseType_id = res.body._id;
-        cb(courseType_id);
+        let schedule_id = res.body._id;
+        cb(schedule_id);
         done();
       });// ./end
   };
@@ -65,14 +67,14 @@ module.exports = function () {
     request(url)
       .get(resource)
       .end(function (err,res) {
-        res.body.name.should.equal( NAME );
+        res.body.dayStart.should.equal( DAY_START );
         done();
       });// ./end
   }
 
   functions.update = function(url, resource, done){
     var bodyPut = {
-      "name": NAME_UPDATE
+      "dayStart": DAY_START_UPDATE
     };
 
     request(url)
@@ -84,7 +86,7 @@ module.exports = function () {
         if (err) {
           throw err;
         }
-        res.body.name.should.equal( NAME_UPDATE );
+        res.body.dayStart.should.equal( DAY_START_UPDATE );
         done();
       });// ./end
   }
