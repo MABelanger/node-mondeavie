@@ -79,9 +79,10 @@ module.exports = function () {
     let teacher_id = req.params.teacher_id;
 
     dbUtils.findCourse(course_id)
-      .then( (data) => {
+      .then( (course) => {
         // put the object to undefined so the field is not present into the db.
         course.teachers.id(teacher_id).course = undefined;
+        console.log('course.teachers.id(teacher_id)', course.teachers.id(teacher_id))
         dbUtils.updateDeletedObj(course, res);
       }, (err) => {
         res.json(err);

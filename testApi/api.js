@@ -129,32 +129,43 @@ describe('Delete All', function() {
   });
 
 
+  // CourseType
   it('Should Delete the CourseType', function(done){
-    restTeacher.delete(URL, resource_courseType + courseType_id, done);
+    restCourseType.delete(URL, resource_courseType + courseType_id, done);
+  });// ./it
+
+  it('Should Read (no data) after delete CourseType', function(done){
+    restCourseType.gone(URL, resource_courseType + courseType_id, done)
   });// ./it
 
 
+  // CourseDescription
   it('Should Delete the CourseDescription', function(done){
-    console.log('resource_courseDescription', resource_courseDescription)
-    //restTeacher.delete(URL, resource_courseDescription, done);
-    done();
+    restCourseDescription.delete(URL, resource_courseDescription, done);
+  });// ./it
+
+  it('Should Read (no data) after delete CourseDescription', function(done){
+    restCourseDescription.gone(URL, resource_courseDescription, done)
   });// ./it
 
 
-  // it('Should Delete the Teacher', function(done){
-  //   restTeacher.delete(URL, resource_teacher + teacher_id, done);
-  // });// ./it
+  // Teacher
+  it('Should Delete the Teacher', function(done){
+    restTeacher.delete(URL, resource_teacher + teacher_id, done);
+  });// ./it
 
-  // it('Should Read (no data) after delete Teacher', function(done){
-  //   restTeacher.gone(URL, resource_teacher + teacher_id, done)
-  // });// ./it
+  it('Should Read (no data) after delete Teacher', function(done){
+    restTeacher.gone(URL, resource_teacher + teacher_id, done)
+  });// ./it
 
-  // it('Should Delete the Course', function(done){
-  //   restCourse.delete(URL, resource_course + course_id, done);
-  // });// ./it
 
-  // it('Should Read (no data) after delete Course', function(done){
-  //   restCourse.gone(URL, resource_course + course_id, done)
-  // });// ./it
+  // Course
+  it('Should Delete the Course', function(done){
+    restCourse.delete(URL, resource_course + course_id, done);
+  });// ./it
+
+  it('Should Read (no data) after delete Course', function(done){
+    restCourse.gone(URL, resource_course + course_id, done)
+  });// ./it
 
 }); // ./describe

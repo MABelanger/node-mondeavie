@@ -113,11 +113,7 @@ module.exports = function () {
     request(url)
       .get(resource)
       .end(function (err,res) {
-        // hack to check if the res.body is null with should
-        if (res.body == null) {
-          res.body = 'null';
-        }
-        res.body.should.equal('null');
+        res.body.should.equal('');
         done();
       });// ./end
   }
