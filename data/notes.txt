@@ -1,3 +1,9 @@
+
+# Rename field
+mongoexport --db mydb --collection modules --out modules.json
+edit files...
+mongoimport --db mydb --collection modules --drop --file modules.json
+
 tar --exclude='./media' --exclude='./node_modules' --exclude='./.git'  -cvzf node-mondeavie.tgz .
 
 

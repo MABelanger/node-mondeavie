@@ -7,7 +7,7 @@ var print = console.log.bind(console, '>')
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Types.ObjectId;
 
-require('../../schemas/embed/course.js')();
+require('../../../schemas/embed/course.js')();
 var Course = mongoose.model('Course');
 
 
@@ -29,12 +29,29 @@ function getTeacherCoursesSlug(teacher){
 }
 
 
+function courseTypeSlug(course, teacher){
+  var courseTypes = teacher.course.courseTypes;
+  courseTypes.map(function(courseType, index){
+    var _slug = slug(courseType.name).toLowerCase();
+    courseTypes[ index ].slug = _slug;
+  });
+
+  var conditions = { '_id' : course._id , 'teacher._id' : teacher._id }
+    , update = { 'courseTypes' : courseTypes }
+    , options = { multi: true };
+
+  Course.update(conditions, update, options, cbUpdateSlug);
+}
+
+
 function teacherSlug(course){
   var teachers = course.teachers;
   teachers.map(function(teacher, index){
     var _slug = slug(teacher.firstName + ' ' + teacher.lastName).toLowerCase();
     teachers[ index ].slug = _slug;
     teachers[ index ] = getTeacherCoursesSlug(teachers[ index ]);
+
+    courseTypeSlug(course, teacher);
   });
 
   var conditions = { '_id' : course._id }
@@ -42,6 +59,8 @@ function teacherSlug(course){
     , options = { multi: true };
 
   Course.update(conditions, update, options, cbUpdateSlug);
+
+
 }
 
 function courseSlug(courses){

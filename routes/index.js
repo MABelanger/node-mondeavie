@@ -10,7 +10,7 @@ var routeTeacher = require('./teacher');
 var routeCourseDescription = require('./courseDescription');
 var routeCourseType = require('./courseType');
 var routeSchedule = require('./schedule');
-var routeTestingDay = require('./testingDay');
+var routeFreeDay = require('./freeDay');
 
 
 
@@ -86,10 +86,10 @@ module.exports = function (app) {
  /* 
   * CRUD operations for testing day
   */
-  app.post('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/testing_days', routeTestingDay().create); // Create
-  app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/testing_days/:testing_day_id', routeTestingDay().read); // Read
-  app.put('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/testing_days/:testing_day_id', routeTestingDay().update); // Update
-  app.delete('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/testing_days/:testing_day_id', routeTestingDay().delete); // Delete
-  app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/testing_days', routeTestingDay().list); // List
+  app.post('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/free_days', routeFreeDay().create); // Create
+  app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/free_days/:free_day_id', routeFreeDay().read); // Read
+  app.put('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/free_days/:free_day_id', routeFreeDay().update); // Update
+  app.delete('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/free_days/:free_day_id', routeFreeDay().delete); // Delete
+  app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/free_days', routeFreeDay().list); // List
 
 };

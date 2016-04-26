@@ -24,12 +24,12 @@ function validateDate(value) {
 
 
 
-var testingDaysSchema = new Schema({
+var freeDaysSchema = new Schema({
   "slug" : String,
   "day" : {
     type: Date, 
-    //validate: [validatePresenceOf, "Le date est invalide"],
-    //required: [true, "Le date est requis"]
+    validate: [validateDate, "Le date est invalide"],
+    required: [true, "Le date est requis"]
   },
   "isFull": Boolean
 });
@@ -48,7 +48,7 @@ var SchedulesSchema = new Schema({
     required: [true, "Le date de départ est requis"]
   },
   "dayName": String,
-  "testingDays": [ testingDaysSchema ]
+  "freeDays": [ freeDaysSchema ]
 });
 
 var courseTypesSchema = new Schema({

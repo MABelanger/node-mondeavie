@@ -1,1 +1,3 @@
 redo db.js, remove unused fct and do big module.exports
+
+unique slug -> can't have the same name, like course.name = yoga only once.

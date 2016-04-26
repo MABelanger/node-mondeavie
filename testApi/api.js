@@ -7,7 +7,7 @@ var restTeacher            = require('./rest/teacher')();
 var restCourseDescription  = require('./rest/courseDescription')();
 var restCourseType         = require('./rest/courseType')();
 var restSchedule           = require('./rest/schedule')();
-var restTestingDay         = require('./rest/testingDay')();
+var restFreeDay         = require('./rest/freeDay')();
 
 
 var URL = 'http://localhost:3000';
@@ -16,13 +16,13 @@ var resource_teacher = null;
 var resource_courseDescription = null;
 var resource_courseType = null;
 var resource_schedule = null;
-var resource_testingDay = null;
+var resource_freeDay = null;
 
 var course_id = null;
 var teacher_id = null;
 var courseType_id = null;
 var schedule_id = null;
-var testingDay_id = null;
+var freeDay_id = null;
 
 // Course
 describe('Create, Read, Update Course', function() {
@@ -143,11 +143,11 @@ describe('Create, Read, Update Schedule', function() {
     //resource_schedule = '/api/courses/57145deba174745e29042cd0/teachers/56da1207dc80b7ca7805ea7b/course_description/course_types/';
     restSchedule.create(URL, resource_schedule, done, function(_schedule_id){
       schedule_id = _schedule_id;
-      resource_testingDay =   '/api/courses/' + course_id 
+      resource_freeDay =   '/api/courses/' + course_id 
                             + '/teachers/' + teacher_id
                             + '/course_description/course_types/' + courseType_id
                             + '/schedules/' + schedule_id
-                            + '/testing_days/';
+                            + '/free_days/';
     });
   });
 
@@ -161,27 +161,26 @@ describe('Create, Read, Update Schedule', function() {
 
 }); // ./describe
 
-// TestingDay
-describe('Create, Read, Update TestingDay', function() {
+// FreeDay
+describe('Create, Read, Update FreeDay', function() {
 
-  it('Should Create with error the TestingDay', function(done){
-    restTestingDay.createError(URL, resource_testingDay, done);
+  it('Should Create with error the FreeDay', function(done){
+    restFreeDay.createError(URL, resource_freeDay, done);
   });// ./it
 
   before(function(done) {
-    console.log('resource_testingDay', resource_testingDay);
-    restTestingDay.create(URL, resource_testingDay, done, function(_testingDay_id){
-      testingDay_id = _testingDay_id;
-
+    console.log('resource_freeDay', resource_freeDay);
+    restFreeDay.create(URL, resource_freeDay, done, function(_freeDay_id){
+      freeDay_id = _freeDay_id;
     });
   });
 
-  it('Should Read the TestingDay', function(done){
-    restTestingDay.read(URL, resource_testingDay + testingDay_id, done);
+  it('Should Read the FreeDay', function(done){
+    restFreeDay.read(URL, resource_freeDay + freeDay_id, done);
   });// ./it
 
-  it('Should Update a TestingDay', function(done){
-    restTestingDay.update(URL, resource_testingDay + testingDay_id, done);
+  it('Should Update a FreeDay', function(done){
+    restFreeDay.update(URL, resource_freeDay + freeDay_id, done);
   });// ./it
 
 }); // ./describe
@@ -193,13 +192,13 @@ describe('Delete All', function() {
     done();
   });
 
-  // TestingDay
-  it('Should Delete the TestingDay', function(done){
-    restTestingDay.delete(URL, resource_testingDay + testingDay_id, done);
+  // FreeDay
+  it('Should Delete the FreeDay', function(done){
+    restFreeDay.delete(URL, resource_freeDay + freeDay_id, done);
   });// ./it
 
-  it('Should Read (no data) after delete TestingDay', function(done){
-    restCourseType.gone(URL, resource_testingDay + testingDay_id, done)
+  it('Should Read (no data) after delete FreeDay', function(done){
+    restCourseType.gone(URL, resource_freeDay + freeDay_id, done)
   });// ./it
 
 

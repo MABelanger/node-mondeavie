@@ -44,10 +44,9 @@ module.exports = function () {
       .post(resource)
       .send(bodyPost)
       .set('Connection', 'keep-alive')
-      //.expect('Content-Type', /json/)
+      .expect('Content-Type', /json/)
       .expect(200) //Status code
       .end(function(err,res) {
-        console.log('res.body', res.body)
         if (err) {
           throw err;
         }
@@ -55,8 +54,8 @@ module.exports = function () {
         res.body.should.have.property('_id');
         res.body.day.should.equal( DAY );
 
-        let schedule_id = res.body._id;
-        cb(schedule_id);
+        let _id = res.body._id;
+        cb(_id);
         done();
       });// ./end
   };
@@ -64,6 +63,7 @@ module.exports = function () {
   functions.read = function(url, resource, done){
     request(url)
       .get(resource)
+      .expect('Content-Type', /json/)
       .end(function (err,res) {
         res.body.day.should.equal( DAY );
         done();
