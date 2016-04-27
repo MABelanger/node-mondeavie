@@ -11,6 +11,7 @@ var routeCourseDescription = require('./courseDescription');
 var routeCourseType = require('./courseType');
 var routeSchedule = require('./schedule');
 var routeFreeDay = require('./freeDay');
+var routeReservation = require('./reservation');
 
 
 
@@ -92,4 +93,8 @@ module.exports = function (app) {
   app.delete('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/free_days/:free_day_id', routeFreeDay().delete); // Delete
   app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/free_days', routeFreeDay().list); // List
 
+ /* 
+  * Send reservation
+  */
+  app.post('/api/reservations/', routeReservation().send); // Create
 };
