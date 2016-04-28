@@ -59,16 +59,31 @@ module.exports = function () {
   function _getField(label, value){
     return "<b>" + label + "</b>" + ": " + value + "<br/>";
   }
+
+  function _getSelectedList(selectedDates){
+    var SelectedDates = "<ul>";
+    SelectedDates += selectedDates.map(function (selectedDate, index){
+      return "<li>" + selectedDate + "</li>";
+    });
+    SelectedDates += "</ul>";
+    return SelectedDates;
+  }
+
   function _getMessageHtml(reservation){
-    let messageHtml = ""
+    var messageHtml = ""
     messageHtml += _getField("Nom", reservation.name);
     messageHtml += _getField("Tel", reservation.tel);
     messageHtml += _getField("Courriel", reservation.email);
     if(reservation.note){
       messageHtml += _getField("Note", reservation.note);
     }
+    if(reservation.selectedDates){
+      messageHtml += _getField("Dates", _getSelectedList(reservation.selectedDates));
+    }
     return messageHtml;
   };
+
+
 
   functions.send = function(req, res){
     console.log('credentials.USER', credentials.USER);
