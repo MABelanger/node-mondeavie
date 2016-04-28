@@ -85,11 +85,55 @@ module.exports = function () {
 
 
 
-  functions.send = function(req, res){
-    console.log('credentials.USER', credentials.USER);
-    console.log('req.body', req.body)
+  function _addError(errors, fieldName, message){
+    var error = {
+      "message": message,
+      "name": "ValidatorError",
+      "properties": {
+        "type": "required",
+        "message": message,
+        "path": "name"
+      },
+      "kind": "required",
+      "path": "name"
+    };
+    errors[fieldName] = error;
+  }
 
-    var reservation = req.body;
+  function _getErrors(reservation){
+    var errors = {};
+
+    var hasError = false;
+    if(!reservation.name){
+      hasError=true;
+      _addError(errors, 'name', "Le Nom est requis")
+    }
+
+    if(!reservation.tel){
+       hasError=true;
+      _addError(errors, 'tel', "Le Téléphone est requis")
+    }
+
+    if(!reservation.email){
+       hasError=true;
+      _addError(errors, 'email', "Le Courriel est requis")
+    }
+
+    if(reservation.selectedDates && reservation.selectedDates.length == 0){
+       hasError=true;
+      _addError(errors, 'selectedDates', "Sélectionner une ou plusieurs dates.")
+    }
+
+    return {
+      "message": "Course validation failed",
+      "name": "ValidationError",
+      "errors": errors,
+      "hasError": hasError
+    };
+  }
+
+
+  function _sendEmail(reservation, res){
     var messageHtml = _getMessageHtml(reservation);
 
     var sendMailMessage = _getSendMailMessage(
@@ -113,9 +157,18 @@ module.exports = function () {
       // if you don't want to use this transport object anymore, uncomment following line
       transport.close(); // close the connection pool
     });
+  }
 
+  functions.send = function(req, res){
+    console.log('req.body', req.body)
+    var reservation = req.body;
+    var errors = _getErrors(reservation);
 
-    
+    if(errors.hasError){
+      res.json(errors);
+    } else {
+      _sendEmail(reservation, res);
+    }
   };
 
   return functions;
