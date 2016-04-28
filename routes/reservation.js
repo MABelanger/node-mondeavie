@@ -32,38 +32,60 @@ module.exports = function () {
   console.log('SMTP Configured');
 
 
-  function _getMessage(emailFrom, emailTo, message){
+  function _getSendMailMessage(emailFrom, emailReplyTo, emailTo, message){
   // Message object
     return {
 
       // sender info
-      from: 'Sender Name <' + emailFrom + '>',
+      'from':  emailFrom,
 
       // Comma separated list of recipients
-      to: '"Receiver Name" <' + emailTo + '>',
+      'to': '"Receiver Name" <' + emailTo + '>',
+
+      'replyTo': emailReplyTo,
 
       // Subject of the message
-      subject: 'Demande de Réservation de mondeavie.ca', 
+      'subject': 'Demande de Réservation de mondeavie.ca', 
 
       // plaintext body
       // text: 'Hello to myself!',
 
       // HTML body
-      html: message
+      'html': message
     };
   }
 
 
+  function _getField(label, value){
+    return "<b>" + label + "</b>" + ": " + value + "<br/>";
+  }
+  function _getMessageHtml(reservation){
+    let messageHtml = ""
+    messageHtml += _getField("Nom", reservation.name);
+    messageHtml += _getField("Tel", reservation.tel);
+    messageHtml += _getField("Courriel", reservation.email);
+    if(reservation.note){
+      messageHtml += _getField("Note", reservation.note);
+    }
+    return messageHtml;
+  };
 
   functions.send = function(req, res){
     console.log('credentials.USER', credentials.USER);
     console.log('req.body', req.body)
 
     var reservation = req.body;
+    var messageHtml = _getMessageHtml(reservation);
 
-    console.log('Sending Mail');
-    var email = _getMessage(reservation.from, credentials.TO, reservation.message);
-    transport.sendMail(email, function(error){
+    var sendMailMessage = _getSendMailMessage(
+          credentials.FROM,
+          reservation.email,
+          credentials.TO,
+          messageHtml
+        );
+
+    console.log('Before sendMail()');
+    transport.sendMail(sendMailMessage, function(error){
       if(error){
           console.log('Error occured');
           console.log(error.message);
