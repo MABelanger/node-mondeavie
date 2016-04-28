@@ -70,7 +70,7 @@ module.exports = function () {
   }
 
   function _getMessageHtml(reservation){
-    var messageHtml = ""
+    var messageHtml = reservation.reservationHeader;
     messageHtml += _getField("Nom", reservation.name);
     messageHtml += _getField("Tel", reservation.tel);
     messageHtml += _getField("Courriel", reservation.email);
