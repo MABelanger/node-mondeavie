@@ -1,8 +1,8 @@
 "use strict";
 
-var credentials            = require('../credentials');
+var credentials            = require('../../credentials');
 
-var dbUtils                = require('../utils/db');
+var dbUtils                = require('../../utils/dbCourse');
 var nodemailer             = require('nodemailer');
 var smtpTransport          = require('nodemailer-smtp-transport');
 

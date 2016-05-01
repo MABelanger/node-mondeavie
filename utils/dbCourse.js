@@ -66,7 +66,7 @@ function findCourse(course_id){
   return promise;
 }
 
-var Utils = {
+var DbCourse = {
   isValidId: isValidId,
   findCourse: findCourse,
   saveCourse: saveCourse,
@@ -74,4 +74,4 @@ var Utils = {
   updateAttributes: updateAttributes
 };
 
-module.exports = Utils;
+module.exports = DbCourse;

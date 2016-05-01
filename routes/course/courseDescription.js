@@ -1,7 +1,7 @@
 "use strict";
 
-var dbUtils=                   require('../utils/db');
-var utils =                    require('../utils/utils');
+var dbUtils=                   require('../../utils/dbCourse');
+var utils =                    require('../../utils/utils');
 
 var BASE_IMG_URL = 'media/img/course_description/'; // TODO: add constant module
 

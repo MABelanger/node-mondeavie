@@ -1,6 +1,6 @@
 "use strict";
 
-var dbUtils =                   require('../utils/db');
+var dbUtils =                   require('../../utils/dbCourse');
 
 function _getObj(course, idList){
   let teacher_id = idList[0];

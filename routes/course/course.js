@@ -1,7 +1,7 @@
 "use strict";
 
-var Course                 = require('../schemas/embed/course');
-var dbUtils                = require('../utils/db');
+var Course                 = require('../../schemas/embed/course');
+var dbUtils                = require('../../utils/dbCourse');
 
 
 function _getObj(course, idList){
