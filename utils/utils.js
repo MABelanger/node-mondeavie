@@ -50,7 +50,7 @@ function saveImage(dataString, imgPath, callback) {
     });
 }
 
-function slugify(course) {
+function slugifyCourse(course) {
   // course slug is course.name
   if (course.name) {
     course.slug = slug(course.name).toLowerCase();
@@ -67,8 +67,20 @@ function getYYYYMMDD(date) {
   return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]); // padding
 }
 
+function slugifyConference(conference) {
+  // conference slug is conference.title
+  console.log('conference.title', conference.title)
+  if (conference.title) {
+    conference.slug = slug(conference.title).toLowerCase();
+  }
+  return conference;
+}
+
+
+
 var Utils = {
-  slugify : slugify,
+  slugifyCourse : slugifyCourse,
+  slugifyConference : slugifyConference,
   getYYYYMMDD: getYYYYMMDD,
   saveImage: saveImage
 };

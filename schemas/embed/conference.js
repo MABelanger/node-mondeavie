@@ -9,6 +9,8 @@ var schemasHelper = require('./helper');
 var utils = require('../../utils/utils');
 
 
+// TODO make slug to the schedule
+
 var SchedulesSchema = new Schema({
   "slug" : String,
   "isFull": Boolean,
@@ -69,8 +71,8 @@ var ConferenceSchema = new Schema({
   description: String,
   "abstract" : {
     type: String, 
-    validate: [schemasHelper.validatePresenceOf, "Le resume est invalide"],
-    required: [true, 'Le resume est requis']
+    // validate: [schemasHelper.validatePresenceOf, "Le resume est invalide"],
+    // required: [true, 'Le resume est requis']
   },
   "speaker" : SpeakerSchema,
   "schedules": [ SchedulesSchema ]
@@ -78,13 +80,14 @@ var ConferenceSchema = new Schema({
 
 
 // Hook on save method that create the slugs
-SpeakerSchema.pre('save', function(next) {
+ConferenceSchema.pre('save', function(next) {
   // set the slugs value of course document and subDocuments
-  //utils.slugify(this);
+  console.log('pre.save')
+  utils.slugifyConference(this);
   next();
 });
 
-SpeakerSchema.pre('validate', function(next){
+ConferenceSchema.pre('validate', function(next){
   //console.log("pre validate called");
   //console.log('this', this);
   next();

@@ -30,6 +30,7 @@ module.exports = function () {
       .then( (conference) => {
         conference.schedules.push( obj );
         dbUtils.saveConference(conference, res, [schedule_id], _getObj);
+
       }, (err) => {
         res.json(err);
       });
@@ -41,7 +42,6 @@ module.exports = function () {
 
     dbUtils.findConference(conference_id)
       .then( (conference) => {
-
         let schedule = conference.schedules.id(schedule_id);
 
         res.json(schedule);
@@ -60,7 +60,6 @@ module.exports = function () {
         let schedule = conference.schedules.id(schedule_id);
 
         schedule = dbUtils.updateAttributes(schedule, json);
-
         dbUtils.saveConference(conference, res, [schedule_id], _getObj);
 
       }, (err) => {
@@ -75,9 +74,7 @@ module.exports = function () {
 
     dbUtils.findConference(conference_id)
       .then( (conference) => {
-
         conference.schedules.pull(schedule_id);
-
         dbUtils.updateDeletedObj(conference, res);
 
       }, (err) => {
@@ -91,7 +88,6 @@ module.exports = function () {
 
     dbUtils.findConference(conference_id)
       .then( (conference) => {
-
         let schedules = conference.schedules;
 
         res.json(schedules);
