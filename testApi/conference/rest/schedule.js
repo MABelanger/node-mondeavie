@@ -53,8 +53,6 @@ module.exports = function () {
           throw err;
         }
 
-        console.log('res.body', res.body)
-
         res.body.should.have.property('_id');
         res.body.dayStart.should.equal( DAY_START );
         res.body.dayEnd.should.equal( DAY_END );
