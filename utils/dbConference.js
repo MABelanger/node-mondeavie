@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var Conference = require('../schemas/embed/conference');
 
 
+// TODO put common module for conference and course
+
 function isValidId(id){
   return mongoose.Types.ObjectId.isValid(id);
 }

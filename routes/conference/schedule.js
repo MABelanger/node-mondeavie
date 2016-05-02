@@ -3,13 +3,9 @@
 var dbUtils                    = require('../../utils/dbConference');
 
 function _getObj(conference, idList){
-  let teacher_id = idList[0];
-  let conferenceType_id = idList[1];
-  let schedule_id = idList[2];
+  let schedule_id = idList[0];
 
-  let schedules = conference.teachers.id( teacher_id )
-                  .conference.conferenceTypes.id( conferenceType_id )
-                  .schedules;
+  let schedules = conference.schedules;
 
   if( schedule_id ) {
     let schedule = schedules.id(schedule_id);
@@ -26,18 +22,14 @@ module.exports = function () {
 
   functions.create = function(req, res){
     let conference_id = req.params.conference_id;
-    let teacher_id = req.params.teacher_id;
-    let conferenceType_id = req.params.conference_type_id;
     let schedule_id = null;
     let obj = req.body;
 
 
     dbUtils.findConference(conference_id)
       .then( (conference) => {
-        conference.teachers.id( teacher_id )
-                .conference.conferenceTypes.id( conferenceType_id )
-                .schedules.push( obj );
-        dbUtils.saveConference(conference, res, [teacher_id, conferenceType_id, schedule_id], _getObj);
+        conference.schedules.push( obj );
+        dbUtils.saveConference(conference, res, [schedule_id], _getObj);
       }, (err) => {
         res.json(err);
       });
@@ -45,16 +37,12 @@ module.exports = function () {
 
   functions.read = function(req, res){
     let conference_id = req.params.conference_id;
-    let teacher_id = req.params.teacher_id;
-    let conferenceType_id = req.params.conference_type_id;
     let schedule_id = req.params.schedule_id;
 
     dbUtils.findConference(conference_id)
       .then( (conference) => {
 
-        let schedule = conference.teachers.id( teacher_id )
-                        .conference.conferenceTypes.id( conferenceType_id )
-                        .schedules.id(schedule_id);
+        let schedule = conference.schedules.id(schedule_id);
 
         res.json(schedule);
       }, (err) => {
@@ -64,20 +52,16 @@ module.exports = function () {
 
   functions.update = function(req, res){
     let conference_id = req.params.conference_id;
-    let teacher_id = req.params.teacher_id;
-    let conferenceType_id = req.params.conference_type_id;
     let schedule_id = req.params.schedule_id;
     let json = req.body;
 
     dbUtils.findConference(conference_id)
       .then( (conference) => {
-        let schedule = conference.teachers.id( teacher_id )
-            .conference.conferenceTypes.id( conferenceType_id )
-            .schedules.id(schedule_id);
+        let schedule = conference.schedules.id(schedule_id);
 
         schedule = dbUtils.updateAttributes(schedule, json);
 
-        dbUtils.saveConference(conference, res, [teacher_id, conferenceType_id, schedule_id], _getObj);
+        dbUtils.saveConference(conference, res, [schedule_id], _getObj);
 
       }, (err) => {
         res.json(err);
@@ -86,17 +70,13 @@ module.exports = function () {
 
   functions.delete = function(req, res) {
     let conference_id = req.params.conference_id;
-    let teacher_id = req.params.teacher_id;
-    let conferenceType_id = req.params.conference_type_id;
     let schedule_id = req.params.schedule_id;
 
 
     dbUtils.findConference(conference_id)
       .then( (conference) => {
 
-        conference.teachers.id( teacher_id )
-          .conference.conferenceTypes.id( conferenceType_id )
-          .schedules.pull(schedule_id);
+        conference.schedules.pull(schedule_id);
 
         dbUtils.updateDeletedObj(conference, res);
 
@@ -107,16 +87,12 @@ module.exports = function () {
 
   functions.list = function(req, res){
     let conference_id = req.params.conference_id;
-    let teacher_id = req.params.teacher_id;
-    let conferenceType_id = req.params.conference_type_id;
     let schedule_id = req.params.schedule_id;
 
     dbUtils.findConference(conference_id)
       .then( (conference) => {
 
-        let schedules = conference.teachers.id( teacher_id )
-                        .conference.conferenceTypes.id( conferenceType_id )
-                        .schedules;
+        let schedules = conference.schedules;
 
         res.json(schedules);
       }, (err) => {
