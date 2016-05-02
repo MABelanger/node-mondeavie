@@ -39,32 +39,28 @@ describe('Create, Read, Update Conference', function() {
 }); // ./describe
 
 
-// // Schedule
-// describe('Create, Read, Update Schedule', function() {
+// Schedule
+describe('Create, Read, Update Schedule', function() {
 
-//   it('Should Create with error the Schedule', function(done){
-//     restSchedule.createError(URL, resource_schedule, done);
-//   });// ./it
+  it('Should Create with error the Schedule', function(done){
+    restSchedule.createError(URL, resource_schedule, done);
+  });// ./it
 
-//   before(function(done) {
-//     restSchedule.create(URL, resource_schedule, done, function(_schedule_id){
-//       schedule_id = _schedule_id;
+  before(function(done) {
+    restSchedule.create(URL, resource_schedule, done, function(_schedule_id){
+      schedule_id = _schedule_id;
+    }); 
+  });
 
-//       resource_schedule = resource_conference + conference_id 
-//                             + '/schedules/' + schedule_id;
+  it('Should Read the Schedule', function(done){
+    restSchedule.read(URL, resource_schedule + schedule_id, done);
+  });// ./it
 
-//     }); 
-//   });
+  it('Should Update a Schedule', function(done){
+    restSchedule.update(URL, resource_schedule + schedule_id, done);
+  });// ./it
 
-//   it('Should Read the Schedule', function(done){
-//     restSchedule.read(URL, resource_schedule + schedule_id, done);
-//   });// ./it
-
-//   it('Should Update a Schedule', function(done){
-//     restSchedule.update(URL, resource_schedule + schedule_id, done);
-//   });// ./it
-
-// }); // ./describe
+}); // ./describe
 
 
 describe('Delete All', function() {
@@ -73,14 +69,14 @@ describe('Delete All', function() {
     done();
   });
 
-  // // Schedule
-  // it('Should Delete the Schedule', function(done){
-  //   restSchedule.delete(URL, resource_schedule + schedule_id, done);
-  // });// ./it
+  // Schedule
+  it('Should Delete the Schedule', function(done){
+    restSchedule.delete(URL, resource_schedule + schedule_id, done);
+  });// ./it
 
-  // it('Should Read (no data) after delete Schedule', function(done){
-  //   restSchedule.gone(URL, resource_schedule + schedule_id, done)
-  // });// ./it
+  it('Should Read (no data) after delete Schedule', function(done){
+    restSchedule.gone(URL, resource_schedule + schedule_id, done)
+  });// ./it
 
 
   // Conference
