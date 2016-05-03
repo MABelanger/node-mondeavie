@@ -160,7 +160,6 @@ module.exports = function () {
   }
 
   functions.send = function(req, res){
-    console.log('req.body', req.body)
     var reservation = req.body;
     var errors = _getErrors(reservation);
 

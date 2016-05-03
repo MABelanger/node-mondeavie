@@ -1,40 +1,9 @@
 "use strict";
 //  node ../../../node_modules/nodemon/bin/nodemon.js read.js
 var Request     = require("superagent");
-var parsedJSON = require('./57.json');
 var moment = require('moment');
 var fs = require('fs');
 
-
-
-let conference = {
-  slug: null,
-  speaker: {
-    slug: null,
-    firstName: null,
-    lastName: null
-  },
-  title: null,
-  tel: null,
-  isVisible: null,
-  note: null,
-  price: null,
-  schoolName: null,
-  schoolUrl: null,
-  description: null,
-  abstract: null,
-  "image": {
-    "url": null,
-    "dataUri": null,
-  },
-  schedules: [
-    {
-      isFull: null,
-      dayStart: null,
-      dayEnd: null,
-    }
-  ]
-};
 
 // function to encode file data to base64 encoded string
 function base64_encode(bitmap) {
@@ -52,8 +21,6 @@ function readImage(url, cb) {
     }
   });
 }
-
-
 
 
 function saveConference(obj){
@@ -125,70 +92,95 @@ function getSchedules(dayConferences){
 }
 
 
-if(parsedJSON.speakers.length == 1){
-  conference.speaker.firstName = parsedJSON.speakers[0].first_name;
-  conference.speaker.lastName = parsedJSON.speakers[0].last_name;
+
+
+function convertConference(json, cb){
+  let conference = {
+    slug: null,
+    speaker: {
+      slug: null,
+      firstName: null,
+      lastName: null
+    },
+    title: null,
+    tel: null,
+    isVisible: null,
+    note: null,
+    price: null,
+    schoolName: null,
+    schoolUrl: null,
+    description: null,
+    abstract: null,
+    "image": {
+      "url": null,
+      "dataUri": null,
+    },
+    schedules: [
+      {
+        isFull: null,
+        dayStart: null,
+        dayEnd: null,
+      }
+    ]
+  };
+
+  if(json.speakers.length == 1){
+    conference.speaker.firstName = json.speakers[0].first_name;
+    conference.speaker.lastName = json.speakers[0].last_name;
+  }
+
+  conference.title = json.title;
+  conference.description = json.description;
+  conference.abstract = json.abstract;
+  conference.price = json.price;
+  conference.tel = json.tel;
+  conference.note = json.note;
+  conference.schoolName = json.school_name;
+  conference.schoolUrl = json.school_url;
+  conference.isVisible = json.is_visible;
+  conference.schedules = undefined;
+
+
+  let imageUrl = 'http://www.mondeavie.ca/' + json.image;
+  readImage(imageUrl, function(base64){
+    conference.image.dataUri = base64;
+
+    conference.schedules = getSchedules(json.day_conferences);
+
+    saveConference(conference)
+      .then( (conference) => {
+        console.log('conference', conference)
+
+        cb(conference);
+        // deleteConference(conference)
+        //   .then( (conference) => {
+        //     console.log('ok');
+        //   }, (errors) => {
+        //     console.log('err', errors)
+        //   });
+
+      }, (errors) => {
+        console.log('err', errors)
+      });
+  });
 }
 
+function readDayConference(url, cb) {
+  Request
+  .get(url, function(err, res){
+    if(!err){
+      cb(res.body);
+    }
+  });
+}
 
-
-conference.title = parsedJSON.title;
-conference.description = parsedJSON.description;
-conference.abstract = parsedJSON.abstract;
-conference.price = parsedJSON.price;
-conference.tel = parsedJSON.tel;
-conference.note = parsedJSON.note;
-conference.schoolName = parsedJSON.school_name;
-conference.schoolUrl = parsedJSON.school_url;
-conference.isVisible = parsedJSON.is_visible;
-conference.schedules = undefined;
-
-
-let imageUrl = 'http://www.mondeavie.ca/' + parsedJSON.image;
-console.log('imageUrl', imageUrl);
-//imageUrl = 'http://localhost:3000/media/img/conference/string_string-string.jpg';
-readImage(imageUrl, function(base64){
-  //console.log('base64:_', base64)
-  conference.image.dataUri = base64;
-
-
-
-  conference.schedules = getSchedules(parsedJSON.day_conferences);
-
-  saveConference(conference)
-    .then( (conference) => {
-      console.log('conference', conference)
-
-      // deleteConference(conference)
-      //   .then( (conference) => {
-      //     console.log('ok');
-      //   }, (errors) => {
-      //     console.log('err', errors)
-      //   });
-
-    }, (errors) => {
-      console.log('err', errors)
+  for(let i=0; i<100; i++){
+    let url = 'http://www.mondeavie.ca/calendar_activities/api/nested/childs/conferences/'+ i + '?format=json';
+    readDayConference(url, function(json){
+      convertConference(json, function(conference){
+        console.log('conference._id', conference._id);
+      });
     });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  }
 
 

@@ -34,7 +34,6 @@ function _updateImage(json, course, teacher, res){
   utils.saveImage(dataUri, urlOriginal, {width:null, height:null}, function(url){
     // save the smaller
     utils.saveImage(dataUri, urlResize, {width:300, height:null}, function(url){
-      console.log('saveImage');
       // set the path to the image
       let image = {
         url: url

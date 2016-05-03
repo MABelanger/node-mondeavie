@@ -24,7 +24,6 @@ function _teacherSlug(teachers){
 }
 
 function _decodeBase64Image(dataString) {
-  console.log('dataString', dataString)
   var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
     response = {};
 
