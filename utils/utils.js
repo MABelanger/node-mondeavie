@@ -24,10 +24,11 @@ function _teacherSlug(teachers){
 }
 
 function _decodeBase64Image(dataString) {
+  console.log('dataString', dataString)
   var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
     response = {};
 
-  if (matches.length !== 3) {
+  if (matches && matches.length !== 3) {
     return new Error('Invalid input string');
   }
 
@@ -67,14 +68,24 @@ function getYYYYMMDD(date) {
   return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]); // padding
 }
 
+function _slugifySpeaker(speaker) {
+  // conference slug is conference.title
+  var _slug = undefined;
+  if (speaker && speaker.firstName && speaker.lastName) {
+    speaker.slug = slug(speaker.firstName + ' ' + speaker.lastName).toLowerCase();
+  }
+  return speaker;
+}
+
 function slugifyConference(conference) {
   // conference slug is conference.title
-  console.log('conference.title', conference.title)
-  if (conference.title) {
+  if (conference && conference.title) {
     conference.slug = slug(conference.title).toLowerCase();
+    conference.speaker = _slugifySpeaker(conference.speaker)
   }
   return conference;
 }
+
 
 
 

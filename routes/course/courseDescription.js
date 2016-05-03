@@ -20,6 +20,7 @@ function _updateImage(json, course, teacher, res){
   let url = BASE_IMG_URL + fileName;
 
   utils.saveImage(dataUri, url, function(url){
+    console.log('saveImage');
     // set the path to the image
     let image = {
       url: url
@@ -82,7 +83,6 @@ module.exports = function () {
       .then( (course) => {
         // put the object to undefined so the field is not present into the db.
         course.teachers.id(teacher_id).course = undefined;
-        console.log('course.teachers.id(teacher_id)', course.teachers.id(teacher_id))
         dbUtils.updateDeletedObj(course, res);
       }, (err) => {
         res.json(err);

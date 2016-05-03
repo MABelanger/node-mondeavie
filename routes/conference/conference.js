@@ -2,11 +2,39 @@
 
 var Conference                 = require('../../schemas/embed/conference');
 var dbUtils                    = require('../../utils/dbConference');
+var utils                      = require('../../utils/utils');
 
+
+var BASE_IMG_URL = 'media/img/conference/'; // TODO: add constant module
 
 function _getObj(conference, idList){
   return conference;
 }
+
+// we don't need the filename of the client
+// the fileName is renamed with teacherSlug_courseSlug.jpg
+//let fileName = json.image.fileName;
+function _updateImage(json, conference, res){
+  let dataUri = json.image.dataUri;
+  let conference_id = conference._id;
+
+  // get the json version because, if conference has not been saved,
+  // no pre.save has been executed so the slug is missing.
+  let conferenceJson = utils.slugifyConference(json);
+
+  let fileName = conferenceJson.slug +'_' + conferenceJson.speaker.slug + '.jpg';
+  let url = BASE_IMG_URL + fileName;
+
+  utils.saveImage(dataUri, url, function(url){
+    // set the path to the image
+    let image = {
+      url: url
+    }
+    conference.image = image;
+    dbUtils.saveConference(conference, res, [conference_id], _getObj);
+  });
+};
+
 
 
 module.exports = function () {
@@ -14,8 +42,17 @@ module.exports = function () {
   var functions = {};
 
   functions.create = function(req, res){
-    let conference = new Conference(req.body);
-    dbUtils.saveConference(conference, res, [conference._id], _getObj);
+    var json = req.body;
+    let conference = new Conference(json);
+
+    // check if is a new upload image. If so,
+    // save it on the file and save the path to the db.
+    if (json.image && json.image.dataUri) {
+      _updateImage(json, conference, res);
+
+    } else {
+      dbUtils.saveConference(conference, res, [conference._id], _getObj);
+    }
   };
 
   functions.read = function(req, res){
@@ -35,7 +72,16 @@ module.exports = function () {
     dbUtils.findConference(conference_id)
       .then( (conference) => {
         dbUtils.updateAttributes(conference, json);
-        dbUtils.saveConference(conference, res, [conference_id], _getObj);
+
+        // check if is a new upload image. If so,
+        // save it on the file and save the path to the db.
+        if (json.image && json.image.dataUri) {
+          _updateImage(json, conference, res);
+
+        } else {
+          dbUtils.saveConference(conference, res, [conference_id], _getObj);
+        }
+        
 
       }, (err) => {
         res.json(err);
