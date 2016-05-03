@@ -22,16 +22,26 @@ function _updateImage(json, conference, res){
   // no pre.save has been executed so the slug is missing.
   let conferenceJson = utils.slugifyConference(json);
 
-  let fileName = conferenceJson.slug +'_' + conferenceJson.speaker.slug + '.jpg';
-  let url = BASE_IMG_URL + fileName;
 
-  utils.saveImage(dataUri, url, function(url){
-    // set the path to the image
-    let image = {
-      url: url
-    }
-    conference.image = image;
-    dbUtils.saveConference(conference, res, [conference_id], _getObj);
+  let fileNameOriginal = conferenceJson.slug +'_' + conferenceJson.speaker.slug + '_original' + '.jpg';
+  let urlOriginal = BASE_IMG_URL + fileNameOriginal;
+
+
+  let fileNameResize = conferenceJson.slug +'_' + conferenceJson.speaker.slug + '.jpg';
+  let urlResize = BASE_IMG_URL + fileNameResize;
+
+
+  // save the original
+  utils.saveImage(dataUri, urlOriginal, {width:null, height:null}, function(url){
+    // save the smaller
+    utils.saveImage(dataUri, urlResize, {width:300, height:null}, function(url){
+      // set the path to the image
+      let image = {
+        url: url
+      }
+      conference.image = image;
+      dbUtils.saveConference(conference, res, [conference_id], _getObj);
+    });
   });
 };
 

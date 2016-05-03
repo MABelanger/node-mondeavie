@@ -19,15 +19,32 @@ function _updateImage(json, course, teacher, res){
   let fileName = teacher.slug +'_' + course.slug + '.jpg';
   let url = BASE_IMG_URL + fileName;
 
-  utils.saveImage(dataUri, url, function(url){
-    console.log('saveImage');
-    // set the path to the image
-    let image = {
-      url: url
-    }
-    course.teachers.id(teacher._id).course.image = image;
-    dbUtils.saveCourse(course, res, [teacher._id], _getObj);
+
+
+
+  let fileNameOriginal = teacher.slug +'_' + course.slug + '_original' + '.jpg';
+  let urlOriginal = BASE_IMG_URL + fileNameOriginal;
+
+
+  let fileNameResize = teacher.slug +'_' + course.slug + '.jpg';
+  let urlResize = BASE_IMG_URL + fileNameResize;
+
+
+  // save the original
+  utils.saveImage(dataUri, urlOriginal, {width:null, height:null}, function(url){
+    // save the smaller
+    utils.saveImage(dataUri, urlResize, {width:300, height:null}, function(url){
+      console.log('saveImage');
+      // set the path to the image
+      let image = {
+        url: url
+      }
+      course.teachers.id(teacher._id).course.image = image;
+      dbUtils.saveCourse(course, res, [teacher._id], _getObj);
+    });
   });
+
+
 };
 
 

@@ -38,10 +38,55 @@ function _decodeBase64Image(dataString) {
   return response;
 }
 
-function saveImage(dataString, imgPath, callback) {
+/*
+ * conference : 
+ *  thumb : max-width : 130
+ *  medium : max-width: 300
+ *  Original : 
+
+ * cours :
+ *   pic : max-width: 300
+ */
+
+// function _getImageSizeCourse(){
+//   return [
+//     {
+//       size: 'small',
+//       width: 130,
+//       height: null
+//     },
+//     {
+//       size: 'medium',
+//       width: 300
+//       height: null
+//     },
+//     {
+//       size: 'original',
+//       width: null
+//       height: null
+//     }
+//   ];
+// }
+
+// function _getImageSizeConference(){
+//   return _getImageSizeCourse();
+// }
+
+// // TODO use constant.
+// function _getImageSizes(type){
+//   if(type == 'COURSE'){
+//     return _getImageSizeCourse();
+
+//   }else if( type == 'CONFERENCE' ){
+//     return _getImageSizeConference()
+
+//   }
+// }
+
+function saveImage(dataString, imgPath, size, callback) {
   var bitmap = _decodeBase64Image(dataString).data;
   sharp(bitmap)
-    .resize(200, 100)
+    .resize(size.width, size.height)
     .max()
     .toFormat('jpeg')
     .toFile(imgPath, function(err) {
