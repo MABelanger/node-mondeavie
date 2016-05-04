@@ -1,46 +1,98 @@
 {
-  "id": 10,
+  "id": 4,
   "teacher": {
-    "id": 10,
-    "first_name": "Céline",
-    "last_name": "Gagné",
-    "tel": "514-995-4404",
-    "school_name": "Être en mouvement",
-    "school_url": "http://etreenmouvement.qigongmontreal.info/a-propos/"
+    "id": 5,
+    "first_name": "Marianne",
+    "last_name": "Girard",
+    "tel": "4504745078",
+    "school_name": "",
+    "school_url": ""
   },
   "course_name": {
-    "id": 2,
-    "name": "Qi Gong",
-    "icon": "/media/course_icon/logo_ki_gong_D2eqw4b.png"
+    "id": 1,
+    "name": "Yoga",
+    "icon": "/media/course_icon/logo_yoga_Zhstq9G.png"
   },
-  "obj_unicode": "Qi Gong avec Céline Gagné",
-  "course_type": "Qi Gong",
-  "note": "<p><font color=\"#a13232\"><b><a target=\"_blank\" href=\"http://etreenmouvement.qigongmontreal.info/calendrier-3-2/\">Consultez le site de C&eacute;line Gagn&eacute;</a></b></font></p>",
-  "image": "/media/course_pic/Celine_Gagne.jpg",
-  "description": "<p class=\"MsoNormal\">Prof Qi Gong / Ta&iuml;-Chi<br />Th&eacute;rapeute approche &eacute;nerg&eacute;tique chinoise<span style=\"font-size: 7pt; line-height: 115%; font-family: Arial, sans-serif;\"><o:p></o:p></span></p><p class=\"MsoNormal\" style=\"margin-bottom:0cm;margin-bottom:.0001pt;line-height:\n150%\"><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\">Dipl&ocirc;m&eacute;e depuis 2000 en m&eacute;decine traditionnelle chinoise, C&eacute;line Gagn&eacute; cumule plus de 20 ans d&rsquo;exp&eacute;rience comme professeur de Qi Gong. V&eacute;ritable passionn&eacute;e du Qi Gong elle a le souci de r&eacute;viser et d&rsquo;enrichir constamment son art aupr&egrave;s des meilleurs sp&eacute;cialistes de r&eacute;putation internationale. </span><span style=\"font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#404040;mso-fareast-language:\nFR-CA\"><o:p></o:p></span><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\"><o:p></o:p></span><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\"><o:p></o:p></span></p><p class=\"MsoNormal\" style=\"margin-bottom:0cm;margin-bottom:.0001pt;line-height:\n150%\"><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\"><o:p></o:p></span></p>",
-  "price": "<p><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\"><b>240$</b>&nbsp;(10 rencontres, 2h chaque cours)&nbsp;rabais 10% pour une reprise<o:p></o:p><br />N.B. 1<sup>er</sup> cours gratuit pour toutes nouvelles personnes.<o:p></o:p><br />On r&eacute;serve sa place &agrave; </span><a href=\"mailto:celine.gagne@etreenmouvement.com\"><span style=\"font-size:12.0pt;\nline-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;\">celine.gagne@etreenmouvement.com</span></a><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\"><o:p></o:p></span></p><p class=\"MsoNormal\" style=\"margin-bottom:0cm;margin-bottom:.0001pt;line-height:\n150%\"><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\">Paiement </span><a target=\"_blank\" href=\"http://etreenmouvement.qigongmontreal.info/activites-venir-montreal-estrie-terrebonne/\"><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;\">en ligne</span></a><span style=\"font-size:12.0pt;line-height:150%;font-family:\n&quot;Arial&quot;,&quot;sans-serif&quot;;color:#404040\"> ou par la poste ou en personne.&nbsp;</span></p><p class=\"MsoNormal\" style=\"margin-bottom:0cm;margin-bottom:.0001pt;line-height:\n150%\"><b><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\">Quand?</span></b><span style=\"font-size:12.0pt;line-height:150%;\nfont-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#404040\">&nbsp;<br />Les jeudis matin de 9h30 &agrave; 11h30 du 7 mai au 18 juin.</span></p><p class=\"MsoNormal\" style=\"margin-bottom:0cm;margin-bottom:.0001pt;line-height:\n150%\"><b><span style=\"font-size:12.0pt;\nline-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#404040\">Session printemps</span></b><span style=\"font-size:12.0pt;line-height:150%;font-family:\n&quot;Arial&quot;,&quot;sans-serif&quot;;color:#404040\"> du 30 avril au 18 juin 2015 (8 sem. 192$)<b><o:p></o:p></b></span></p><p class=\"MsoNormal\" style=\"margin-bottom:0cm;margin-bottom:.0001pt;line-height:\n150%\"><span style=\"font-size:12.0pt;line-height:150%;\nfont-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#404040\"><o:p></o:p></span></p>",
+  "obj_unicode": "Yoga avec Marianne Girard",
+  "course_type": "Yoga",
+  "note": "<p>Bienvenue aux d&eacute;butants!<br />&nbsp;</p>",
+  "image": "/media/course_pic/marianne_yoga_petite.jpg",
+  "description": "<p>Marianne s&#39;int&eacute;resse au yoga depuis 2001. Le yoga s&#39;est tranquillement immisc&eacute; dans son quotidien et elle souhaite qu&#39;il prenne une place de plus en plus importante.<br />Elle a pratiqu&eacute; avec plus de 60 professeurs diff&eacute;rents et d<span style=\"line-height: 20.8px;\">epuis 8&nbsp;ans, sa principale inspiration est Catherine Nehme du&nbsp;</span><a target=\"_blank\" style=\"line-height: 20.8px;\" href=\"http://www.bhutayoga.ca/\">Studio Bhuta yoga &agrave; Terrebonne</a><span style=\"line-height: 20.8px;\">.&nbsp;</span><br />Au mois d&#39;octobre dernier, elle a ajout&eacute; &agrave; son cursus&nbsp;une formation (yoga Alliance)&nbsp;de 200 heures au Costa Rica avec <a target=\"_blank\" href=\"http://anabelmirandayoga.com/\">Anabel Miranda</a>&nbsp;et Kadri Kurgun.<br /><br />Marianne vous invite &agrave; venir partager sa pratique. Dans la douceur, le respect et le calme. Bienvenue &agrave; tous.<br />Elle organise deux retraites de yoga par ann&eacute;e! La prochaine sera du 23 au 30&nbsp;avril 2016 au <a target=\"_blank\" href=\"http://www.wildorchidbelize.com/\">Belize au Wild Orchid</a>. (Comprends 7 nuits en occupation double, 7 d&eacute;jeuners, 7 diners, 5 soupers V&Eacute;G&Eacute;TARIEN, 2 cours de yoga par jour, cours de cuisine v&eacute;g&eacute;talienne, transport terrestre pour 1480$ - exclus: alcool, avion et activit&eacute;s facultatives)<br />Le Costa Rica vous int&eacute;resse? Elle organise une semanie de yoga et d&eacute;couvertes&nbsp;au mois de&nbsp;novembre 2016.<a target=\"_blank\" href=\"http://www.mondeavie.ca/costa-rica-2015\"> Cliquez ici pour plus d&#39;informations!</a></p>",
+  "price": "<p>Premier cours d&#39;essai toujours gratuit.<br />Cours &agrave; la carte: 15$<br />10 cours pour 140$ - aucune date limite!<br />20 cours pour 260$ - aucune date limite!<br />Pour ceux et celles qui affrontent une p&eacute;riode financi&egrave;re plus pr&eacute;caire, Marianne offre ses s&eacute;ances avec une &quot;contribution volontaire&quot;. Communiquez directement avec Marianne pour conna&icirc;tre le yoga karma!&nbsp;</p>",
   "schedules": [
     {
       "daySchedules": [
         {
-          "hour_end": "11:15",
-          "schedule": 14,
-          "day_name": "Jeudi",
-          "day_start": "2015-05-07",
+          "hour_end": "19:20",
+          "schedule": 6,
+          "day_name": "Lundi",
+          "day_start": "2016-01-18",
           "is_full": false,
-          "day_end": "2015-06-18",
+          "day_end": "2016-05-30",
           "testingDays": null,
-          "hour_start": "09:15",
-          "id": 17
+          "hour_start": "18:00",
+          "id": 46
+        },
+        {
+          "hour_end": "20:45",
+          "schedule": 6,
+          "day_name": "Lundi",
+          "day_start": "2016-05-02",
+          "is_full": false,
+          "day_end": "2016-07-11",
+          "testingDays": null,
+          "hour_start": "19:30",
+          "id": 53
+        },
+        {
+          "hour_end": "16:40",
+          "schedule": 6,
+          "day_name": "Jeudi",
+          "day_start": "2016-05-04",
+          "is_full": false,
+          "day_end": "2016-07-07",
+          "testingDays": {
+            "list": {
+              "5": {
+                "list": [
+                  "05 mai 2016",
+                  "06 mai 2016"
+                ],
+                "monthName": "Mai 2016"
+              }
+            }
+          },
+          "hour_start": "15:30",
+          "id": 9
+        },
+        {
+          "hour_end": "13:15",
+          "schedule": 6,
+          "day_name": "Vendredi",
+          "day_start": "2016-05-06",
+          "is_full": false,
+          "day_end": "2016-07-08",
+          "testingDays": {
+            "list": {
+              "5": {
+                "list": [
+                  "06 mai 2016"
+                ],
+                "monthName": "Mai 2016"
+              }
+            }
+          },
+          "hour_start": "12:00",
+          "id": 18
         }
       ],
-      "description": "<p class=\"MsoNormal\" style=\"margin-bottom:0cm;margin-bottom:.0001pt;line-height:\n150%\"><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\">Le Qi Gong est un art de sant&eacute; qui r&eacute;unit diff&eacute;rentes techniques corporelles, respiratoires et m&eacute;ditatives issues de la tradition chinoise. Ces exercices sont pratiqu&eacute;s depuis des mill&eacute;naires pour leurs bienfaits autant sur le plan de la sant&eacute; physique, &eacute;motionnelle que mentale. Le terme Qi (Chi) fait r&eacute;f&eacute;rence &agrave; cette force de vie qui soutient notre &ecirc;tre et le terme Gong d&eacute;signe l&rsquo;entra&icirc;nement. En route vers une &eacute;nergie plus libre et gu&eacute;rissante.<o:p></o:p></span></p><p class=\"MsoNormal\" style=\"margin-bottom:0cm;margin-bottom:.0001pt;line-height:\n150%\"><b><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\"><o:p>&nbsp;</o:p></span></b><b><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\">Au programme</span></b><br /><span style=\"font-size:12.0pt;\nline-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#404040\">Apprentissage du ZhiNeng Qi Gong 2&egrave; m&eacute;thode, Nul besoin d&rsquo;avoir suivi le 1er pour s&rsquo;int&eacute;grer au groupe.&nbsp;<br /><a target=\"_blank\" href=\"http://etreenmouvement.qigongmontreal.info/cours/zhi-neng-qi-gong/\">Visitez le site de site de Mme Gagn&eacute; pour plus de d</a></span><a target=\"_blank\" href=\"http://etreenmouvement.qigongmontreal.info/cours/zhi-neng-qi-gong/\"><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;\">&eacute;tails</span></a><span style=\"font-size:12.0pt;line-height:150%;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;\ncolor:#404040\"><a target=\"_blank\" href=\"http://etreenmouvement.qigongmontreal.info/cours/zhi-neng-qi-gong/\">.&nbsp;</a><o:p></o:p></span></p>",
-      "day_start": "2015-05-07",
-      "course": 10,
-      "day_end": "2015-06-18",
-      "id": 14,
-      "name": "Qi Gong Céline Gagné"
+      "description": "<p>Noter qu&#39;il n&#39;y aura PAS de cours du 22 au 30 avril!</p>",
+      "day_start": "2016-01-18",
+      "course": 4,
+      "day_end": "2016-07-11",
+      "id": 6,
+      "name": "Yoga"
     }
   ],
-  "is_visible": false
+  "is_visible": true
 }
