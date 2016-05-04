@@ -114,6 +114,14 @@ var CourseSchemaEmbed = Schema({
 CourseSchemaEmbed.pre('save', function(next) {
   // set the slugs value of course document and subDocuments
   utils.slugifyCourse(this);
+
+  if(this.teachers){
+    for(let i=0; i<this.teachers.length; i++){
+      let teacher = this.teachers[i];
+      console.log('teacher.course.image', teacher.course.image)
+    }
+  }
+  
   next();
 });
 

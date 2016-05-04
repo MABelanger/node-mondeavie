@@ -15,6 +15,7 @@ function _getObj(course, idList){
 // the fileName is renamed with teacherSlug_courseSlug.jpg
 //let fileName = json.image.fileName;
 function _updateImage(json, course, teacher, res){
+
   let dataUri = json.image.dataUri;
   let fileName = teacher.slug +'_' + course.slug + '.jpg';
   let url = BASE_IMG_URL + fileName;

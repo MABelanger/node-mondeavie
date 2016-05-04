@@ -180,7 +180,8 @@ function getCourseDescription(json){
       price: null,
       isVisible: true,
       image: {
-        url: null
+        url: null,
+        dataUri: null
       }
   };
 
@@ -196,11 +197,15 @@ function getCourseDescription(json){
 }
 
 function addCourseDescription(teacher, json){
+
+
   teacher.course = getCourseDescription(json);
   teacher.course.courseTypes = [];
 
   //console.log('json.schedules', json.schedules)
   addCourseType(teacher.course.courseTypes, json.schedules)
+
+
 }
 
 
@@ -289,7 +294,7 @@ for(let i=0; i<MAX_ID; i++){
     // convertConference(json, function(conference){
     //   console.log('conference._id', conference._id);
     // });
-    if( i==(29) ){
+    if( i==(MAX_ID-1) ){
       endConvert()
     }
   });
@@ -316,20 +321,51 @@ function saveCourse(obj){
   return promise;
 }
 
+
+let nbTeachers = 0;
+let nbTeacherReadImage = 0;
 function endConvert(){
-  console.log('endConvert', endConvert)
+
   for(let i=0; i<courses.length; i++){
     let course = courses[i];
-    //console.log('___course:', JSON.stringify(course));
-    // saveCourse(course)
-    //   .then( (course) => {
-    //     console.log('course._id', course._id)
-    //     //cb(course);
-    //   }, (errors) => {
-    //     console.log('err', errors)
-    //   });
+    nbTeachers += course.teachers.length;
+    console.log('___nbTeachers:', nbTeachers);
+
+    for(let j=0; j<course.teachers.length; j++){
+      let teacher = course.teachers[j];
+
+      let imageUrl = 'http://www.mondeavie.ca' + teacher.course.image.url;
+
+      readImage(imageUrl, function(base64){
+        console.log('base64', base64.length)
+        courses[i].teachers[j].course.image.url = undefined;
+        courses[i].teachers[j].course.image.dataUri = base64;
+        nbTeacherReadImage++;
+        finishReadImage(nbTeacherReadImage);
+      });
+    }
   }
 }
 
+function finishReadImage(nbTeacherReadImage){
+  console.log('nbTeacherReadImage', nbTeacherReadImage)
+  if(nbTeacherReadImage == nbTeachers){
+    console.log('finishReadImage')
+    for(let i=0; i<courses.length; i++){
+      let course = courses[i];
+      console.log('dataUri.length', course.teachers[0].course.image)
+      saveCourse(course)
+        .then( (course) => {
+          console.log('course._id', course._id)
+          //cb(course);
+        }, (errors) => {
+          console.log('err', errors)
+        });
+    }
+  }
+}
 
+(function wait () {
+   if (!(nbTeacherReadImage == nbTeachers) ) setTimeout(wait, 1000*60*10);
+})();
 
