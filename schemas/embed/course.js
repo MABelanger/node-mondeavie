@@ -7,6 +7,32 @@ var Schema = mongoose.Schema;
 var utils = require('../../utils/utils');
 var schemasHelper = require('./helper');
 
+var BASE_IMG_URL = 'media/img/course_description/'; // TODO: add constant module
+
+function _updateImage(json, course, teacher, cb){
+
+  let dataUri = json.image.dataUri;
+  let fileName = teacher.slug +'_' + course.slug + '.jpg';
+  let url = BASE_IMG_URL + fileName;
+
+
+  let fileNameOriginal = teacher.slug +'_' + course.slug + '_original' + '.jpg';
+  let urlOriginal = BASE_IMG_URL + fileNameOriginal;
+
+
+  let fileNameResize = teacher.slug +'_' + course.slug + '.jpg';
+  let urlResize = BASE_IMG_URL + fileNameResize;
+
+
+  // save the original
+  utils.saveImage(dataUri, urlOriginal, {width:null, height:null}, function(url){
+    // save the smaller
+    utils.saveImage(dataUri, urlResize, {width:300, height:null}, function(url){
+      cb(url);
+    });
+  });
+};
+
 
 var freeDaysSchema = new Schema({
   "slug" : String,
@@ -55,7 +81,8 @@ var CourseSchema = new Schema({
   },
   "note": String,
   "image": {
-    url: String
+    url: String,
+    dataUri: String
   },
   "description": String,
   "price": String,
@@ -114,20 +141,27 @@ var CourseSchemaEmbed = Schema({
 CourseSchemaEmbed.pre('save', function(next) {
   // set the slugs value of course document and subDocuments
   utils.slugifyCourse(this);
-
-  if(this.teachers){
-    for(let i=0; i<this.teachers.length; i++){
-      let teacher = this.teachers[i];
-      console.log('teacher.course.image', teacher.course.image)
-    }
-  }
-  
   next();
+  // if(this.teachers){
+  //   for(let i=0; i<this.teachers.length; i++){
+  //     let teacher = this.teachers[i];
+  //     if (teacher.course.image && teacher.course.image.dataUri) {
+  //       _updateImage(teacher.course, this, teacher, function(url){
+  //         // set the path to the image
+  //         console.log('url', url);
+  //         let image = {
+  //           url: url
+  //         }
+  //         teacher.course.image = image;
+  //       });
+  //     }
+  //   }
+  // }
+  // // 30 seconds
+  // setTimeout(next, 1000*30);
 });
 
 CourseSchemaEmbed.pre('validate', function(next){
-    //console.log("pre validate called");
-    //console.log('this', this);
     next();
 });
 

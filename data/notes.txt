@@ -1,4 +1,8 @@
 
+# dump to json only certain field
+mongo localhost/mondeavie-free-days --eval "db.courses.find({}, {_id:0, svg:1, name:1})" >svg.json
+
+
 # Rename field
 mongoexport --db mydb --collection modules --out modules.json
 edit files...
