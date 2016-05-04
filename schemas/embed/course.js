@@ -141,7 +141,7 @@ var CourseSchemaEmbed = Schema({
 CourseSchemaEmbed.pre('save', function(next) {
   // set the slugs value of course document and subDocuments
   utils.slugifyCourse(this);
-  next();
+  
   // if(this.teachers){
   //   for(let i=0; i<this.teachers.length; i++){
   //     let teacher = this.teachers[i];
@@ -159,6 +159,7 @@ CourseSchemaEmbed.pre('save', function(next) {
   // }
   // // 30 seconds
   // setTimeout(next, 1000*30);
+  next();
 });
 
 CourseSchemaEmbed.pre('validate', function(next){

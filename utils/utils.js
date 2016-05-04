@@ -3,6 +3,19 @@
 var slug =                     require('slug');
 var sharp =                    require('sharp');
 
+function _courseTypesSlug(courseTypes) {
+  if (courseTypes){
+    courseTypes.map(function(courseType, index){
+      if( courseType.name ){
+        var _slug = slug(courseType.name).toLowerCase();
+        courseTypes[ index ].slug = _slug;
+        console.log('_courseTypesSlug', _slug)
+      }
+    });
+  }
+}
+
+
 function _getTeacherCoursesSlug(teacher) {
   if (teacher.course && teacher.course.courseType) {
     var _slug = slug(teacher.course.courseType).toLowerCase();
@@ -18,6 +31,7 @@ function _teacherSlug(teachers){
         var _slug = slug(teacher.firstName + ' ' + teacher.lastName).toLowerCase();
         teachers[ index ].slug = _slug;
         teachers[ index ] = _getTeacherCoursesSlug(teachers[ index ]);
+        _courseTypesSlug(teacher.course.courseTypes);
       }
     });
   }
@@ -37,50 +51,6 @@ function _decodeBase64Image(dataString) {
   return response;
 }
 
-/*
- * conference : 
- *  thumb : max-width : 130
- *  medium : max-width: 300
- *  Original : 
-
- * cours :
- *   pic : max-width: 300
- */
-
-// function _getImageSizeCourse(){
-//   return [
-//     {
-//       size: 'small',
-//       width: 130,
-//       height: null
-//     },
-//     {
-//       size: 'medium',
-//       width: 300
-//       height: null
-//     },
-//     {
-//       size: 'original',
-//       width: null
-//       height: null
-//     }
-//   ];
-// }
-
-// function _getImageSizeConference(){
-//   return _getImageSizeCourse();
-// }
-
-// // TODO use constant.
-// function _getImageSizes(type){
-//   if(type == 'COURSE'){
-//     return _getImageSizeCourse();
-
-//   }else if( type == 'CONFERENCE' ){
-//     return _getImageSizeConference()
-
-//   }
-// }
 
 function saveImage(dataString, imgPath, size, callback) {
   var bitmap = _decodeBase64Image(dataString).data;
