@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var sharp = require('sharp');
 
 // Constants
-var URL = 'mongodb://localhost/mondeavie-free-days';
+var URL = 'mongodb://localhost/mondeavie';
 
 // Load the express application
 var app = express();

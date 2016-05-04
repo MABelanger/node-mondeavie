@@ -4,7 +4,19 @@ var moment = require('moment');
 var Request     = require("superagent");
 var json = require('./course10.json');
 
-          
+
+function readImage(url, cb) {
+  Request
+  .get(url, function(err, res){
+    if(!err){
+      let buffer = res.body;
+      let base64 = "data:image/jpeg;base64," + buffer.toString('base64');
+      cb(base64);
+    }
+  });
+}
+
+
 /*
  * Free Days
  */
@@ -267,23 +279,55 @@ function readUrl(url, cb) {
   });
 }
 
-for(let i=0; i<10; i++){
+const MAX_ID = 200;
+for(let i=0; i<MAX_ID; i++){
   let url = 'http://www.mondeavie.ca/calendar_activities/api/nested/childs/courses/'+ i + '?format=json';
   readUrl(url, function(json){
     addCourse(json);
 
+    console.log('i', i);
     // convertConference(json, function(conference){
     //   console.log('conference._id', conference._id);
     // });
-    if(i==9){
+    if( i==(29) ){
       endConvert()
     }
   });
 }
 
+
+function saveCourse(obj){
+  const URL = 'http://localhost:3000/api/courses';
+  var promise = new Promise(function(resolve, reject) {
+    Request
+      .post(URL)
+      .accept('application/json')
+      .type('application/json')
+      .send(obj)
+      .end((err, res) => {
+        if (! err ) {
+          resolve(res.body);
+        }
+        else {
+          reject(err);
+        }
+      });
+  });
+  return promise;
+}
+
 function endConvert(){
+  console.log('endConvert', endConvert)
   for(let i=0; i<courses.length; i++){
-    console.log('courses[i]:', courses[i])
+    let course = courses[i];
+    //console.log('___course:', JSON.stringify(course));
+    // saveCourse(course)
+    //   .then( (course) => {
+    //     console.log('course._id', course._id)
+    //     //cb(course);
+    //   }, (errors) => {
+    //     console.log('err', errors)
+    //   });
   }
 }
 
