@@ -5,11 +5,6 @@ var moment = require('moment');
 var fs = require('fs');
 
 
-// function to encode file data to base64 encoded string
-function base64_encode(bitmap) {
-    // convert binary data to base64 encoded string
-    return new Buffer(bitmap).toString('base64');
-}
 
 function readImage(url, cb) {
   Request
