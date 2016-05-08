@@ -8,6 +8,7 @@ var routeFreeDay = require('./freeDay');
 var routeReservation = require('./reservation');
 
 module.exports = function (app) {
+
   /**
    * CRUD operations for the course
    */
@@ -63,7 +64,9 @@ module.exports = function (app) {
   app.get('/api/courses/:course_id/teachers/:teacher_id/course_description/course_types/:course_type_id/schedules/:schedule_id/free_days', routeFreeDay().list); // List
 
  /* 
-  * Send reservation
+  * Public API
   */
-  app.post('/api/reservations/', routeReservation().send); // Create
+  app.get('/public/api/courses', routeCourse().list); // Public List
+  app.post('/public/api/reservations/', routeReservation().send); // Public Create
+
 };

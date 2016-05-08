@@ -3,6 +3,8 @@ var routeUser = require('./user');
 
 module.exports = function (app) {
 
+  app.use('/api/sessions/private', app.jwtCheck);
+
   /**
    * User operations
    */

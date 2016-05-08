@@ -27,17 +27,9 @@ module.exports = function (app) {
     secret: config.secret
   });
 
-
-  app.use('/api/sessions/private', jwtCheck);
-
-  // fallback if no token is sended.
-  app.use(function (err, req, res, next) {
-    console.log('req.headers', req.headers.authorization);
-    if (err.name === 'UnauthorizedError') { 
-      res.send(401, 'invalid token...');
-    }
-  });
-
+  app.jwtCheck = jwtCheck;
+  // all /api is private to access we can access it via /public/api
+  app.use('/api', app.jwtCheck);
   /**
    * Serve the static files
    */
@@ -51,4 +43,12 @@ module.exports = function (app) {
 
   // Load all user routes
   require('./user')(app);
+
+  // fallback if no token is sended.
+  app.use(function (err, req, res, next) {
+    console.log('req.headers', req.headers.authorization);
+    if (err.name === 'UnauthorizedError') { 
+      res.send(401, 'invalid token...');
+    }
+  });
 };

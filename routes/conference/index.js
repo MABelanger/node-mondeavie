@@ -22,4 +22,9 @@ module.exports = function (app) {
   app.delete('/api/conferences/:conference_id/schedules/:schedule_id', routeSchedule().delete); // Delete
   app.get('/api/conferences/:conference_id/schedules', routeSchedule().list); // List
 
+ /* 
+  * Public API
+  */
+  app.get('/public/api/conferences', routeConference().list); // List
+
 };
