@@ -7,4 +7,5 @@ module.exports = function (app) {
    * User operations
    */
   app.post('/api/sessions/authentication', routeUser().login); // Authenticate
+  app.get('/api/sessions/private', routeUser().private); // Authenticate
 };

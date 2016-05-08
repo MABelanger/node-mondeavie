@@ -2,7 +2,7 @@
 
 var bodyParser = require('body-parser');
 var express = require('express');
-
+var jwt     = require('express-jwt');
 
 module.exports = function (app) {
 
@@ -13,13 +13,27 @@ module.exports = function (app) {
   app.use(function(req, res, next) {
      res.header("Access-Control-Allow-Origin", "*");
      res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+     res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
      next();
   });
 
   // Show message to use path /api if user try to use the root path
   app.get('/', function(req, res){
     res.send('use /api');
+  });
+
+  var jwtCheck = jwt({
+    secret: 'config.secret'
+  });
+
+
+  app.use('/api/sessions/private', jwtCheck);
+
+  // fallback if no token is sended.
+  app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') { 
+      res.send(401, 'invalid token...');
+    }
   });
 
   /**

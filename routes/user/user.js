@@ -67,5 +67,12 @@ module.exports = function () {
     });
   };
 
+
+  functions.private = function(req, res){
+    res.status(201).send({
+      status: 'ok'
+    });
+  };
+
   return functions;
 };
