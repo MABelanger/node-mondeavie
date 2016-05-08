@@ -3,6 +3,7 @@
 var bodyParser = require('body-parser');
 var express = require('express');
 var jwt     = require('express-jwt');
+var config  = require('./user/config')
 
 module.exports = function (app) {
 
@@ -23,7 +24,7 @@ module.exports = function (app) {
   });
 
   var jwtCheck = jwt({
-    secret: 'config.secret'
+    secret: config.secret
   });
 
 
@@ -31,6 +32,7 @@ module.exports = function (app) {
 
   // fallback if no token is sended.
   app.use(function (err, req, res, next) {
+    console.log('req.headers', req.headers.authorization);
     if (err.name === 'UnauthorizedError') { 
       res.send(401, 'invalid token...');
     }
