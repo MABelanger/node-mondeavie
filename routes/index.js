@@ -30,6 +30,9 @@ module.exports = function (app) {
   // Load all course routes
   require('./course')(app);
 
-  // Load all course routes
+  // Load all conference routes
   require('./conference')(app);
+
+  // Load all user routes
+  require('./user')(app);
 };
