@@ -31,7 +31,9 @@ function _teacherSlug(teachers){
         var _slug = slug(teacher.firstName + ' ' + teacher.lastName).toLowerCase();
         teachers[ index ].slug = _slug;
         teachers[ index ] = _getTeacherCoursesSlug(teachers[ index ]);
-        _courseTypesSlug(teacher.course.courseTypes);
+        if(teacher.course && teacher.course.courseTypes.length > 0){
+          _courseTypesSlug(teacher.course.courseTypes);
+        }
       }
     });
   }
