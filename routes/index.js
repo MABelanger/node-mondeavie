@@ -29,7 +29,8 @@ module.exports = function (app) {
 
   app.jwtCheck = jwtCheck;
   // all /api is private to access we can access it via /public/api
-  app.use('/api', app.jwtCheck);
+  
+  //app.use('/api', app.jwtCheck);
   /**
    * Serve the static files
    */

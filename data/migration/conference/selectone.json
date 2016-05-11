@@ -1,5 +1,0 @@
-MongoDB shell version: 3.2.3
-connecting to: localhost/mondeavie-free-days
-loading file: –eval
-2016-05-04T03:51:00.594-0400 E -        [main] file [–eval] doesn't exist
-failed to load: –eval
