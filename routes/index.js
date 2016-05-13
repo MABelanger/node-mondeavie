@@ -2,8 +2,10 @@
 
 var bodyParser = require('body-parser');
 var express = require('express');
+var path = require("path");
 var jwt     = require('express-jwt');
-var config  = require('./user/config')
+var config  = require('./user/config');
+
 
 module.exports = function (app) {
 
@@ -19,9 +21,9 @@ module.exports = function (app) {
   });
 
   // Show message to use path /api if user try to use the root path
-  app.get('/', function(req, res){
-    res.send('use /api');
-  });
+  // app.get('/', function(req, res){
+  //   res.send('use /api');
+  // });
 
   var jwtCheck = jwt({
     secret: config.secret
@@ -35,6 +37,9 @@ module.exports = function (app) {
    * Serve the static files
    */
   app.use('/media', express.static('media'));
+
+  
+  
 
   // Load all course routes
   require('./course')(app);
@@ -52,4 +57,18 @@ module.exports = function (app) {
       res.send(401, 'invalid token...');
     }
   });
+
+
+  var appDir = path.join(__dirname,"../app/dist");
+
+  // https://github.com/reactjs/react-router/blob/1.0.x/docs/guides/basics/Histories.md
+  app.use(express.static(appDir))
+
+  // handle every other route with index.html, which will contain
+  // a script tag to your application's JavaScript file(s).
+  app.get('*', function (request, response){
+    response.sendFile( path.resolve(__dirname, appDir, 'index.html') );
+  })
+
+  
 };
