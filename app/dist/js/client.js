@@ -7,6 +7,8 @@ import { createHistory }              from 'history';
 import { Router, Route, IndexRoute, Redirect,
   hashHistory, useRouterHistory }       from "react-router";
 
+import * as Configs                    from "./configs/configs";
+
 // Project modules
 import Layout from './pages/Layout';
 import CalendarPage from './pages/calendar/CalendarPage';
@@ -19,8 +21,10 @@ import ReservationConferencePage from './pages/conference/ReservationConferenceP
 const browserHistory = useRouterHistory(createHistory)({ basename: '/' })
 const APP = document.getElementById('app');
 
+const history = Configs.getHistory();
+
 ReactDOM.render(
-  <Router history={browserHistory}>
+  <Router history={history}>
     <Redirect from="/" to="calendrier/cours/" />
     <Route  path="/"
             component={Layout}>
