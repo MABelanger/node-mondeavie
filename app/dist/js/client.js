@@ -3,8 +3,9 @@
 // Vendor modules
 import React                          from "react";
 import ReactDOM                       from "react-dom";
+import { createHistory }              from 'history';
 import { Router, Route, IndexRoute, Redirect,
-  hashHistory, browserHistory }       from "react-router";
+  hashHistory, useRouterHistory }       from "react-router";
 
 // Project modules
 import Layout from './pages/Layout';
@@ -15,8 +16,9 @@ import ConferencesPage from './pages/conference/ConferencesPage';
 import ConferenceDetailPage from './pages/conference/ConferenceDetailPage';
 import ReservationConferencePage from './pages/conference/ReservationConferencePage';
 
-
+const browserHistory = useRouterHistory(createHistory)({ basename: '/' })
 const APP = document.getElementById('app');
+
 ReactDOM.render(
   <Router history={browserHistory}>
     <Redirect from="/" to="calendrier/cours/" />
