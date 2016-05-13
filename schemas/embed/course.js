@@ -142,24 +142,28 @@ CourseSchemaEmbed.pre('save', function(next) {
   // set the slugs value of course document and subDocuments
   utils.slugifyCourse(this);
   
-  // if(this.teachers){
-  //   for(let i=0; i<this.teachers.length; i++){
-  //     let teacher = this.teachers[i];
-  //     if (teacher.course.image && teacher.course.image.dataUri) {
-  //       _updateImage(teacher.course, this, teacher, function(url){
-  //         // set the path to the image
-  //         console.log('url', url);
-  //         let image = {
-  //           url: url
-  //         }
-  //         teacher.course.image = image;
-  //       });
-  //     }
-  //   }
-  // }
-  // // 30 seconds
-  // setTimeout(next, 1000*30);
-  next();
+  // uncomment step 2
+  if(this.teachers){
+    for(let i=0; i<this.teachers.length; i++){
+      let teacher = this.teachers[i];
+      if (teacher.course.image && teacher.course.image.dataUri) {
+        _updateImage(teacher.course, this, teacher, function(url){
+          // set the path to the image
+          console.log('url', url);
+          let image = {
+            url: url
+          }
+          teacher.course.image = image;
+        });
+      }
+    }
+  }
+  // 30 seconds
+  setTimeout(next, 1000*30);
+  
+
+  // comment step 2
+  //next();
 });
 
 CourseSchemaEmbed.pre('validate', function(next){
