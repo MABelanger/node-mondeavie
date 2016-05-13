@@ -15,6 +15,14 @@ export function getBaseUrlApi() {
   }
 }
 
+export function getBaseUrlImage() {
+  if( isProduction() ){
+    return 'http://ec2-54-235-235-7.compute-1.amazonaws.com:9000';
+  } else {
+    return 'http://localhost:3000';
+  }
+}
+
 export function getHistory() {
   if( isProduction() ){
     let  browserHistory = useRouterHistory(createHistory)({ basename: '/' });
