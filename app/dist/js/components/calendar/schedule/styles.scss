@@ -8,11 +8,13 @@ $logo-fill: #2d4214;
 
 
 @media (max-width: 768px) {
+  .schedule {
     table{
       td {
         font-size: 11px!important;
       }
     }
+  }
 }
 
 .schedule {
