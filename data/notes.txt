@@ -1,3 +1,4 @@
+node node_modules/forever/bin/forever start app.js
 
 # dump to json only certain field
 mongo localhost/mondeavie-free-days --eval "db.courses.find({}, {_id:0, svg:1, name:1})" >svg.json
