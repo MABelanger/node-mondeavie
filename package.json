@@ -17,6 +17,7 @@
     "express": "^4.13.4",
     "express-jwt": "^3.4.0",
     "express-mongoose-generator": "^2.0.0",
+    "forever": "^0.15.1",
     "humps": "^1.0.0",
     "jsonwebtoken": "^6.2.0",
     "lodash": "^4.11.2",
