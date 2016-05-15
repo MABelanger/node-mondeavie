@@ -17,6 +17,7 @@ module.exports = function (app) {
      res.header("Access-Control-Allow-Origin", "*");
      res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
      res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
+     console.log('req.headers.host', req.headers.host)
      next();
   });
 
