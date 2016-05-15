@@ -1,0 +1,10 @@
+.imgPreview img {
+	height:150px;
+}
+.imgPreview input {
+	visibility: hidden;
+}
+
+.imgPreview div {
+	
+}

@@ -1,0 +1,21 @@
+.section-animation{
+    /*Animate menu, Course Names with Teachers*/
+    .section-transition {
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+    }
+
+    .section-show {
+        opacity: 1;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        max-height: 1250px;
+    }
+
+    .section-hide {
+        opacity: 0;
+        padding: 0px;
+        max-height: 0;
+        overflow: hidden;
+    }
+}

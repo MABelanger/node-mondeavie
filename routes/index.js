@@ -1,5 +1,6 @@
 "use strict";
 
+var vhost = require('vhost');
 var bodyParser = require('body-parser');
 var express = require('express');
 var path = require("path");
@@ -59,16 +60,25 @@ module.exports = function (app) {
     }
   });
 
-
-  var appDir = path.join(__dirname,"../app/dist");
+  var reactCalendarDir = path.join(__dirname,"../app/dist/react-calendar");
+  var reactAdminDir =    path.join(__dirname,"../app/dist/react-admin");
 
   // https://github.com/reactjs/react-router/blob/1.0.x/docs/guides/basics/Histories.md
-  app.use(express.static(appDir))
+  app.use(vhost('www.blackandrouge.com', express.static(reactCalendarDir))); // Serves first app
+  app.use(vhost('admin.blackandrouge.com', express.static(reactAdminDir))); // Serves second app
+
+  app.use(vhost('_www.blackandrouge.com', express.static(reactCalendarDir))); // Serves first app
+  app.use(vhost('_admin.blackandrouge.com', express.static(reactAdminDir))); // Serves second app
 
   // handle every other route with index.html, which will contain
   // a script tag to your application's JavaScript file(s).
   app.get('*', function (request, response){
-    response.sendFile( path.resolve(__dirname, appDir, 'index.html') );
+    if(request.headers.host == '_www.blackandrouge.com'){
+      response.sendFile( path.resolve(__dirname, reactCalendarDir, 'index.html') );
+
+    } else if (request.headers.host == '_admin.blackandrouge.com'){
+      response.sendFile( path.resolve(__dirname, reactAdminDir, 'index.html') );
+    }
   })
 
   

@@ -1,0 +1,89 @@
+/*$bgcolor: #99CC66;*/
+$bgcolor: #F5F5F5;
+$size-title: 15px;
+$menu-hover: #EEEEEE;
+$link-hover: #999999;
+$txt-color-mid: #5C753F;
+$logo-fill: #2d4214;
+
+
+@media (max-width: 768px) {
+  .schedule {
+    svg{
+      height: 18px;
+    }
+    table {
+      th {
+        font-size: 13px!important;
+      }
+      td{
+        font-size: 11px!important;
+      }
+    }
+  }
+}
+
+.schedule {
+  background-color: $bgcolor;
+
+
+
+  svg {
+    path {
+      fill: $logo-fill;
+      transition: 0.5s ease;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width:100%;
+    border-bottom: 1px solid $link-hover;
+
+    th {
+      border-bottom: 1px solid $link-hover;
+    }
+
+    td {
+      border-left: 1px solid $link-hover;
+      border-right: 1px solid $link-hover;
+    }
+
+    th, td {
+      border-collapse: collapse;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      vertical-align: top;
+      width: 40px;
+      overflow: hidden;
+    }
+  }
+
+  a {
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: $txt-color-mid;
+    border: 1px solid transparent;
+    text-align: center;
+ 
+    &:link, &:visited {
+      text-decoration: none;
+      outline: none;
+    }
+
+    &:hover {
+      text-decoration: none;
+      background-color: $menu-hover;
+      border: 1px solid $link-hover;
+    }
+
+    &:active {
+      text-decoration: none;
+      background-color: $menu-hover;
+      border: 1px solid $link-hover;
+    }
+  }
+}
