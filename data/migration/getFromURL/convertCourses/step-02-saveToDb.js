@@ -7,7 +7,7 @@ let courseJson = require("./courses.json");
 let svgJson = require("./svg.json");
 
 function saveCourse(obj){
-  const URL = 'http://localhost:3000/api/courses';
+  const URL = 'http://localhost:9000/api/courses';
   var promise = new Promise(function(resolve, reject) {
     Request
       .post(URL)

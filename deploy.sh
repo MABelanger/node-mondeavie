@@ -2,6 +2,9 @@
 
 set -o errexit # Exit on error
 
+echo "pull node-mondeavie"
+git pull
+
 cd ../react-admin
 echo "pull react-admin"
 git pull

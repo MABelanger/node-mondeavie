@@ -19,7 +19,7 @@ function readImage(url, cb) {
 
 
 function saveConference(obj){
-  const CONFERENCE_URL = 'http://localhost:3000/api/conferences';
+  const CONFERENCE_URL = 'http://localhost:9000/api/conferences';
   var promise = new Promise(function(resolve, reject) {
     Request
       .post(CONFERENCE_URL)

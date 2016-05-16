@@ -7,7 +7,7 @@ var sharp = require('sharp');
 // Constants
 // mondeavie-free-days
 var URL_MONGO = 'mongodb://localhost/mondeavie';
-var PORT = 3000;
+var PORT = 9000;
 
 // Load the express application
 var app = express();
