@@ -8,6 +8,7 @@ var utils = require('../../utils/utils');
 var schemasHelper = require('./helper');
 
 var BASE_IMG_URL = 'media/img/course_description/'; // TODO: add constant module
+var SAVE_IMAGE_FILES_HOOK = false;
 
 function _updateImage(json, course, teacher, cb){
 
@@ -137,17 +138,13 @@ var CourseSchemaEmbed = Schema({
 }); // courseSchema
 
 
-// Hook on save method that create the slugs
-CourseSchemaEmbed.pre('save', function(next) {
-  // set the slugs value of course document and subDocuments
-  utils.slugifyCourse(this);
-  
+function saveImageFilesHook(_this){
   // uncomment step 2
-  if(this.teachers){
-    for(let i=0; i<this.teachers.length; i++){
-      let teacher = this.teachers[i];
+  if(_this.teachers){
+    for(let i=0; i<_this.teachers.length; i++){
+      let teacher = _this.teachers[i];
       if (teacher.course.image && teacher.course.image.dataUri) {
-        _updateImage(teacher.course, this, teacher, function(url){
+        _updateImage(teacher.course, _this, teacher, function(url){
           // set the path to the image
           console.log('url', url);
           let image = {
@@ -160,10 +157,19 @@ CourseSchemaEmbed.pre('save', function(next) {
   }
   // 30 seconds
   setTimeout(next, 1000*30);
-  
+}
 
-  // comment step 2
-  //next();
+// Hook on save method that create the slugs
+CourseSchemaEmbed.pre('save', function(next) {
+  // set the slugs value of course document and subDocuments
+  utils.slugifyCourse(this);
+  // step 2
+  if(SAVE_IMAGE_FILES_HOOK){
+    saveImageFilesHook(this);
+  }
+  else {
+    next();
+  }
 });
 
 CourseSchemaEmbed.pre('validate', function(next){

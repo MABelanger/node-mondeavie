@@ -6,7 +6,8 @@ var sharp = require('sharp');
 
 // Constants
 // mondeavie-free-days
-var URL = 'mongodb://localhost/mondeavie';
+var URL_MONGO = 'mongodb://localhost/mondeavie';
+var PORT = 3000;
 
 // Load the express application
 var app = express();
@@ -15,13 +16,13 @@ var app = express();
 require('./routes')(app);
 
 // Connect to monbodb
-mongoose.connect(URL, function(err){
+mongoose.connect(URL_MONGO, function(err){
   if (err) throw err;
 });
 
 // Listen to the port 3000
-app.listen(3000);
+app.listen(PORT);
 
-console.log('Running on port 3000');
+console.log('Running on port' + PORT);
 
 
