@@ -5,12 +5,13 @@ var fs = require("fs");
 
 let courseJson = require("./courses.json");
 let svgJson = require("./svg.json");
+var constants = require('../constants');
 
 function saveCourse(obj){
-  const URL = 'http://localhost:9000/api/courses';
+  var url = constants.COURSES_URL_API;
   var promise = new Promise(function(resolve, reject) {
     Request
-      .post(URL)
+      .post(url)
       .accept('application/json')
       .type('application/json')
       .send(obj)

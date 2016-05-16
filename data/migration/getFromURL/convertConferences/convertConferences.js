@@ -3,7 +3,7 @@
 var Request     = require("superagent");
 var moment = require('moment');
 var fs = require('fs');
-
+var constants = require('../constants');
 
 
 function readImage(url, cb) {
@@ -19,10 +19,10 @@ function readImage(url, cb) {
 
 
 function saveConference(obj){
-  const CONFERENCE_URL = 'http://localhost:9000/api/conferences';
+  var url = constants.CONFERENCES_URL_API;
   var promise = new Promise(function(resolve, reject) {
     Request
-      .post(CONFERENCE_URL)
+      .post(url)
       .accept('application/json')
       .type('application/json')
       .send(obj)
@@ -39,10 +39,10 @@ function saveConference(obj){
 }
 
 function deleteConference(conference) {
-  const CONFERENCE_URL = 'http://localhost:3000/api/conferences';
+  var url = constants.CONFERENCES_URL_API;
   var promise = new Promise(function(resolve, reject) {
     Request
-      .del(CONFERENCE_URL + '/' + conference._id)
+      .del(url + '/' + conference._id)
       .accept('application/json')
       .type('application/json')
       .send(conference)
