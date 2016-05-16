@@ -5,7 +5,6 @@ var routeCourseDescription = require('./courseDescription');
 var routeCourseType = require('./courseType');
 var routeSchedule = require('./schedule');
 var routeFreeDay = require('./freeDay');
-var routeReservation = require('./reservation');
 
 module.exports = function (app) {
 
@@ -67,6 +66,6 @@ module.exports = function (app) {
   * Public API
   */
   app.get('/public/api/courses', routeCourse().list); // Public List
-  app.post('/public/api/reservations/', routeReservation().send); // Public Create
+
 
 };
