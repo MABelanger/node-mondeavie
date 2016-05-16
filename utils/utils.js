@@ -9,7 +9,6 @@ function _courseTypesSlug(courseTypes) {
       if( courseType.name ){
         var _slug = slug(courseType.name).toLowerCase();
         courseTypes[ index ].slug = _slug;
-        console.log('_courseTypesSlug', _slug)
       }
     });
   }

@@ -31,7 +31,6 @@ module.exports = function () {
       .expect('Content-Type', /json/)
       .expect(400) //Status code
       .end(function(err,res) {
-        console.log('res.body.errors', res.body.errors)
         // res.body.errors['courseType.1.courseType'].message
         //   .should.equal( 'Le prénom est requis' );
 

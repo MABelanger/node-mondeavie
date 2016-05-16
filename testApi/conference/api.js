@@ -6,7 +6,7 @@ var restConference              = require('./rest/conference')();
 var restSchedule                = require('./rest/schedule')();
 
 
-var URL = 'http://localhost:3000';
+var URL = 'http://localhost:9000';
 var resource_conference = '/api/conferences/';
 var resource_schedule = null;
 

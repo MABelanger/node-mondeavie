@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node node_modules/nodemon/bin/nodemon.js app.js",
+    "dev": "node node_modules/nodemon/bin/nodemon.js app.js --port=9000",
+    "test": "node node_modules/nodemon/bin/nodemon.js app.js --port=9000 --apiPublic=true",
+    "production": "node node_modules/nodemon/bin/nodemon.js app.js --port=9000",
     "deploy": "./deploy.sh"
   },
   "keywords": [],
@@ -22,6 +24,7 @@
     "humps": "^1.0.0",
     "jsonwebtoken": "^6.2.0",
     "lodash": "^4.11.2",
+    "minimist": "^1.2.0",
     "mongodb-rest": "^0.10.14",
     "mongoose": "^4.4.5",
     "nodemailer": "^2.3.2",

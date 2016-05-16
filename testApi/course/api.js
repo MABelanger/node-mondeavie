@@ -10,7 +10,7 @@ var restSchedule           = require('./rest/schedule')();
 var restFreeDay         = require('./rest/freeDay')();
 
 
-var URL = 'http://localhost:3000';
+var URL = 'http://localhost:9000';
 var resource_course = '/api/courses/';
 var resource_teacher = null;
 var resource_courseDescription = null;
@@ -169,7 +169,6 @@ describe('Create, Read, Update FreeDay', function() {
   });// ./it
 
   before(function(done) {
-    console.log('resource_freeDay', resource_freeDay);
     restFreeDay.create(URL, resource_freeDay, done, function(_freeDay_id){
       freeDay_id = _freeDay_id;
     });

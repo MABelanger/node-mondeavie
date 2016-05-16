@@ -18,7 +18,6 @@ module.exports = function (app) {
      res.header("Access-Control-Allow-Origin", "*");
      res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
      res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
-     console.log('req.headers.host', req.headers.host)
      next();
   });
 
@@ -34,7 +33,9 @@ module.exports = function (app) {
   app.jwtCheck = jwtCheck;
   // all /api is private to access we can access it via /public/api
   
-  app.use('/api', app.jwtCheck);
+  if(!app.isApiPublic){
+    app.use('/api', app.jwtCheck);
+  }
   /**
    * Serve the static files
    */
@@ -51,7 +52,6 @@ module.exports = function (app) {
 
   // fallback if no token is sended.
   app.use(function (err, req, res, next) {
-    console.log('req.headers', req.headers.authorization);
     if (err.name === 'UnauthorizedError') { 
       res.send(401, 'invalid token...');
     }

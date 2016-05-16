@@ -28,6 +28,10 @@ module.exports = function () {
 
   var functions = {};
 
+
+  console.log('SMTP Configured');
+
+
   function _getSendMailMessage(emailFrom, emailReplyTo, emailTo, message){
   // Message object
     return {
@@ -58,9 +62,9 @@ module.exports = function () {
 
   function _getSelectedList(selectedDates){
     var SelectedDates = "<ul>";
-    for(var i=0; i<selectedDates.length; i++){
-      SelectedDates += "<li>" + selectedDates[i] + "</li>";
-    }
+    SelectedDates += selectedDates.map(function (selectedDate, index){
+      return "<li>" + selectedDate + "</li>";
+    });
     SelectedDates += "</ul>";
     return SelectedDates;
   }

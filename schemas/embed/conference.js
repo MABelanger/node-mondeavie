@@ -82,14 +82,11 @@ var ConferenceSchema = new Schema({
 // Hook on save method that create the slugs
 ConferenceSchema.pre('save', function(next) {
   // set the slugs value of course document and subDocuments
-  console.log('pre.save')
   utils.slugifyConference(this);
   next();
 });
 
 ConferenceSchema.pre('validate', function(next){
-  //console.log("pre validate called");
-  //console.log('this', this);
   next();
 });
 
