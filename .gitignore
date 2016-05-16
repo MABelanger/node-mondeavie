@@ -3,3 +3,4 @@ credentials/
 node_modules/
 media/
 app/
+logs/

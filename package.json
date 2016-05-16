@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node node_modules/nodemon/bin/nodemon.js app.js --port=9000",
     "test": "node node_modules/nodemon/bin/nodemon.js app.js --port=9000 --apiPublic=true",
-    "production": "node node_modules/nodemon/bin/nodemon.js app.js --port=9000",
+    "dev": "node node_modules/nodemon/bin/nodemon.js app.js --port=9000",
+    "start": "./node_modules/forever/bin/forever -o ./logs/out.log -e ./logs/err.log start app.js --port 9000",
+    "stop": "./node_modules/forever/bin/forever stop app.js",
+    "foreverlist": "./node_modules/forever/bin/forever list",
     "deploy": "./deploy.sh"
   },
   "keywords": [],
