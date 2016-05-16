@@ -62,9 +62,9 @@ module.exports = function () {
 
   function _getSelectedList(selectedDates){
     var SelectedDates = "<ul>";
-    SelectedDates += selectedDates.map(function (selectedDate, index){
-      return "<li>" + selectedDate + "</li>";
-    });
+    for(var i=0; i<selectedDates.length; i++){
+      SelectedDates += "<li>" + selectedDates[i] + "</li>";
+    }
     SelectedDates += "</ul>";
     return SelectedDates;
   }
@@ -143,16 +143,17 @@ module.exports = function () {
           messageHtml
         );
 
-    console.log('Before sendMail()');
     transport.sendMail(sendMailMessage, function(error){
       if(error){
-          console.log('Error occured');
           console.log(error.message);
           res.json({status: "Error" + error.message});
           return;
       }
       console.log('Message sent successfully!');
-      res.json({status: "Message sent successfully!"});
+      res.json({
+        status: "Message sent successfully!",
+        messageHtml: messageHtml
+      });
 
       // if you don't want to use this transport object anymore, uncomment following line
       transport.close(); // close the connection pool
