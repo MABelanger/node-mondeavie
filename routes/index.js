@@ -70,10 +70,10 @@ module.exports = function (app) {
   // handle every other route with index.html, which will contain
   // a script tag to your application's JavaScript file(s).
   app.get('*', function (request, response){
-    if(request.headers.host == '_www.blackandrouge.com'){
+    if(request.headers.host == 'www.blackandrouge.com'){
       response.sendFile( path.resolve(__dirname, reactCalendarDir, 'index.html') );
 
-    } else if (request.headers.host == '_admin.blackandrouge.com'){
+    } else if (request.headers.host == 'admin.blackandrouge.com'){
       response.sendFile( path.resolve(__dirname, reactAdminDir, 'index.html') );
     }
   })
