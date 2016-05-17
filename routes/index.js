@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var path = require("path");
 var jwt     = require('express-jwt');
-var config  = require('./user/config');
+var config  = require('../config');
 
 
 module.exports = function (app) {
@@ -27,7 +27,7 @@ module.exports = function (app) {
   // });
 
   var jwtCheck = jwt({
-    secret: config.secret
+    secret: config.SECRET
   });
 
   app.jwtCheck = jwtCheck;

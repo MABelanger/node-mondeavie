@@ -3,6 +3,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var sharp = require('sharp');
+var config = require('./config');
 
 // get ragument command lines
 
@@ -11,7 +12,7 @@ var argv = require('minimist')(process.argv.slice(2));
 
 // Constants
 // mondeavie-free-days
-var URL_MONGO = 'mongodb://localhost/mondeavie';
+var URL_MONGO = config.URL_MONGO;
 var PORT = argv.port;
 var IS_API_PUBLIC = argv.apiPublic;
 

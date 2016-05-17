@@ -138,7 +138,7 @@ var CourseSchemaEmbed = Schema({
 }); // courseSchema
 
 
-function saveImageFilesHook(_this){
+function saveImageFilesHook(_this, next){
   // uncomment step 2
   if(_this.teachers){
     for(let i=0; i<_this.teachers.length; i++){
@@ -165,7 +165,7 @@ CourseSchemaEmbed.pre('save', function(next) {
   utils.slugifyCourse(this);
   // step 2
   if(SAVE_IMAGE_FILES_HOOK){
-    saveImageFilesHook(this);
+    saveImageFilesHook(this, next);
   }
   else {
     next();

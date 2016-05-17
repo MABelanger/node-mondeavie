@@ -1,6 +1,6 @@
 "use strict";
 
-var credentials            = require('../../credentials');
+var config            = require('../../config');
 
 var dbUtils                = require('../../utils/dbCourse');
 var nodemailer             = require('nodemailer');
@@ -8,13 +8,13 @@ var smtpTransport          = require('nodemailer-smtp-transport');
 
 
 var transport = nodemailer.createTransport(smtpTransport({
-        host: credentials.HOST,
+        host: config.HOST,
         secureConnection: false, // TLS requires secureConnection to be false
         port: 587,
         auth: {
             //user: 'info@mondeavie.mtrema.com',
-            user: credentials.USER,
-            pass: credentials.PASSWORD
+            user: config.USER,
+            pass: config.PASSWORD
         },
         tls: {
             //rejectUnauthorized: false,
@@ -137,9 +137,9 @@ module.exports = function () {
     var messageHtml = _getMessageHtml(reservation);
 
     var sendMailMessage = _getSendMailMessage(
-          credentials.FROM,
+          config.FROM,
           reservation.email,
-          credentials.TO,
+          config.TO,
           messageHtml
         );
 

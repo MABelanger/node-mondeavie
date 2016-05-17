@@ -1,19 +1,13 @@
 
 var _       = require('lodash'),
-    config  = require('./config'),
     jwt     = require('jsonwebtoken');
+    config = require('../../config');
 
 
-
-// XXX: This should be a database of users :).
-var users = [{
-  id: 1,
-  username: 'gonto',
-  password: 'gonto'
-}];
+var users = config.USERS;
 
 function createToken(user) {
-  return jwt.sign(_.omit(user, 'password'), config.secret, { expiresIn: 60*60*5 });
+  return jwt.sign(_.omit(user, 'password'), config.SECRET, { expiresIn: 60*60*5 });
 }
 
 function getUserScheme(req) {
