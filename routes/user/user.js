@@ -6,6 +6,21 @@ var _       = require('lodash'),
 
 var users = config.USERS;
 
+function _addError(errors, fieldName, message){
+  var error = {
+    "message": message,
+    "name": "ValidatorError",
+    "properties": {
+      "type": "required",
+      "message": message,
+      "path": "name"
+    },
+    "kind": "required",
+    "path": "name"
+  };
+  errors[fieldName] = error;
+}
+
 function createToken(user) {
   return jwt.sign(_.omit(user, 'password'), config.SECRET, { expiresIn: 60*60*5 });
 }
@@ -29,44 +44,56 @@ function getUserScheme(req) {
   }
 }
 
-
-
-
 module.exports = function () {
 
   var functions = {};
 
+
   functions.login = function(req, res){
     var userScheme = getUserScheme(req);
-    console.log('req.body', req.body);
+    var errors = {};
 
-    if (!userScheme.username || !req.body.password) {
-      return res.status(400).send("You must send the username and the password");
+    var hasError = false;
+    if(!userScheme.username){
+      hasError=true;
+      _addError(errors, 'user', "Le Nom d'utilisateur est requis")
     }
-    console.log('Before user', userScheme.username)
+
+    if(!req.body.password){
+       hasError=true;
+      _addError(errors, 'password', "Le mot de passe est requis")
+    }
+
     var user = _.find(users, 'username', userScheme.username);
-    console.log('user', user)
+
+    if(!hasError){
+      if (!user) {
+        hasError=true;
+        _addError(errors, 'user', "Mot de passe ou nom d'utilisateur invalide");
+        _addError(errors, 'password', "Mot de passe ou nom d'utilisateur invalide");
+      }
+
+      if (user.password !== req.body.password) {
+        hasError=true;
+        _addError(errors, 'user', "Mot de passe ou nom d'utilisateur invalide");
+        _addError(errors, 'password', "Mot de passe ou nom d'utilisateur invalide");
+      }
+    }
     
-    if (!user) {
-      return res.status(401).send("The username or password don't match");
+    if(hasError){
+      res.json({
+        "message": "User validation failed",
+        "name": "ValidationError",
+        "errors": errors,
+        "hasError": hasError
+      });
+    } else {
+      res.status(201).send({
+        id_token: createToken(user)
+      });
     }
-
-    if (user.password !== req.body.password) {
-      return res.status(401).send("The username or password don't match");
-    }
-
-
-    res.status(201).send({
-      id_token: createToken(user)
-    });
   };
 
-
-  functions.private = function(req, res){
-    res.status(201).send({
-      status: 'ok'
-    });
-  };
 
   return functions;
 };
