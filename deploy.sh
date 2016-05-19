@@ -6,7 +6,7 @@ set -o errexit # Exit on error
 # Functions gitCheck
 #!/bin/sh
 gitCheck() {
-	git remote update
+	git remote update > /dev/null 2>&1
 	LOCAL=$(git rev-parse @)
 	REMOTE=$(git rev-parse @{u})
 	BASE=$(git merge-base @ @{u})
