@@ -45,7 +45,7 @@ fi
 
 ### copy files to app/dist
 cd ../node-mondeavie
-echo "copy react-admin react-calendar into app/dist"
+echo "remove ./app and copy react-admin react-calendar into app/dist"
 rm -rf ./app/
 mkdir -p ./app/dist/
 cp -a ../react-admin/dist ./app/dist/react-admin
