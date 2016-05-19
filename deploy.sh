@@ -33,7 +33,7 @@ if [ $gitStatus = 'Need to pull' ]; then
 	npm run deploy
 fi
 
-echo "check react-admin"
+echo "check react-calendar"
 cd ../react-calendar
 gitStatus=$(gitCheck)
 if [ $gitStatus = 'Need to pull' ]; then
