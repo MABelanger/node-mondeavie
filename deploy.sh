@@ -2,20 +2,45 @@
 
 set -o errexit # Exit on error
 
+
+# Functions gitCheck
+#!/bin/sh
+gitCheck() {
+	LOCAL=$(git rev-parse @)
+	REMOTE=$(git rev-parse @{u})
+	BASE=$(git merge-base @ @{u})
+
+	if [ $LOCAL = $REMOTE ]; then
+	    echo "Up-to-date"
+	elif [ $LOCAL = $BASE ]; then
+	    echo "Need to pull"
+	elif [ $REMOTE = $BASE ]; then
+	    echo "Need to push"
+	else
+	    echo "Diverged"
+	fi
+}
+
 echo "pull node-mondeavie"
 git pull
 
+echo "check react-admin"
 cd ../react-admin
-echo "pull react-admin"
-git pull
-echo "rebuild react-admin"
-npm run deploy
+local gitStatus=$(gitCheck)
+if [ $gitStatus =  'Need to pull']; then
+	git pull
+	echo "rebuild react-admin"
+	npm run deploy
+fi
 
+echo "check react-admin"
 cd ../react-calendar
-echo "pull react-calendar"
-git pull
-echo "rebuild react-calendar"
-npm run deploy
+gitStatus=$(gitCheck)
+if [ $gitStatus =  'Need to pull']; then
+	git pull
+	echo "rebuild react-calendar"
+	npm run deploy
+fi
 
 cd ../node-mondeavie
 echo "copy react-admin react-calendar into app/dist"
