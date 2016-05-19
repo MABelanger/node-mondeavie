@@ -26,7 +26,7 @@ git pull
 
 echo "check react-admin"
 cd ../react-admin
-local gitStatus=$(gitCheck)
+gitStatus=$(gitCheck)
 if [ $gitStatus =  'Need to pull']; then
 	git pull
 	echo "rebuild react-admin"
