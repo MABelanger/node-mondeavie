@@ -2,9 +2,7 @@
 
 set -o errexit # Exit on error
 
-
-# Functions gitCheck
-#!/bin/sh
+# Functions gitCheck, return string that represent the status of the repo
 gitCheck() {
 	git remote update > /dev/null 2>&1
 	LOCAL=$(git rev-parse @)
@@ -25,26 +23,27 @@ gitCheck() {
 echo "pull node-mondeavie"
 git pull
 
+### react-admin
 echo "check react-admin"
 cd ../react-admin
 gitStatus=$(gitCheck)
-echo $gitStatus
 if [ "$gitStatus" = "Need to pull" ]; then
 	git pull
 	echo "rebuild react-admin"
 	npm run deploy
 fi
 
+### react-calendar
 echo "check react-calendar"
 cd ../react-calendar
 gitStatus=$(gitCheck)
-echo $gitStatus
 if [ "$gitStatus" = "Need to pull" ]; then
 	git pull
 	echo "rebuild react-calendar"
 	npm run deploy
 fi
 
+### copy files to app/dist
 cd ../node-mondeavie
 echo "copy react-admin react-calendar into app/dist"
 rm -rf ./app/
