@@ -32,7 +32,7 @@ module.exports = function (app) {
 
   app.jwtCheck = jwtCheck;
   // all /api is private to access we can access it via /public/api
-  
+
   if(!app.isApiPublic){
     app.use('/api', app.jwtCheck);
   }
@@ -52,17 +52,19 @@ module.exports = function (app) {
 
   // fallback if no token is sended.
   app.use(function (err, req, res, next) {
-    if (err.name === 'UnauthorizedError') { 
+    if (err.name === 'UnauthorizedError') {
       res.send(401, 'invalid token...');
     }
   });
 
-  var reactCalendarDir = path.join(__dirname,"../app/dist/react-calendar");
-  var reactAdminDir =    path.join(__dirname,"../app/dist/react-admin");
+  var reactCalendarDir  = path.join(__dirname,"../app/dist/react-calendar");
+  var reactAdminDir     = path.join(__dirname,"../app/dist/react-admin");
+  var zeleDir           = path.join(__dirname,"../app/dist/zele");
 
   // https://github.com/reactjs/react-router/blob/1.0.x/docs/guides/basics/Histories.md
   app.use(vhost('www.blackandrouge.com', express.static(reactCalendarDir))); // Serves first app
   app.use(vhost('admin.blackandrouge.com', express.static(reactAdminDir))); // Serves second app
+  app.use(vhost('zele.co', express.static(zeleDir))); // Serves zele.co webpage
 
   app.use(vhost('_www.blackandrouge.com', express.static(reactCalendarDir))); // Serves first app
   app.use(vhost('_admin.blackandrouge.com', express.static(reactAdminDir))); // Serves second app
@@ -78,5 +80,5 @@ module.exports = function (app) {
     }
   })
 
-  
+
 };
