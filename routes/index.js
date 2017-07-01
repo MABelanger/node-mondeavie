@@ -60,13 +60,11 @@ module.exports = function (app) {
   var reactCalendarDir  = path.join(__dirname,"../app/dist/react-calendar");
   var reactAdminDir     = path.join(__dirname,"../app/dist/react-admin");
   var zeleDir           = path.join(__dirname,"../app/dist/zele");
-  var spotbioDir        = path.join(__dirname,"../app/dist/spotbio");
 
   // https://github.com/reactjs/react-router/blob/1.0.x/docs/guides/basics/Histories.md
   app.use(vhost('www.blackandrouge.com', express.static(reactCalendarDir))); // Serves first app
   app.use(vhost('admin.blackandrouge.com', express.static(reactAdminDir))); // Serves second app
   app.use(vhost('zele.co', express.static(zeleDir))); // Serves zele.co webpage
-  app.use(vhost('spotb.io', express.static(spotbioDir))); // Serves spotb.io webpage
 
   app.use(vhost('_www.blackandrouge.com', express.static(reactCalendarDir))); // Serves first app
   app.use(vhost('_admin.blackandrouge.com', express.static(reactAdminDir))); // Serves second app
