@@ -4,7 +4,7 @@
 DATE=`date +%Y-%m-%d_%Hh-%Mm-%Ss`
 
 # switch to backup dir
-cd /home/ubuntu/projects/node-mondeavie/backup &&
+cd ./backup &&
 
 # Dump the database into folder ./mondeaviedb
 mongodump --db=mondeavie  --out=./mondeaviedb &&
