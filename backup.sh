@@ -4,7 +4,7 @@
 DATE=`date +%Y-%m-%d_%Hh-%Mm-%Ss`
 
 # switch to backup dir
-cd ./backup &&
+cd /home/ubuntu/projects/node-mondeavie/backup &&
 
 # Dump the database into folder ./mondeaviedb
 mongodump --db=mondeavie  --out=./mondeaviedb &&
@@ -17,6 +17,11 @@ rm -rf mondeaviedb/ &&
 
 # Compress the image files and exclude *original.jpg
 tar -czf img-$DATE.tgz -C ../media/img/ --exclude "*original.jpg" . &&
+
+# use node 6+
+export NVM_DIR=~/.nvm
+source ~/.nvm/nvm.sh
+nvm use 6
 
 # Send the backup
 mailatt *.tgz &&
